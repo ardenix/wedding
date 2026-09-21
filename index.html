@@ -535,7 +535,57 @@
       font-weight: 500;
       text-align: center;
     }
+    
+    /* ---------- ПОДАРОК ---------- */
+    .gift-text {
+      font-size: 1.05rem;
+      color: #5e554e;
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
 
+    .gift-text .gift-emoji {
+      display: inline-block;
+      font-size: 1.4rem;
+      margin: 0 0.3rem;
+      animation: giftBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes giftBounce {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50%      { transform: translateY(-4px) rotate(4deg); }
+    }
+
+    .gift-ps {
+      font-size: 0.95rem;
+      color: #a89a8e;
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.4rem;
+    }
+
+    .gift-card {
+      background: linear-gradient(135deg, #fdf6f0, #f9ece1);
+      border-radius: 24px;
+      padding: 1.6rem 1.5rem;
+      margin-top: 1rem;
+      border: 1px dashed #e8c8b0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gift-card::before {
+      content: "🎁";
+      position: absolute;
+      font-size: 5rem;
+      opacity: 0.07;
+      top: -10px;
+      right: 10px;
+      transform: rotate(15deg);
+      pointer-events: none;
+    }
+    
     /* ---------- НАПИТКИ ---------- */
     .drinks-grid {
       display: grid;
@@ -919,7 +969,19 @@
       </div>
     </div>
   </div>
-
+  
+  <!-- ПОДАРОК -->
+  <div class="card">
+    <h2><i class="fas fa-gift"></i>Подарок</h2>
+    <div class="gift-card">
+      <p class="gift-text">
+        Мы очень ценим вас и будем рады любому подарку <span class="gift-emoji">💝</span><br>
+        И не важно, в какой конверт вы его упакуете! :-)
+      </p>
+      <p class="gift-ps">P.s. цветов не надо</p>
+    </div>
+  </div>
+  
   <!-- ФОРМА RSVP -->
   <div class="card">
     <h2><i class="fas fa-envelope"></i>Подтверждение</h2>
