@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Свадьба Анны и Михаила</title>
+  <title>Свадьба Юлии и Ивана</title>
   <!-- Font Awesome для иконок (опционально, но с ним удобнее) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -284,9 +284,9 @@
   <!-- ШАПКА С ИМЕНАМИ И ТАЙМЕРОМ -->
   <div class="card hero">
     <div class="names">
-      Анна <span class="ampersand">&</span> Михаил
+      Юлия <span class="ampersand">&</span> Иван
     </div>
-    <div class="date">12 СЕНТЯБРЯ 2026</div>
+    <div class="date">05 ИЮНЯ 2027</div>
 
     <!-- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА -->
     <div class="timer-container" id="timer">
@@ -313,9 +313,9 @@
   <div class="card">
     <h2><i class="fas fa-map-pin" style="margin-right: 10px; color: #b8a89a;"></i>Место</h2>
     <div class="map-wrapper">
-      <!-- Карта: загородный клуб «Лесной» (пример координат) -->
+      <!-- Карта: Ресторан Авантаж, Иркутск, ул. Байкальская, 279 -->
       <iframe 
-        src="https://www.openstreetmap.org/export/embed.html?bbox=37.539%2C55.732%2C37.579%2C55.752&amp;layer=mapnik&amp;marker=55.742%2C37.559" 
+        src="https://www.openstreetmap.org/export/embed.html?bbox=104.244%2C52.254%2C104.304%2C52.284&amp;layer=mapnik&amp;marker=52.269%2C104.274" 
         style="border:0;" 
         allowfullscreen="" 
         loading="lazy">
@@ -323,11 +323,11 @@
     </div>
     <div class="address">
       <i class="fas fa-location-dot"></i>
-      <span>Загородный клуб «Лесной», Московская область, 25 км от МКАД</span>
+      <span>г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»</span>
     </div>
     <div class="address" style="margin-top: 0.2rem;">
       <i class="fas fa-car"></i>
-      <span>Трансфер от станции метро «Сокол» в 15:00</span>
+      <span>Парковка перед рестораном. Трансфер от пл. Кирова в 15:00</span>
     </div>
   </div>
 
@@ -365,7 +365,7 @@
   <!-- ФОРМА RSVP -->
   <div class="card">
     <h2><i class="fas fa-envelope" style="margin-right: 10px; color: #b8a89a;"></i>Подтверждение</h2>
-    <p style="color: #6b625b; margin-bottom: 1rem; font-size: 1rem;">Пожалуйста, подтвердите своё присутствие до 1 августа 2026.</p>
+    <p style="color: #6b625b; margin-bottom: 1rem; font-size: 1rem;">Пожалуйста, подтвердите своё присутствие до 1 мая 2027.</p>
     <form class="rsvp-form" id="rsvpForm">
       <div class="form-group">
         <label for="name">Ваше имя и фамилия</label>
@@ -391,14 +391,14 @@
   </div>
 
   <div class="footer-note">
-    <i class="fas fa-heart" style="color: #d9cfc5; margin-right: 4px;"></i> Анна & Михаил, 2026
+    <i class="fas fa-heart" style="color: #d9cfc5; margin-right: 4px;"></i> Юлия & Иван, 2027
   </div>
 
   <script>
     (function() {
       // ---------- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА ----------
-      // Дата свадьбы: 12 сентября 2026, 15:00 (можно уточнить время)
-      const weddingDate = new Date(2026, 8, 12, 15, 0, 0).getTime(); // месяцы с 0 (8 = сентябрь)
+      // Дата свадьбы: 5 июня 2027, 15:00
+      const weddingDate = new Date(2027, 5, 5, 15, 0, 0).getTime(); // месяцы с 0 (5 = июнь)
 
       function updateTimer() {
         const now = new Date().getTime();
@@ -463,9 +463,6 @@
           messageDiv.textContent = '';
         }, 5000);
       });
-
-      // Дополнительно: плавное появление карты (просто для удовольствия)
-      // Ничего критичного, оставим как есть.
     })();
   </script>
 </body>
