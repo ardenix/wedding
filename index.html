@@ -6,7 +6,6 @@
   <title>Свадьба Юлии и Ивана</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ---------- ГЛОБАЛЬНЫЕ СТИЛИ ---------- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -141,6 +140,86 @@
 
     .program-desc i { margin-right: 0.6rem; color: #cbb9aa; width: 1.2rem; font-size: 0.95rem; }
 
+    /* ---------- ДРЕСС-КОД ---------- */
+    .dress-code-text {
+      font-size: 1rem;
+      color: #5e554e;
+      margin-bottom: 1.2rem;
+    }
+
+    .color-palette {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    .color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .color-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border: 3px solid #ffffff;
+      outline: 1px solid #eae7e2;
+      transition: transform 0.2s;
+    }
+
+    .color-circle:hover { transform: scale(1.06); }
+
+    .color-name {
+      font-size: 0.85rem;
+      color: #7a6e66;
+      letter-spacing: 0.05em;
+      text-transform: lowercase;
+    }
+
+    /* ---------- НАПИТКИ ---------- */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.6rem 1rem;
+      margin-top: 0.6rem;
+    }
+
+    .drink-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 14px;
+      border: 1px solid #eae7e2;
+      background: #fefefe;
+      cursor: pointer;
+      transition: border 0.2s, background 0.2s;
+      user-select: none;
+    }
+
+    .drink-item:hover { border-color: #cbb9aa; background: #fcfaf8; }
+
+    .drink-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #cbb9aa;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    .drink-item label {
+      font-size: 0.95rem;
+      color: #4a4a4a;
+      cursor: pointer;
+      flex: 1;
+    }
+
     /* ---------- ФОРМА RSVP ---------- */
     .rsvp-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; }
 
@@ -148,7 +227,7 @@
 
     label { font-size: 0.9rem; color: #7a6e66; letter-spacing: 0.02em; font-weight: 400; }
 
-    input, select, textarea {
+    input[type="text"], select, textarea {
       font-family: inherit;
       padding: 0.9rem 1.2rem;
       border: 1px solid #e3ddd7;
@@ -161,7 +240,7 @@
       width: 100%;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input[type="text"]:focus, select:focus, textarea:focus {
       border-color: #cbb9aa;
       box-shadow: 0 0 0 3px rgba(203, 185, 170, 0.15);
     }
@@ -211,6 +290,8 @@
       .timer-number { font-size: 1.7rem; }
       .program-list li { flex-direction: column; gap: 0.3rem; }
       .program-time { min-width: auto; }
+      .color-circle { width: 60px; height: 60px; }
+      .drinks-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -249,9 +330,9 @@
     <div class="map-wrapper">
       <iframe 
         src="https://yandex.ru/map-widget/v1/?um=constructor%3A7ba91779bba17def2330a67bafd52345290a0a6bf2664a163e8ef9bf024bc681&amp;source=constructor" 
-        width="719" 
-        height="493" 
-        frameborder="0">  
+        frameborder="0"
+        allowfullscreen
+        loading="lazy">
       </iframe>
     </div>
     <div class="address">
@@ -268,35 +349,40 @@
   <div class="card">
     <h2><i class="fas fa-clock" style="margin-right: 10px; color: #b8a89a;"></i>Программа дня</h2>
     <ul class="program-list">
-      <li>
-        <span class="program-time">16:00</span>
-        <span class="program-desc"><i class="fas fa-champagne-glasses"></i>Церемония в ЗАГС</span>
-      </li>
-      <li>
-        <span class="program-time">16:30</span>
-        <span class="program-desc"><i class="fas fa-champagne-glasses"></i>Трансфер от ЗАГС</span>
-      </li>
-      <li>
-        <span class="program-time">16:50</span>
-        <span class="program-desc"><i class="fas fa-champagne-glasses"></i>Сбор гостей, welcome-зона</span>
-      </li>
-      <li>
-        <span class="program-time">17:00</span>
-        <span class="program-desc"><i class="fas fa-utensils"></i>Банкет и поздравления</span>
-      </li>
-      <li>
-        <span class="program-time">19:30</span>
-        <span class="program-desc"><i class="fas fa-cake-candles"></i>Торт и первый танец</span>
-      </li>
-      <li>
-        <span class="program-time">21:00</span>
-        <span class="program-desc"><i class="fas fa-music"></i>Танцы и вечеринка</span>
-      </li>
-      <li>
-        <span class="program-time">23:00</span>
-        <span class="program-desc"><i class="fas fa-star"></i>Фейерверк</span>
-      </li>
+      <li><span class="program-time">16:00</span><span class="program-desc"><i class="fas fa-champagne-glasses"></i>Церемония в ЗАГС</span></li>
+      <li><span class="program-time">16:30</span><span class="program-desc"><i class="fas fa-champagne-glasses"></i>Трансфер от ЗАГС</span></li>
+      <li><span class="program-time">16:50</span><span class="program-desc"><i class="fas fa-champagne-glasses"></i>Сбор гостей, welcome-зона</span></li>
+      <li><span class="program-time">17:00</span><span class="program-desc"><i class="fas fa-utensils"></i>Банкет и поздравления</span></li>
+      <li><span class="program-time">19:30</span><span class="program-desc"><i class="fas fa-cake-candles"></i>Торт и первый танец</span></li>
+      <li><span class="program-time">21:00</span><span class="program-desc"><i class="fas fa-music"></i>Танцы и вечеринка</span></li>
+      <li><span class="program-time">23:00</span><span class="program-desc"><i class="fas fa-star"></i>Фейерверк</span></li>
     </ul>
+  </div>
+
+  <!-- ДРЕСС-КОД -->
+  <div class="card">
+    <h2><i class="fas fa-vest" style="margin-right: 10px; color: #b8a89a;"></i>Дресс-код</h2>
+    <p class="dress-code-text">
+      Мы будем рады, если вы поддержите палитру нашего торжества. Пожалуйста, выберите наряд в одном из этих цветов:
+    </p>
+    <div class="color-palette">
+      <div class="color-item">
+        <div class="color-circle" style="background-color: #556B2F;"></div>
+        <span class="color-name">оливковый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background-color: #E8D9C5;"></div>
+        <span class="color-name">бежевый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background-color: #E8B4B8;"></div>
+        <span class="color-name">розовый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background-color: #6B4423;"></div>
+        <span class="color-name">коричневый</span>
+      </div>
+    </div>
   </div>
 
   <!-- ФОРМА RSVP → GOOGLE FORMS -->
@@ -310,7 +396,7 @@
       action="https://docs.google.com/forms/d/e/1FAIpQLSdEffMetZFqe-O7GWki0z_hGBI2xDOrCHmbdZJtNIuVplD-RA/formResponse"
       method="POST"
       target="hidden_iframe"
-      onsubmit="submitted=true;"
+      onsubmit="window.submitted=true;"
     >
       <div class="form-group">
         <label for="name">Ваше имя и фамилия</label>
@@ -326,16 +412,55 @@
           <option value="5">5</option>
         </select>
       </div>
+
+      <!-- НОВЫЙ БЛОК: НАПИТКИ -->
       <div class="form-group">
-        <label for="wishes">Пожелания или предпочтения по напиткам (необязательно)</label>
-        <input type="text" id="wishes" name="entry.51985960" placeholder="Например: без алкоголя">
+        <label>Предпочтения по напиткам (можно выбрать несколько)</label>
+        <div class="drinks-grid">
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Вино красное">
+            <span>Вино красное</span>
+          </label>
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Вино белое">
+            <span>Вино белое</span>
+          </label>
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Шампанское">
+            <span>Шампанское</span>
+          </label>
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Виски">
+            <span>Виски</span>
+          </label>
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Водка">
+            <span>Водка</span>
+          </label>
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Коньяк">
+            <span>Коньяк</span>
+          </label>
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Пиво">
+            <span>Пиво</span>
+          </label>
+          <label class="drink-item">
+            <input type="checkbox" name="entry.444444444" value="Безалкогольные напитки">
+            <span>Безалкогольные</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="wishes">Другие пожелания (необязательно)</label>
+        <input type="text" id="wishes" name="entry.51985960" placeholder="Например: аллергия на орехи">
       </div>
       <button type="submit" id="submitBtn">Отправить</button>
       <div id="rsvpMessage"></div>
     </form>
 
-    <!-- Скрытый iframe для перехвата ответа Google Forms -->
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){showThankYou();}"></iframe>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.showThankYou();}"></iframe>
   </div>
 
   <div class="footer-note">
@@ -344,7 +469,9 @@
 
   <script>
     (function() {
-      // ---------- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА ----------
+      window.submitted = false;
+
+      // ---------- ТАЙМЕР ----------
       const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
 
       function updateTimer() {
@@ -373,11 +500,7 @@
       updateTimer();
       setInterval(updateTimer, 1000);
 
-      // ---------- ОТПРАВКА ФОРМЫ В GOOGLE FORMS ----------
-      // Флаг submitted объявлен глобально (используется в onsubmit и onload iframe)
-      // window.submitted = false; — но так как скрипт в IIFE, объявим его в window:
-
-      // ---------- ПОКАЗ СООБЩЕНИЯ ПОСЛЕ ОТПРАВКИ ----------
+      // ---------- СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ ----------
       window.showThankYou = function() {
         if (window.submitted) {
           const msg = document.getElementById('rsvpMessage');
