@@ -442,7 +442,7 @@
 
     .color-palette {
       display: flex;
-      gap: 1.8rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
       justify-content: center;
       margin: 1.5rem 0 0.5rem;
@@ -482,9 +482,9 @@
     }
 
     .color-name {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: #5e554e;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       font-weight: 500;
     }
 
@@ -674,42 +674,6 @@
 
     .footer-note i { color: #d99b8a; margin-right: 6px; }
 
-    /* ---------- МУЗЫКАЛЬНАЯ КНОПКА ---------- */
-    .music-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #d99b8a, #b5865c);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 10px 24px rgba(217, 155, 138, 0.45);
-      z-index: 100;
-      transition: transform 0.2s, box-shadow 0.2s;
-      font-family: inherit;
-    }
-
-    .music-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 14px 30px rgba(217, 155, 138, 0.55);
-    }
-
-    .music-btn.playing {
-      animation: pulse 1.6s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 10px 24px rgba(217, 155, 138, 0.45), 0 0 0 0 rgba(217, 155, 138, 0.5); }
-      50%      { box-shadow: 0 10px 24px rgba(217, 155, 138, 0.45), 0 0 0 14px rgba(217, 155, 138, 0); }
-    }
-
     /* ---------- КОНФЕТТИ (сердечки) ---------- */
     .confetti-layer {
       position: fixed;
@@ -755,12 +719,12 @@
       .timer-number { font-size: 1.6rem; }
       .program-list::before { left: 26px; }
       .program-emoji { width: 38px; height: 38px; font-size: 1rem; }
-      .color-circle { width: 64px; height: 64px; }
-      .color-palette { gap: 1.2rem; }
+      .color-circle { width: 58px; height: 58px; }
+      .color-palette { gap: 0.9rem; }
+      .color-name { font-size: 0.78rem; }
       .drinks-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
       .drink-emoji { font-size: 1.7rem; }
       .drink-label { font-size: 0.8rem; }
-      .music-btn { width: 48px; height: 48px; bottom: 16px; right: 16px; font-size: 1rem; }
       .gallery-nav { width: 38px; height: 38px; }
     }
   </style>
@@ -873,12 +837,20 @@
         <span class="color-name">🌿 оливковый</span>
       </div>
       <div class="color-item">
-        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #f3e5cf, #E8D9C5 70%);"></div>
-        <span class="color-name">🤍 бежевый</span>
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #c8e6b8, #a8d18a 70%);"></div>
+        <span class="color-name">🌱 светло-зелёный</span>
       </div>
       <div class="color-item">
         <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #f0c4c8, #E8B4B8 70%);"></div>
         <span class="color-name">🌸 розовый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #f3e5cf, #E8D9C5 70%);"></div>
+        <span class="color-name">🤍 бежевый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #d4b896, #b89870 70%);"></div>
+        <span class="color-name">🤎 светло-коричневый</span>
       </div>
       <div class="color-item">
         <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #8a5a30, #6B4423 70%);"></div>
@@ -977,16 +949,6 @@
     <i class="fas fa-heart"></i> Юлия & Иван, 2027
   </div>
 
-  <!-- МУЗЫКАЛЬНАЯ КНОПКА -->
-  <button class="music-btn" id="musicBtn" type="button" aria-label="Включить музыку">
-    <i class="fas fa-music" id="musicIcon"></i>
-  </button>
-
-  <!-- Скрытое аудио (замените src на свой трек) -->
-  <audio id="bgMusic" loop preload="none">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
     (function() {
       window.submitted = false;
@@ -1066,29 +1028,6 @@
       // Автопрокрутка
       setInterval(() => goToSlide(currentSlide + 1), 6000);
 
-      /* ---------- МУЗЫКА ---------- */
-      const musicBtn = document.getElementById('musicBtn');
-      const musicIcon = document.getElementById('musicIcon');
-      const bgMusic = document.getElementById('bgMusic');
-
-      musicBtn.addEventListener('click', function() {
-        if (bgMusic.paused) {
-          bgMusic.play().then(() => {
-            musicIcon.className = 'fas fa-pause';
-            musicBtn.classList.add('playing');
-            musicBtn.setAttribute('aria-label', 'Пауза');
-          }).catch(err => {
-            console.warn('Не удалось воспроизвести музыку:', err);
-            alert('Не удалось воспроизвести музыку. Убедитесь, что файл music.mp3 находится рядом с index.html');
-          });
-        } else {
-          bgMusic.pause();
-          musicIcon.className = 'fas fa-music';
-          musicBtn.classList.remove('playing');
-          musicBtn.setAttribute('aria-label', 'Включить музыку');
-        }
-      });
-
       /* ---------- КОНФЕТТИ (сердечки) ---------- */
       function launchConfetti() {
         const layer = document.getElementById('confettiLayer');
@@ -1130,7 +1069,6 @@
 
       /* ---------- КНОПКА "В КАЛЕНДАРЬ" ---------- */
       window.downloadICS = function() {
-        // Дата свадьбы: 5 июня 2027, 16:00 — длительность 8 часов
         const dtStart = '20270605T160000';
         const dtEnd   = '20270606T000000';
         const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
