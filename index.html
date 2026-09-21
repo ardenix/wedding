@@ -4,18 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Свадьба Юлии и Ивана</title>
-  <!-- Font Awesome для иконок (опционально, но с ним удобнее) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* ---------- ГЛОБАЛЬНЫЕ СТИЛИ ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background-color: #f9f7f4;  /* очень светлый бежевый */
+      background-color: #f9f7f4;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: #2e2e2e;
       line-height: 1.6;
@@ -25,7 +20,6 @@
       padding: 2rem 1rem;
     }
 
-    /* Плавные тени и скругления */
     .card {
       background: #ffffff;
       border-radius: 32px;
@@ -37,17 +31,9 @@
       transition: transform 0.2s ease;
     }
 
-    h1, h2, h3 {
-      font-weight: 400;
-      letter-spacing: -0.02em;
-    }
+    h1, h2, h3 { font-weight: 400; letter-spacing: -0.02em; }
 
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-      color: #3a3a3a;
-      font-weight: 300;
-    }
+    h1 { font-size: 2.8rem; margin-bottom: 0.5rem; color: #3a3a3a; font-weight: 300; }
 
     h2 {
       font-size: 1.8rem;
@@ -58,12 +44,8 @@
       font-weight: 300;
     }
 
-    /* ---------- ШАПКА С ИМЕНАМИ ---------- */
-    .hero {
-      text-align: center;
-      padding: 3rem 2rem;
-      background: #ffffff;
-    }
+    /* ---------- ШАПКА ---------- */
+    .hero { text-align: center; padding: 3rem 2rem; background: #ffffff; }
 
     .hero .names {
       font-size: 3.2rem;
@@ -105,12 +87,7 @@
       text-align: center;
     }
 
-    .timer-number {
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: #3a3a3a;
-      line-height: 1.2;
-    }
+    .timer-number { font-size: 2.2rem; font-weight: 300; color: #3a3a3a; line-height: 1.2; }
 
     .timer-label {
       font-size: 0.75rem;
@@ -127,7 +104,7 @@
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
     }
 
-    iframe {
+    .map-wrapper iframe {
       display: block;
       width: 100%;
       height: 260px;
@@ -144,16 +121,10 @@
       gap: 0.6rem;
     }
 
-    .address i {
-      color: #b8a89a;
-      width: 1.2rem;
-    }
+    .address i { color: #b8a89a; width: 1.2rem; }
 
     /* ---------- ПРОГРАММА ---------- */
-    .program-list {
-      list-style: none;
-      margin-top: 0.5rem;
-    }
+    .program-list { list-style: none; margin-top: 0.5rem; }
 
     .program-list li {
       display: flex;
@@ -162,49 +133,20 @@
       border-bottom: 1px solid #f0ede9;
     }
 
-    .program-list li:last-child {
-      border-bottom: none;
-    }
+    .program-list li:last-child { border-bottom: none; }
 
-    .program-time {
-      font-weight: 400;
-      min-width: 90px;
-      color: #b8a89a;
-      font-size: 1rem;
-    }
+    .program-time { font-weight: 400; min-width: 90px; color: #b8a89a; font-size: 1rem; }
 
-    .program-desc {
-      font-size: 1.05rem;
-      color: #3a3a3a;
-    }
+    .program-desc { font-size: 1.05rem; color: #3a3a3a; }
 
-    .program-desc i {
-      margin-right: 0.6rem;
-      color: #cbb9aa;
-      width: 1.2rem;
-      font-size: 0.95rem;
-    }
+    .program-desc i { margin-right: 0.6rem; color: #cbb9aa; width: 1.2rem; font-size: 0.95rem; }
 
     /* ---------- ФОРМА RSVP ---------- */
-    .rsvp-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-top: 1rem;
-    }
+    .rsvp-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 
-    label {
-      font-size: 0.9rem;
-      color: #7a6e66;
-      letter-spacing: 0.02em;
-      font-weight: 400;
-    }
+    label { font-size: 0.9rem; color: #7a6e66; letter-spacing: 0.02em; font-weight: 400; }
 
     input, select, textarea {
       font-family: inherit;
@@ -240,13 +182,8 @@
       min-width: 200px;
     }
 
-    button:hover {
-      background: #cbb9aa;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
+    button:hover { background: #cbb9aa; }
+    button:active { transform: scale(0.98); }
 
     #rsvpMessage {
       text-align: center;
@@ -256,7 +193,6 @@
       min-height: 1.6rem;
     }
 
-    /* ---------- ПОДВАЛ ---------- */
     .footer-note {
       text-align: center;
       font-size: 0.85rem;
@@ -265,7 +201,6 @@
       letter-spacing: 0.03em;
     }
 
-    /* ---------- АДАПТИВНОСТЬ ---------- */
     @media (max-width: 600px) {
       body { padding: 1rem 0.8rem; }
       .card { padding: 1.5rem; border-radius: 24px; }
@@ -288,7 +223,6 @@
     </div>
     <div class="date">05 ИЮНЯ 2027</div>
 
-    <!-- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА -->
     <div class="timer-container" id="timer">
       <div class="timer-item">
         <div class="timer-number" id="days">00</div>
@@ -313,12 +247,11 @@
   <div class="card">
     <h2><i class="fas fa-map-pin" style="margin-right: 10px; color: #b8a89a;"></i>Место</h2>
     <div class="map-wrapper">
-      <!-- Яндекс Карта: Ресторан Авантаж, Иркутск, ул. Байкальская, 279 -->
       <iframe 
         src="https://yandex.ru/map-widget/v1/?um=constructor%3A147c0d1a862f5d5a59c585b41056e110d92da2b2c4ef0aaa12e801bc9bf58089&amp;source=constructor" 
-        width="990" 
-        height="623" 
-        frameborder="0">
+        frameborder="0"
+        allowfullscreen
+        loading="lazy">
       </iframe>
     </div>
     <div class="address">
@@ -366,18 +299,26 @@
     </ul>
   </div>
 
-  <!-- ФОРМА RSVP -->
+  <!-- ФОРМА RSVP → GOOGLE FORMS -->
   <div class="card">
     <h2><i class="fas fa-envelope" style="margin-right: 10px; color: #b8a89a;"></i>Подтверждение</h2>
     <p style="color: #6b625b; margin-bottom: 1rem; font-size: 1rem;">Пожалуйста, подтвердите своё присутствие до 1 мая 2027.</p>
-    <form class="rsvp-form" id="rsvpForm">
+
+    <form 
+      class="rsvp-form" 
+      id="rsvpForm"
+      action="https://docs.google.com/forms/d/e/ДЛИННЫЙ_ID_ВАШЕЙ_ФОРМЫ/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="submitted=true;"
+    >
       <div class="form-group">
         <label for="name">Ваше имя и фамилия</label>
-        <input type="text" id="name" name="name" placeholder="Иван Петров" required>
+        <input type="text" id="name" name="entry.111111111" placeholder="Иван Петров" required>
       </div>
       <div class="form-group">
         <label for="guests">Количество гостей (включая вас)</label>
-        <select id="guests" name="guests">
+        <select id="guests" name="entry.222222222">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -387,11 +328,14 @@
       </div>
       <div class="form-group">
         <label for="wishes">Пожелания или предпочтения по напиткам (необязательно)</label>
-        <input type="text" id="wishes" name="wishes" placeholder="Например: без алкоголя">
+        <input type="text" id="wishes" name="entry.333333333" placeholder="Например: без алкоголя">
       </div>
       <button type="submit" id="submitBtn">Отправить</button>
       <div id="rsvpMessage"></div>
     </form>
+
+    <!-- Скрытый iframe для перехвата ответа Google Forms -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){showThankYou();}"></iframe>
   </div>
 
   <div class="footer-note">
@@ -401,14 +345,12 @@
   <script>
     (function() {
       // ---------- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА ----------
-      // Дата свадьбы: 5 июня 2027, 16:00
-      const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime(); // месяцы с 0 (5 = июнь)
+      const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
 
       function updateTimer() {
         const now = new Date().getTime();
         const distance = weddingDate - now;
 
-        // Если дата прошла, таймер показывает нули
         if (distance < 0) {
           document.getElementById('days').textContent = '00';
           document.getElementById('hours').textContent = '00';
@@ -422,51 +364,35 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Форматирование с ведущими нулями
         document.getElementById('days').textContent = days.toString().padStart(2, '0');
         document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
         document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
         document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
       }
 
-      // Запускаем сразу и обновляем каждую секунду
       updateTimer();
       setInterval(updateTimer, 1000);
 
-      // ---------- ОБРАБОТКА ФОРМЫ RSVP ----------
-      const form = document.getElementById('rsvpForm');
-      const messageDiv = document.getElementById('rsvpMessage');
+      // ---------- ОТПРАВКА ФОРМЫ В GOOGLE FORMS ----------
+      // Флаг submitted объявлен глобально (используется в onsubmit и onload iframe)
+      // window.submitted = false; — но так как скрипт в IIFE, объявим его в window:
 
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
+      // ---------- ПОКАЗ СООБЩЕНИЯ ПОСЛЕ ОТПРАВКИ ----------
+      window.showThankYou = function() {
+        if (window.submitted) {
+          const msg = document.getElementById('rsvpMessage');
+          const nameInput = document.getElementById('name');
+          const name = nameInput.value.trim() || 'гость';
 
-        // Получаем значения полей
-        const name = document.getElementById('name').value.trim();
-        const guests = document.getElementById('guests').value;
-        const wishes = document.getElementById('wishes').value.trim();
+          msg.textContent = `Спасибо, ${name}! Ваш ответ сохранён.`;
+          msg.style.color = '#6f8c7c';
 
-        // Простая валидация
-        if (!name) {
-          messageDiv.textContent = 'Пожалуйста, укажите ваше имя.';
-          messageDiv.style.color = '#b37b6b';
-          return;
+          document.getElementById('rsvpForm').reset();
+          window.submitted = false;
+
+          setTimeout(() => { msg.textContent = ''; }, 6000);
         }
-
-        // Эмуляция отправки (здесь можно добавить fetch-запрос на сервер)
-        // В реальном проекте данные ушли бы на сервер.
-
-        // Показываем сообщение об успехе
-        messageDiv.textContent = `Спасибо, ${name}! Ваше присутствие (${guests} чел.) подтверждено.`;
-        messageDiv.style.color = '#6f8c7c';
-
-        // Очищаем форму (опционально)
-        form.reset();
-
-        // Через 5 секунд убираем сообщение (необязательно)
-        setTimeout(() => {
-          messageDiv.textContent = '';
-        }, 5000);
-      });
+      };
     })();
   </script>
 </body>
