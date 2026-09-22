@@ -60,25 +60,16 @@
     }
 
     @keyframes petalFall {
-      0% {
-        transform: translateY(-50px) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(-50px) translateX(0) rotate(0deg); opacity: 0; }
       10% { opacity: 0.85; }
       90% { opacity: 0.85; }
-      100% {
-        transform: translateY(110vh) translateX(var(--drift, 30px)) rotate(720deg);
-        opacity: 0;
-      }
+      100% { transform: translateY(110vh) translateX(var(--drift, 30px)) rotate(720deg); opacity: 0; }
     }
 
-    /* ---------- КАРТОЧКИ ---------- */
     .card {
       background: #ffffff;
       border-radius: 36px;
-      box-shadow:
-        0 20px 40px rgba(180, 150, 130, 0.10),
-        0 4px 12px rgba(180, 150, 130, 0.06);
+      box-shadow: 0 20px 40px rgba(180, 150, 130, 0.10), 0 4px 12px rgba(180, 150, 130, 0.06);
       padding: 2.2rem 2rem 2rem;
       width: 100%;
       max-width: 800px;
@@ -136,8 +127,7 @@
       position: relative;
     }
 
-    .hero::before,
-    .hero::after {
+    .hero::before, .hero::after {
       position: absolute;
       font-size: 1.6rem;
       opacity: 0.55;
@@ -151,55 +141,8 @@
       50%      { transform: scale(1.15) rotate(10deg); opacity: 0.9; }
     }
 
-    /* Фото пары */
-    .hero-top {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.8rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-photo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .hero-photo-circle {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-      border: 4px solid #ffffff;
-      box-shadow:
-        0 10px 24px rgba(180, 150, 130, 0.22),
-        0 0 0 3px #f4e0d4;
-      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
-    }
-
-    .hero-photo-circle:hover {
-      transform: scale(1.08) rotate(-3deg);
-      box-shadow:
-        0 14px 32px rgba(180, 150, 130, 0.30),
-        0 0 0 3px #e8c8b0;
-    }
-
-    .hero-photo-name {
-      font-size: 0.95rem;
-      color: #8b7e74;
-      letter-spacing: 0.15em;
-      font-weight: 500;
-      text-transform: uppercase;
-    }
-
-    .hero-names-block { flex-shrink: 0; }
-
     .hero .names {
-      font-size: 2.8rem;
+      font-size: 3.4rem;
       font-weight: 300;
       letter-spacing: 0.08em;
       line-height: 1.2;
@@ -210,7 +153,7 @@
     }
 
     .hero .ampersand {
-      font-size: 2.2rem;
+      font-size: 2.6rem;
       color: #d99b8a;
       margin: 0 0.3rem;
       font-style: italic;
@@ -219,23 +162,22 @@
 
     .hero .date {
       display: inline-block;
-      margin-top: 0.9rem;
-      padding: 0.5rem 1.4rem;
+      margin-top: 1.2rem;
+      padding: 0.55rem 1.6rem;
       border-radius: 40px;
       background: #ffffff;
       color: #8b7e74;
       font-weight: 400;
-      letter-spacing: 0.22em;
-      font-size: 0.95rem;
+      letter-spacing: 0.25em;
+      font-size: 1rem;
       box-shadow: 0 6px 16px rgba(185, 140, 110, 0.14);
     }
 
-    /* Кнопка "В календарь" */
     .calendar-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 1.2rem;
+      margin-top: 1rem;
       padding: 0.6rem 1.3rem;
       border-radius: 40px;
       background: #fbf1e8;
@@ -294,23 +236,8 @@
       pointer-events: none;
     }
 
-    .timer-number {
-      font-size: 2.2rem;
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: 0.02em;
-      position: relative;
-      z-index: 1;
-    }
-
-    .timer-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      opacity: 0.9;
-      position: relative;
-      z-index: 1;
-    }
+    .timer-number { font-size: 2.2rem; font-weight: 400; line-height: 1.1; position: relative; z-index: 1; }
+    .timer-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.9; position: relative; z-index: 1; }
 
     /* ---------- ГАЛЕРЕЯ ---------- */
     .gallery-viewport {
@@ -333,17 +260,13 @@
       background-position: center;
     }
 
-    .gallery-slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
+    .gallery-slide.active { opacity: 1; transform: scale(1); }
 
     .gallery-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(8px);
@@ -363,16 +286,10 @@
     .gallery-prev { left: 12px; }
     .gallery-next { right: 12px; }
 
-    .gallery-dots {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      margin-top: 1rem;
-    }
+    .gallery-dots { display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
 
     .gallery-dot {
-      width: 10px;
-      height: 10px;
+      width: 10px; height: 10px;
       border-radius: 50%;
       background: #e0d5c9;
       border: none;
@@ -381,10 +298,7 @@
       padding: 0;
     }
 
-    .gallery-dot.active {
-      background: #d99b8a;
-      transform: scale(1.3);
-    }
+    .gallery-dot.active { background: #d99b8a; transform: scale(1.3); }
 
     /* ---------- КАРТА ---------- */
     .map-wrapper {
@@ -419,19 +333,12 @@
     .address i { color: #c99d7b; width: 1.2rem; }
 
     /* ---------- ПРОГРАММА ---------- */
-    .program-list {
-      list-style: none;
-      margin-top: 0.6rem;
-      position: relative;
-      padding-left: 0.4rem;
-    }
+    .program-list { list-style: none; margin-top: 0.6rem; position: relative; padding-left: 0.4rem; }
 
     .program-list::before {
       content: "";
       position: absolute;
-      left: 32px;
-      top: 20px;
-      bottom: 20px;
+      left: 32px; top: 20px; bottom: 20px;
       width: 2px;
       background: linear-gradient(180deg, #f3d9d3, #e0e6d3, #f0d9c4);
       border-radius: 2px;
@@ -446,17 +353,13 @@
       transition: background 0.2s, transform 0.2s;
     }
 
-    .program-list li:hover {
-      background: #fdf8f3;
-      transform: translateX(4px);
-    }
+    .program-list li:hover { background: #fdf8f3; transform: translateX(4px); }
 
     .program-emoji {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       font-size: 1.15rem;
       background: #ffffff;
@@ -468,43 +371,26 @@
     }
 
     .program-body { flex: 1; display: flex; flex-direction: column; }
-
-    .program-time {
-      font-weight: 600;
-      color: #b5865c;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-    }
-
+    .program-time { font-weight: 600; color: #b5865c; font-size: 0.9rem; letter-spacing: 0.05em; }
     .program-desc { font-size: 1rem; color: #3a3a3a; }
 
     /* ---------- ДРЕСС-КОД ---------- */
-    .dress-code-text {
-      font-size: 1rem;
-      color: #5e554e;
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
-    }
+    .dress-code-text { font-size: 1rem; color: #5e554e; margin-bottom: 1.2rem; line-height: 1.6; }
 
     .color-palette {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem 1rem;
-      justify-items: center;
-      margin: 1.5rem auto 0.5rem;
-      max-width: 480px;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1.5rem 0 0.5rem;
     }
 
     .color-item { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
 
     .color-circle {
-      width: 84px;
-      height: 84px;
+      width: 84px; height: 84px;
       border-radius: 50%;
-      box-shadow:
-        inset 0 -8px 16px rgba(0,0,0,0.12),
-        inset 0 6px 12px rgba(255,255,255,0.35),
-        0 10px 20px rgba(0,0,0,0.10);
+      box-shadow: inset 0 -8px 16px rgba(0,0,0,0.12), inset 0 6px 12px rgba(255,255,255,0.35), 0 10px 20px rgba(0,0,0,0.10);
       border: 3px solid #ffffff;
       transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
       position: relative;
@@ -522,70 +408,11 @@
 
     .color-circle:hover {
       transform: scale(1.12) rotate(-6deg);
-      box-shadow:
-        inset 0 -8px 16px rgba(0,0,0,0.12),
-        inset 0 6px 12px rgba(255,255,255,0.35),
-        0 16px 28px rgba(0,0,0,0.16);
+      box-shadow: inset 0 -8px 16px rgba(0,0,0,0.12), inset 0 6px 12px rgba(255,255,255,0.35), 0 16px 28px rgba(0,0,0,0.16);
     }
 
-    .color-name {
-      font-size: 0.88rem;
-      color: #5e554e;
-      letter-spacing: 0.04em;
-      font-weight: 500;
-      text-align: center;
-    }
-    
-    /* ---------- ПОДАРОК ---------- */
-    .gift-text {
-      font-size: 1.05rem;
-      color: #5e554e;
-      line-height: 1.8;
-      text-align: center;
-      margin-bottom: 0.8rem;
-    }
+    .color-name { font-size: 0.88rem; color: #5e554e; letter-spacing: 0.04em; font-weight: 500; }
 
-    .gift-text .gift-emoji {
-      display: inline-block;
-      font-size: 1.4rem;
-      margin: 0 0.3rem;
-      animation: giftBounce 2s ease-in-out infinite;
-    }
-
-    @keyframes giftBounce {
-      0%, 100% { transform: translateY(0) rotate(-4deg); }
-      50%      { transform: translateY(-4px) rotate(4deg); }
-    }
-
-    .gift-ps {
-      font-size: 0.95rem;
-      color: #a89a8e;
-      font-style: italic;
-      text-align: center;
-      margin-top: 0.4rem;
-    }
-
-    .gift-card {
-      background: linear-gradient(135deg, #fdf6f0, #f9ece1);
-      border-radius: 24px;
-      padding: 1.6rem 1.5rem;
-      margin-top: 1rem;
-      border: 1px dashed #e8c8b0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .gift-card::before {
-      content: "🎁";
-      position: absolute;
-      font-size: 5rem;
-      opacity: 0.07;
-      top: -10px;
-      right: 10px;
-      transform: rotate(15deg);
-      pointer-events: none;
-    }
-    
     /* ---------- НАПИТКИ ---------- */
     .drinks-grid {
       display: grid;
@@ -606,30 +433,16 @@
       border: 2px dashed #e3ddd7;
       background: #fefefe;
       cursor: pointer;
-      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1),
-                  box-shadow 0.25s, border-color 0.25s, background 0.25s;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s, border-color 0.25s, background 0.25s;
       user-select: none;
       text-align: center;
       overflow: hidden;
     }
 
-    .drink-item:hover {
-      transform: translateY(-4px) rotate(-1deg);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-      border-color: #cbb9aa;
-    }
-
-    .drink-emoji {
-      font-size: 2rem;
-      line-height: 1;
-      transition: transform 0.3s;
-      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.06));
-    }
-
+    .drink-item:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08); border-color: #cbb9aa; }
+    .drink-emoji { font-size: 2rem; line-height: 1; transition: transform 0.3s; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.06)); }
     .drink-item:hover .drink-emoji { transform: scale(1.25) rotate(8deg); }
-
     .drink-label { font-size: 0.9rem; font-weight: 500; color: #4a4a4a; letter-spacing: 0.02em; }
-
     .drink-item input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
 
     .drink-red      { --c: #b23a48; }
@@ -676,16 +489,58 @@
       100% { transform: scale(1); }
     }
 
+    /* ---------- ПРИСУТСТВИЕ В ЗАГС ---------- */
+    .visit-options {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+
+    .visit-item {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 18px;
+      border: 2px solid #f0e7de;
+      background: #fefcf9;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4a4a4a;
+      transition: border 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
+      user-select: none;
+    }
+
+    .visit-item:hover {
+      border-color: #cbb9aa;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(180, 150, 130, 0.10);
+    }
+
+    .visit-item input[type="radio"] {
+      accent-color: #d99b8a;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    .visit-item:has(input:checked) {
+      border-color: #d99b8a;
+      background: #fdf1ec;
+      box-shadow: 0 0 0 4px rgba(217, 155, 138, 0.12);
+    }
+
     /* ---------- ФОРМА ---------- */
     .rsvp-form { display: flex; flex-direction: column; gap: 1.3rem; margin-top: 1rem; }
     .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
 
-    label {
-      font-size: 0.92rem;
-      color: #7a6e66;
-      letter-spacing: 0.02em;
-      font-weight: 500;
-    }
+    label { font-size: 0.92rem; color: #7a6e66; letter-spacing: 0.02em; font-weight: 500; }
 
     input[type="text"], select, textarea {
       font-family: inherit;
@@ -738,11 +593,7 @@
       transition: transform 0.3s;
     }
 
-    button[type="submit"]:hover {
-      filter: brightness(1.06);
-      box-shadow: 0 14px 28px rgba(217, 155, 138, 0.45);
-    }
-
+    button[type="submit"]:hover { filter: brightness(1.06); box-shadow: 0 14px 28px rgba(217, 155, 138, 0.45); }
     button[type="submit"]:hover::after { transform: translateY(-50%) rotate(90deg); }
     button[type="submit"]:active { transform: scale(0.97); }
 
@@ -772,7 +623,7 @@
 
     .footer-note i { color: #d99b8a; margin-right: 6px; }
 
-    /* ---------- КОНФЕТТИ (сердечки) ---------- */
+    /* ---------- КОНФЕТТИ ---------- */
     .confetti-layer {
       position: fixed;
       inset: 0;
@@ -790,18 +641,9 @@
     }
 
     @keyframes confettiFall {
-      0% {
-        transform: translateY(0) rotate(0deg) scale(0.6);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-        transform: translateY(10vh) rotate(60deg) scale(1);
-      }
-      100% {
-        transform: translateY(105vh) rotate(720deg) scale(0.9);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+      10% { opacity: 1; transform: translateY(10vh) rotate(60deg) scale(1); }
+      100% { transform: translateY(105vh) rotate(720deg) scale(0.9); opacity: 0; }
     }
 
     /* ---------- АДАПТИВНОСТЬ ---------- */
@@ -809,10 +651,7 @@
       body { padding: 1rem 0.8rem; }
       .card { padding: 1.6rem 1.3rem; border-radius: 26px; }
       .hero { padding: 2rem 1rem 1.8rem; }
-      .hero-top { gap: 1rem; }
-      .hero .names { font-size: 1.9rem; }
-      .hero-photo-circle { width: 82px; height: 82px; border-width: 3px; }
-      .hero-photo-name { font-size: 0.72rem; letter-spacing: 0.1em; }
+      .hero .names { font-size: 2.2rem; }
       .hero::before, .hero::after { font-size: 1.2rem; }
       h2 { font-size: 1.35rem; }
       h2 i { width: 34px; height: 34px; font-size: 0.8rem; }
@@ -821,12 +660,13 @@
       .program-list::before { left: 26px; }
       .program-emoji { width: 38px; height: 38px; font-size: 1rem; }
       .color-circle { width: 58px; height: 58px; }
-      .color-palette { gap: 1rem 0.5rem; max-width: 320px; }
-      .color-name { font-size: 0.7rem; }
+      .color-palette { gap: 0.9rem; }
+      .color-name { font-size: 0.78rem; }
       .drinks-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
       .drink-emoji { font-size: 1.7rem; }
       .drink-label { font-size: 0.8rem; }
       .gallery-nav { width: 38px; height: 38px; }
+      .visit-item { min-width: 100%; }
     }
   </style>
 </head>
@@ -837,42 +677,14 @@
 
   <!-- ШАПКА -->
   <div class="card hero">
-    <div class="hero-top">
-      <div class="hero-photo">
-        <div class="hero-photo-circle" style="background-image: url('Julia5.jpg');"></div>
-        <span class="hero-photo-name">Юлия</span>
-      </div>
-
-      <div class="hero-names-block">
-        <div class="names">
-          Юлия <span class="ampersand">&</span> Иван
-        </div>
-        <div class="date">05 ИЮНЯ 2027</div>
-      </div>
-
-      <div class="hero-photo">
-        <div class="hero-photo-circle" style="background-image: url('Ivan3.jpg');"></div>
-        <span class="hero-photo-name">Иван</span>
-      </div>
-    </div>
+    <div class="names">Юлия <span class="ampersand">&</span> Иван</div>
+    <div class="date">05 ИЮНЯ 2027</div>
 
     <div class="timer-container" id="timer">
-      <div class="timer-item">
-        <div class="timer-number" id="days">00</div>
-        <div class="timer-label">дней</div>
-      </div>
-      <div class="timer-item">
-        <div class="timer-number" id="hours">00</div>
-        <div class="timer-label">часов</div>
-      </div>
-      <div class="timer-item">
-        <div class="timer-number" id="minutes">00</div>
-        <div class="timer-label">минут</div>
-      </div>
-      <div class="timer-item">
-        <div class="timer-number" id="seconds">00</div>
-        <div class="timer-label">секунд</div>
-      </div>
+      <div class="timer-item"><div class="timer-number" id="days">00</div><div class="timer-label">дней</div></div>
+      <div class="timer-item"><div class="timer-number" id="hours">00</div><div class="timer-label">часов</div></div>
+      <div class="timer-item"><div class="timer-number" id="minutes">00</div><div class="timer-label">минут</div></div>
+      <div class="timer-item"><div class="timer-number" id="seconds">00</div><div class="timer-label">секунд</div></div>
     </div>
 
     <button class="calendar-btn" type="button" onclick="downloadICS()">
@@ -885,12 +697,11 @@
   <div class="card">
     <h2><i class="fas fa-images"></i>Наши моменты</h2>
     <div class="gallery-viewport" id="galleryViewport">
-      <div class="gallery-slide active" style="background-image: url('Photo1.jpg');"></div>
-      <div class="gallery-slide" style="background-image: url('Photo2.jpg');"></div>
-      <div class="gallery-slide" style="background-image: url('Photo3.jpg');"></div>
-      <div class="gallery-slide" style="background-image: url('Photo4.jpg');"></div>
-      <div class="gallery-slide" style="background-image: url('Photo5.jpg');"></div>
-      <div class="gallery-slide" style="background-image: url('Photo6.jpg');"></div>
+      <div class="gallery-slide active" style="background-image: url('Photo1.jpeg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo1.jpeg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo2.jpeg');"></div>
+      <div class="gallery-slide" style="background-image: url('https://picsum.photos/id/1035/1200/750');"></div>
+      <div class="gallery-slide" style="background-image: url('https://picsum.photos/id/1062/1200/750');"></div>
 
       <button class="gallery-nav gallery-prev" type="button" aria-label="Назад" onclick="galleryPrev()">
         <i class="fas fa-chevron-left"></i>
@@ -902,23 +713,31 @@
     <div class="gallery-dots" id="galleryDots"></div>
   </div>
 
-  <!-- ПРОГРАММА ДНЯ -->
+  <!-- МЕСТО -->
   <div class="card">
-    <h2><i class="fas fa-clock"></i>Программа дня</h2>
-    <ul class="program-list">
-      <li><span class="program-emoji">💍</span><span class="program-body"><span class="program-time">16:00</span><span class="program-desc">Церемония в ЗАГС</span></span></li>
-      <li><span class="program-emoji">🚗</span><span class="program-body"><span class="program-time">16:30</span><span class="program-desc">Трансфер от ЗАГС</span></span></li>
-      <li><span class="program-emoji">🥂</span><span class="program-body"><span class="program-time">16:50</span><span class="program-desc">Сбор гостей, welcome-зона</span></span></li>
-      <li><span class="program-emoji">🍽️</span><span class="program-body"><span class="program-time">17:00</span><span class="program-desc">Банкет и поздравления</span></span></li>
-      <li><span class="program-emoji">🎂</span><span class="program-body"><span class="program-time">19:30</span><span class="program-desc">Торт и первый танец</span></span></li>
-      <li><span class="program-emoji">🎶</span><span class="program-body"><span class="program-time">21:00</span><span class="program-desc">Танцы и вечеринка</span></span></li>
-      <li><span class="program-emoji">🎆</span><span class="program-body"><span class="program-time">23:00</span><span class="program-desc">Фейерверк</span></span></li>
-    </ul>
-  </div>
+    <h2><i class="fas fa-map-pin"></i>Место</h2>
 
-   <!-- МЕСТО БАНКЕТА -->
-  <div class="card">
-    <h2><i class="fas fa-map-pin"></i>Место банкета</h2>
+    <!-- ЗАГС -->
+    <h3 style="font-weight: 500; color: #5e554e; margin-bottom: 0.6rem; font-size: 1.05rem;">
+      <i class="fas fa-ring" style="color: #b5865c; margin-right: 6px;"></i>Церемония в ЗАГС
+    </h3>
+    <div class="map-wrapper">
+      <iframe 
+        src="https://yandex.ru/map-widget/v1/?ll=104.280%2C52.286&z=15&text=Иркутск%20ЗАГС%20Байкальская"
+        frameborder="0"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+    <div class="address">
+      <i class="fas fa-location-dot"></i>
+      <span>г. Иркутск, ул. Байкальская, 279 — Отдел ЗАГС</span>
+    </div>
+
+    <!-- Ресторан -->
+    <h3 style="font-weight: 500; color: #5e554e; margin: 1.5rem 0 0.6rem; font-size: 1.05rem;">
+      <i class="fas fa-champagne-glasses" style="color: #b5865c; margin-right: 6px;"></i>Банкет
+    </h3>
     <div class="map-wrapper">
       <iframe 
         src="https://yandex.ru/map-widget/v1/?um=constructor%3A7ba91779bba17def2330a67bafd52345290a0a6bf2664a163e8ef9bf024bc681&amp;source=constructor" 
@@ -935,6 +754,20 @@
       <i class="fas fa-car"></i>
       <span>Парковка перед рестораном. Трансфер от ЗАГС в 16:30</span>
     </div>
+  </div>
+
+  <!-- ПРОГРАММА ДНЯ -->
+  <div class="card">
+    <h2><i class="fas fa-clock"></i>Программа дня</h2>
+    <ul class="program-list">
+      <li><span class="program-emoji">💍</span><span class="program-body"><span class="program-time">16:00</span><span class="program-desc">Церемония в ЗАГС</span></span></li>
+      <li><span class="program-emoji">🚗</span><span class="program-body"><span class="program-time">16:30</span><span class="program-desc">Трансфер от ЗАГС</span></span></li>
+      <li><span class="program-emoji">🥂</span><span class="program-body"><span class="program-time">16:50</span><span class="program-desc">Сбор гостей, welcome-зона</span></span></li>
+      <li><span class="program-emoji">🍽️</span><span class="program-body"><span class="program-time">17:00</span><span class="program-desc">Банкет и поздравления</span></span></li>
+      <li><span class="program-emoji">🎂</span><span class="program-body"><span class="program-time">19:30</span><span class="program-desc">Торт и первый танец</span></span></li>
+      <li><span class="program-emoji">🎶</span><span class="program-body"><span class="program-time">21:00</span><span class="program-desc">Танцы и вечеринка</span></span></li>
+      <li><span class="program-emoji">🎆</span><span class="program-body"><span class="program-time">23:00</span><span class="program-desc">Фейерверк</span></span></li>
+    </ul>
   </div>
 
   <!-- ДРЕСС-КОД -->
@@ -962,7 +795,7 @@
       </div>
       <div class="color-item">
         <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #d4b896, #b89870 70%);"></div>
-        <span class="color-name">🖐🏼 светло-коричневый</span>
+        <span class="color-name">🤎 светло-коричневый</span>
       </div>
       <div class="color-item">
         <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #8a5a30, #6B4423 70%);"></div>
@@ -970,25 +803,11 @@
       </div>
     </div>
   </div>
-  
-  <!-- ПОДАРОК -->
-  <div class="card">
-    <h2><i class="fas fa-gift"></i>Подарок</h2>
-    <div class="gift-card">
-      <p class="gift-text">
-        Мы очень ценим вас и будем рады любому подарку <span class="gift-emoji">💝</span><br>
-        И не важно, в какой конверт вы его упакуете! :-)
-      </p>
-      <p class="gift-ps">P.s. Пожалуйста не дарите букеты цветов</p>
-    </div>
-  </div>
-  
+
   <!-- ФОРМА RSVP -->
   <div class="card">
     <h2><i class="fas fa-envelope"></i>Подтверждение</h2>
-    <p style="color: #6b625b; margin-bottom: 1rem; font-size: 1rem;">Надеемся провести время с кайфом и от души. 
-      От вас требуется придти в хорошем настроении и разделить с нами наш день.
-      Поэтому, пожалуйста, подтвердите своё присутствие до 1 мая 2027. 💌</p>
+    <p style="color: #6b625b; margin-bottom: 1rem; font-size: 1rem;">Пожалуйста, подтвердите своё присутствие до 1 мая 2027. 💌</p>
 
     <form 
       class="rsvp-form" 
@@ -1013,6 +832,22 @@
         </select>
       </div>
 
+      <!-- ПРИСУТСТВИЕ В ЗАГС -->
+      <div class="form-group">
+        <label>Будете ли вы присутствовать в ЗАГС?</label>
+        <div class="visit-options">
+          <label class="visit-item">
+            <input type="radio" name="entry.777777777" value="Да" required>
+            <span>✅ Да, буду</span>
+          </label>
+          <label class="visit-item">
+            <input type="radio" name="entry.777777777" value="Нет">
+            <span>❌ Нет, только на банкет</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- НАПИТКИ -->
       <div class="form-group">
         <label>Предпочтения по напиткам (можно выбрать несколько 🍷)</label>
         <div class="drinks-grid">
@@ -1078,6 +913,7 @@
     (function() {
       window.submitted = false;
 
+      /* ---------- ЛЕПЕСТКИ ---------- */
       (function createPetals() {
         const layer = document.getElementById('petals');
         const COUNT = 22;
@@ -1093,6 +929,7 @@
         }
       })();
 
+      /* ---------- ТАЙМЕР ---------- */
       const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
 
       function updateTimer() {
@@ -1121,6 +958,7 @@
       updateTimer();
       setInterval(updateTimer, 1000);
 
+      /* ---------- ГАЛЕРЕЯ ---------- */
       const slides = document.querySelectorAll('.gallery-slide');
       const dotsContainer = document.getElementById('galleryDots');
       let currentSlide = 0;
@@ -1149,6 +987,7 @@
 
       setInterval(() => goToSlide(currentSlide + 1), 6000);
 
+      /* ---------- КОНФЕТТИ ---------- */
       function launchConfetti() {
         const layer = document.getElementById('confettiLayer');
         const hearts = ['💖', '💕', '💗', '💓', '❤️', '🌸', '✨', '💛'];
@@ -1168,6 +1007,7 @@
         }
       }
 
+      /* ---------- СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ ---------- */
       window.showThankYou = function() {
         if (window.submitted) {
           const msg = document.getElementById('rsvpMessage');
@@ -1186,6 +1026,7 @@
         }
       };
 
+      /* ---------- КНОПКА "В КАЛЕНДАРЬ" ---------- */
       window.downloadICS = function() {
         const dtStart = '20270605T160000';
         const dtEnd   = '20270606T000000';
