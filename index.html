@@ -131,7 +131,7 @@
       .env-letter { padding: 2rem 1.5rem; }
     }
 
-        /* ── Створки конверта (крафтовая бумага) ── */
+    /* ── Створки конверта (крафтовая бумага) ── */
     .env-flap {
       position: absolute;
       background-color: #d4b88a;
@@ -141,7 +141,6 @@
       box-shadow: 0 2px 6px rgba(120, 85, 40, 0.12);
     }
 
-    /* Верхний клапан — треугольник сверху */
     .env-flap-top {
       top: 0; left: 0;
       width: 100%; height: 62%;
@@ -151,7 +150,6 @@
       z-index: 8;
     }
 
-    /* Тонкая линия сгиба по диагонали — левая */
     .env-flap-top::before {
       content: "";
       position: absolute;
@@ -172,7 +170,6 @@
       opacity: 0.6;
     }
 
-    /* Мягкая тень от верхнего клапана */
     .env-flap-top::after {
       content: "";
       position: absolute;
@@ -182,7 +179,6 @@
       pointer-events: none;
     }
 
-    /* Нижний клапан — треугольник снизу */
     .env-flap-bottom {
       bottom: 0; left: 0;
       width: 100%; height: 42%;
@@ -191,7 +187,6 @@
       z-index: 6;
     }
 
-    /* Тонкая линия сгиба на нижнем клапане */
     .env-flap-bottom::before {
       content: "";
       position: absolute;
@@ -212,7 +207,6 @@
       opacity: 0.6;
     }
 
-    /* Левый / правый клапаны — боковые треугольники */
     .env-flap-left {
       top: 0; left: 0;
       width: 32%; height: 100%;
@@ -228,7 +222,7 @@
       z-index: 4;
     }
 
-     .env-flap-text {
+    .env-flap-text {
       position: absolute;
       top: 8%;
       left: 50%;
@@ -261,7 +255,8 @@
       line-height: 1;
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
     }
-        /* ── Сургучная печать (как настоящая — неровная, с потёками) ── */
+
+    /* ── Сургучная печать (как настоящая — неровная, с потёками) ── */
     .wax-seal {
       position: absolute;
       top: 58%;
@@ -290,7 +285,6 @@
       animation: sealPulse 2.6s ease-in-out infinite;
     }
 
-    /* Неровные «потёки» сургуча по краю */
     .wax-seal::before {
       content: "";
       position: absolute;
@@ -308,7 +302,6 @@
       z-index: -1;
     }
 
-    /* Тонкий контур внутри печати — оттиск */
     .wax-seal::after {
       content: "";
       position: absolute;
@@ -321,7 +314,6 @@
       pointer-events: none;
     }
 
-    /* Блик сверху-слева — сургучный отблеск */
     .wax-seal .wax-seal-text::before {
       content: "";
       position: absolute;
@@ -358,7 +350,6 @@
       100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
     }
 
-    /* Осколки сургуча */
     .seal-shards {
       position: absolute;
       top: 58%;
@@ -559,17 +550,62 @@
       margin: 2.5rem 0 1rem;
     }
 
+    /* ═══════════════════════════════════════════
+       ВИНТАЖНЫЕ ПОЛАРОИДЫ
+       ═══════════════════════════════════════════ */
     .polaroid {
-      background: #ffffff;
-      padding: 12px 12px 48px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.08), 0 12px 26px rgba(150, 120, 90, 0.16);
+      background: #fbf6ec;
+      background-image:
+        radial-gradient(circle at 25% 15%, rgba(180, 155, 120, 0.10) 0%, transparent 35%),
+        radial-gradient(circle at 80% 85%, rgba(160, 130, 95, 0.12) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.24 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      padding: 14px 14px 52px;
+      box-shadow:
+        0 1px 2px rgba(80, 60, 40, 0.15),
+        0 6px 14px rgba(120, 95, 70, 0.20),
+        0 14px 30px rgba(90, 60, 40, 0.14),
+        inset 0 0 0 1px rgba(200, 180, 150, 0.5),
+        inset 0 0 60px rgba(190, 165, 130, 0.12);
       position: relative;
       transition: transform 0.3s ease;
       display: inline-block;
+      border: 1px solid #e8dfc9;
+      border-radius: 2px;
     }
-    .polaroid:hover { transform: rotate(0deg) scale(1.03); z-index: 10; }
-    .polaroid-a { transform: rotate(-4deg); }
-    .polaroid-b { transform: rotate(3deg); }
+
+    /* Потёртые края рамки */
+    .polaroid::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 12px 6px at 6% 8%, rgba(120, 90, 60, 0.18), transparent 70%),
+        radial-gradient(ellipse 10px 8px at 94% 12%, rgba(120, 90, 60, 0.14), transparent 70%),
+        radial-gradient(ellipse 8px 10px at 90% 92%, rgba(120, 90, 60, 0.16), transparent 70%),
+        radial-gradient(ellipse 14px 6px at 10% 88%, rgba(120, 90, 60, 0.15), transparent 70%);
+      border-radius: 2px;
+      z-index: 3;
+    }
+
+    /* Винтажные фото-уголки */
+    .polaroid::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      pointer-events: none;
+      z-index: 4;
+      background:
+        linear-gradient(135deg, #c9b48a 0%, #b8a074 40%, transparent 42%) top left / 34px 34px no-repeat,
+        linear-gradient(225deg, #c9b48a 0%, #b8a074 40%, transparent 42%) top right / 34px 34px no-repeat,
+        linear-gradient(45deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom left / 34px 34px no-repeat,
+        linear-gradient(315deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom right / 34px 34px no-repeat;
+      filter: drop-shadow(0 1px 1px rgba(80, 60, 40, 0.25));
+    }
+
+    .polaroid:hover { transform: rotate(0deg) scale(1.04); z-index: 10; }
+    .polaroid-a { transform: rotate(-4.5deg); }
+    .polaroid-b { transform: rotate(3.5deg); }
 
     .polaroid .photo {
       width: 210px;
@@ -577,17 +613,40 @@
       background-size: cover;
       background-position: center;
       background-color: #f0e8dc;
+      box-shadow:
+        inset 0 0 0 1px rgba(120, 90, 60, 0.20),
+        inset 0 0 30px rgba(140, 110, 80, 0.14);
+      filter: sepia(0.10) contrast(1.02) saturate(0.96);
+      transition: filter 0.3s;
     }
+
+    .polaroid:hover .photo {
+      filter: sepia(0) contrast(1.03) saturate(1);
+    }
+
     .polaroid .caption {
       position: absolute;
-      bottom: 10px;
+      bottom: 12px;
       left: 0;
       right: 0;
       text-align: center;
       font-family: 'Caveat', cursive;
       font-size: 1.9rem;
       font-weight: 600;
-      color: #e63946;
+      color: #7c5a3a;
+      letter-spacing: 0.02em;
+      text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.5),
+        0 0 1px rgba(120, 90, 60, 0.3);
+    }
+
+    .polaroid .caption::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 1px;
+      margin: 4px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(124, 90, 58, 0.45), transparent);
     }
 
     .big-text {
@@ -727,12 +786,12 @@
     .gallery-scatter .polaroid { padding: 10px 10px 40px; margin: -14px; }
     .gallery-scatter .polaroid .photo { width: 200px; height: 200px; }
 
-    .gallery-scatter .polaroid:nth-child(1) { transform: rotate(-7deg) translateY(10px); }
-    .gallery-scatter .polaroid:nth-child(2) { transform: rotate(4deg) translateY(-8px); }
-    .gallery-scatter .polaroid:nth-child(3) { transform: rotate(-3deg) translateY(12px); }
-    .gallery-scatter .polaroid:nth-child(4) { transform: rotate(8deg) translateY(-10px); }
-    .gallery-scatter .polaroid:nth-child(5) { transform: rotate(-5deg) translateY(6px); }
-    .gallery-scatter .polaroid:nth-child(6) { transform: rotate(6deg) translateY(-6px); }
+    .gallery-scatter .polaroid:nth-child(1) { transform: rotate(-7.5deg) translateY(10px); }
+    .gallery-scatter .polaroid:nth-child(2) { transform: rotate(4.5deg) translateY(-8px); }
+    .gallery-scatter .polaroid:nth-child(3) { transform: rotate(-3.5deg) translateY(12px); }
+    .gallery-scatter .polaroid:nth-child(4) { transform: rotate(8.5deg) translateY(-10px); }
+    .gallery-scatter .polaroid:nth-child(5) { transform: rotate(-5.5deg) translateY(6px); }
+    .gallery-scatter .polaroid:nth-child(6) { transform: rotate(6.5deg) translateY(-6px); }
     .gallery-scatter .polaroid:hover { transform: rotate(0) scale(1.06); z-index: 10; }
 
     .gallery-nav {
@@ -1122,8 +1181,17 @@
       .hero-title { font-size: 3rem; }
       h2 { font-size: 2.6rem; }
 
+      .polaroid { padding: 10px 10px 44px; }
       .polaroid .photo { width: 150px; height: 150px; }
-      .polaroid .caption { font-size: 1.6rem; }
+      .polaroid .caption { font-size: 1.6rem; bottom: 8px; }
+      .polaroid .caption::after { width: 44px; }
+      .polaroid::after {
+        background:
+          linear-gradient(135deg, #c9b48a 0%, #b8a074 40%, transparent 42%) top left / 26px 26px no-repeat,
+          linear-gradient(225deg, #c9b48a 0%, #b8a074 40%, transparent 42%) top right / 26px 26px no-repeat,
+          linear-gradient(45deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom left / 26px 26px no-repeat,
+          linear-gradient(315deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom right / 26px 26px no-repeat;
+      }
       .hero-polaroids { gap: 1.5rem; }
 
       .big-text { font-size: 1.5rem; }
