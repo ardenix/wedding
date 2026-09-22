@@ -8,7 +8,6 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ---------- ФОН С ЛЕПЕСТКАМИ ---------- */
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: #2e2e2e;
@@ -139,6 +138,37 @@
     @keyframes twinkle {
       0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.55; }
       50%      { transform: scale(1.15) rotate(10deg); opacity: 0.9; }
+    }
+
+    .hero-photos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      box-shadow:
+        0 10px 24px rgba(180, 150, 130, 0.22),
+        0 0 0 5px #ffffff,
+        0 0 0 7px #f3e0d4;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .hero-photo:hover { transform: scale(1.06) rotate(-2deg); }
+
+    .hero-names {
+      text-align: center;
+      flex: 1;
+      min-width: 220px;
     }
 
     .hero .names {
@@ -379,11 +409,21 @@
 
     .color-palette {
       display: flex;
-      gap: 1.5rem;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 1.5rem 0 0.5rem;
+      gap: 1.5rem;
+      margin: 1.5rem auto 0.5rem;
+      max-width: 480px; /* ровно 3 кружка в ряд */
     }
+
+    /* Принудительный перенос после 3-го кружка */
+    .color-palette::before {
+      content: "";
+      flex-basis: 100%;
+      height: 0;
+      order: 1;
+    }
+    .color-item:nth-child(n+4) { order: 2; }
 
     .color-item { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
 
@@ -411,7 +451,7 @@
       box-shadow: inset 0 -8px 16px rgba(0,0,0,0.12), inset 0 6px 12px rgba(255,255,255,0.35), 0 16px 28px rgba(0,0,0,0.16);
     }
 
-    .color-name { font-size: 0.88rem; color: #5e554e; letter-spacing: 0.04em; font-weight: 500; }
+    .color-name { font-size: 0.88rem; color: #5e554e; letter-spacing: 0.04em; font-weight: 500; text-align: center; }
 
     /* ---------- НАПИТКИ ---------- */
     .drinks-grid {
@@ -653,6 +693,9 @@
       .hero { padding: 2rem 1rem 1.8rem; }
       .hero .names { font-size: 2.2rem; }
       .hero::before, .hero::after { font-size: 1.2rem; }
+      .hero-photo { width: 80px; height: 80px; }
+      .hero-photos { gap: 0.7rem; }
+      .hero-names { min-width: auto; }
       h2 { font-size: 1.35rem; }
       h2 i { width: 34px; height: 34px; font-size: 0.8rem; }
       .timer-item { min-width: 68px; padding: 0.7rem 0.4rem 0.5rem; }
@@ -660,8 +703,8 @@
       .program-list::before { left: 26px; }
       .program-emoji { width: 38px; height: 38px; font-size: 1rem; }
       .color-circle { width: 58px; height: 58px; }
-      .color-palette { gap: 0.9rem; }
-      .color-name { font-size: 0.78rem; }
+      .color-palette { gap: 0.9rem; max-width: 340px; }
+      .color-name { font-size: 0.72rem; }
       .drinks-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
       .drink-emoji { font-size: 1.7rem; }
       .drink-label { font-size: 0.8rem; }
@@ -677,8 +720,14 @@
 
   <!-- ШАПКА -->
   <div class="card hero">
-    <div class="names">Юлия <span class="ampersand">&</span> Иван</div>
-    <div class="date">05 ИЮНЯ 2027</div>
+    <div class="hero-photos">
+      <div class="hero-photo" style="background-image: url('Photo1.jpeg');"></div>
+      <div class="hero-names">
+        <div class="names">Юлия <span class="ampersand">&</span> Иван</div>
+        <div class="date">05 ИЮНЯ 2027</div>
+      </div>
+      <div class="hero-photo" style="background-image: url('Photo2.jpeg');"></div>
+    </div>
 
     <div class="timer-container" id="timer">
       <div class="timer-item"><div class="timer-number" id="days">00</div><div class="timer-label">дней</div></div>
@@ -717,7 +766,6 @@
   <div class="card">
     <h2><i class="fas fa-map-pin"></i>Место</h2>
 
-    <!-- ЗАГС -->
     <h3 style="font-weight: 500; color: #5e554e; margin-bottom: 0.6rem; font-size: 1.05rem;">
       <i class="fas fa-ring" style="color: #b5865c; margin-right: 6px;"></i>Церемония в ЗАГС
     </h3>
@@ -733,12 +781,11 @@
       <i class="fas fa-location-dot"></i>
       <span>г. Иркутск, ул. Декабрьских Событий, 106 — Дворец бракосочетания</span>
     </div>
-     <div class="address" style="margin-top: 0.2rem;">
+    <div class="address" style="margin-top: 0.2rem;">
       <i class="fas fa-car"></i>
       <span>Трансфер от ЗАГС в 16:30</span>
     </div>
 
-    <!-- Ресторан -->
     <h3 style="font-weight: 500; color: #5e554e; margin: 1.5rem 0 0.6rem; font-size: 1.05rem;">
       <i class="fas fa-champagne-glasses" style="color: #b5865c; margin-right: 6px;"></i>Банкет
     </h3>
@@ -754,7 +801,6 @@
       <i class="fas fa-location-dot"></i>
       <span>г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»</span>
     </div>
-   
   </div>
 
   <!-- ПРОГРАММА ДНЯ -->
@@ -833,7 +879,6 @@
         </select>
       </div>
 
-      <!-- ПРИСУТСТВИЕ В ЗАГС -->
       <div class="form-group">
         <label>Будете ли вы присутствовать в ЗАГС?</label>
         <div class="visit-options">
@@ -848,7 +893,6 @@
         </div>
       </div>
 
-      <!-- НАПИТКИ -->
       <div class="form-group">
         <label>Предпочтения по напиткам (можно выбрать несколько 🍷)</label>
         <div class="drinks-grid">
@@ -914,7 +958,6 @@
     (function() {
       window.submitted = false;
 
-      /* ---------- ЛЕПЕСТКИ ---------- */
       (function createPetals() {
         const layer = document.getElementById('petals');
         const COUNT = 22;
@@ -930,7 +973,6 @@
         }
       })();
 
-      /* ---------- ТАЙМЕР ---------- */
       const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
 
       function updateTimer() {
@@ -959,7 +1001,6 @@
       updateTimer();
       setInterval(updateTimer, 1000);
 
-      /* ---------- ГАЛЕРЕЯ ---------- */
       const slides = document.querySelectorAll('.gallery-slide');
       const dotsContainer = document.getElementById('galleryDots');
       let currentSlide = 0;
@@ -988,7 +1029,6 @@
 
       setInterval(() => goToSlide(currentSlide + 1), 6000);
 
-      /* ---------- КОНФЕТТИ ---------- */
       function launchConfetti() {
         const layer = document.getElementById('confettiLayer');
         const hearts = ['💖', '💕', '💗', '💓', '❤️', '🌸', '✨', '💛'];
@@ -1008,7 +1048,6 @@
         }
       }
 
-      /* ---------- СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ ---------- */
       window.showThankYou = function() {
         if (window.submitted) {
           const msg = document.getElementById('rsvpMessage');
@@ -1027,7 +1066,6 @@
         }
       };
 
-      /* ---------- КНОПКА "В КАЛЕНДАРЬ" ---------- */
       window.downloadICS = function() {
         const dtStart = '20270605T160000';
         const dtEnd   = '20270606T000000';
