@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Наталья + Матвей 💍</title>
+  <title>Юлия + Иван 💍</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,13 +65,11 @@
       box-shadow:
         0 2px 4px rgba(0,0,0,0.05),
         0 12px 28px rgba(150, 120, 90, 0.12);
-      /* лёгкая неровность как у бумаги */
       border-radius: 3px;
       transform: rotate(-0.2deg);
     }
     .card:nth-child(even) { transform: rotate(0.3deg); }
 
-    /* Скотч в углу */
     .card::before {
       content: "";
       position: absolute;
@@ -84,7 +82,6 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
 
-    /* От руки нарисованные сердечки по углам карточек */
     .card .doodle-heart {
       position: absolute;
       width: 22px;
@@ -113,7 +110,6 @@
       line-height: 1;
     }
 
-    /* Заголовок как на скриншотах — с псевдо-элементами */
     h2::after {
       content: "";
       display: block;
@@ -151,7 +147,6 @@
       text-transform: uppercase;
     }
 
-    /* Поляроиды в шапке */
     .hero-polaroids {
       display: flex;
       justify-content: center;
@@ -198,16 +193,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* Ручные стрелки и сердечки вокруг поляроидов */
-    .hero-polaroids::before {
-      content: "♥";
-      font-family: 'Caveat', cursive;
-      color: #e63946;
-      font-size: 1.2rem;
-      position: absolute;
-      display: none;
-    }
-
     /* Таймер */
     .timer-container {
       display: flex;
@@ -217,10 +202,7 @@
       flex-wrap: wrap;
     }
 
-    .timer-item {
-      text-align: center;
-      min-width: 84px;
-    }
+    .timer-item { text-align: center; min-width: 84px; }
 
     .timer-number {
       font-family: 'Amatic SC', cursive;
@@ -237,7 +219,6 @@
       text-transform: lowercase;
     }
 
-    /* Кнопка календаря */
     .calendar-btn {
       font-family: 'Caveat', cursive;
       font-size: 1.35rem;
@@ -257,10 +238,7 @@
     .calendar-btn:hover { background: #e63946; color: #fff; transform: rotate(-1.5deg); }
 
     /* ---------- КАЛЕНДАРЬ ---------- */
-    .calendar-block {
-      text-align: center;
-      margin: 1.5rem 0 0.5rem;
-    }
+    .calendar-block { text-align: center; margin: 1.5rem 0 0.5rem; }
 
     .cal-header {
       display: flex;
@@ -290,11 +268,7 @@
       letter-spacing: 0.05em;
     }
 
-    .cal-grid {
-      font-size: 1.4rem;
-      color: #4a4a4a;
-    }
-
+    .cal-grid { font-size: 1.4rem; color: #4a4a4a; }
     .cal-grid span { padding: 4px 0; }
 
     .cal-grid .today {
@@ -476,11 +450,7 @@
 
     .timing-list .dot { color: #a89a8e; font-size: 1.4rem; }
 
-    .timing-icon {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-    }
+    .timing-icon { width: 48px; height: 48px; flex-shrink: 0; }
 
     /* ---------- ДРЕСС-КОД ---------- */
     .dress-text {
@@ -584,7 +554,6 @@
 
     select { cursor: pointer; }
 
-    /* Присутствие в ЗАГС — как на скриншоте («от руки») */
     .visit-options {
       display: flex;
       gap: 1rem;
@@ -694,7 +663,6 @@
       justify-content: center;
     }
 
-    /* Кнопка отправки */
     button[type="submit"] {
       font-family: 'Caveat', cursive;
       font-size: 1.6rem;
@@ -870,7 +838,7 @@
     <h2>Узнали этих малышей?</h2>
 
     <div class="gallery-scatter" id="galleryScatter">
-      <div class="polaroid" style="background-image: none;">
+      <div class="polaroid">
         <div class="photo" style="background-image: url('Photo1.jpg');"></div>
       </div>
       <div class="polaroid">
@@ -1180,7 +1148,7 @@
   </div>
 
   <div class="footer-note">
-    Наталья & Матвей • 2027
+    Юлия & Иван • 2027
   </div>
 
   <script>
@@ -1205,8 +1173,7 @@
       (function() {
         const grid = document.getElementById('calGrid');
         if (!grid) return;
-        // Июнь 2027: 1 июня — вторник. Понедельник первый.
-        const offset = 1; // пустых клеток перед 1-м числом
+        const offset = 1;
         const daysInMonth = 30;
 
         for (let i = 0; i < offset; i++) {
@@ -1293,14 +1260,14 @@
         const ics = [
           'BEGIN:VCALENDAR',
           'VERSION:2.0',
-          'PRODID:-//Wedding Natalia and Matvey//RU',
+          'PRODID:-//Wedding Yulia and Ivan//RU',
           'CALSCALE:GREGORIAN',
           'BEGIN:VEVENT',
-          'UID:' + Date.now() + '@wedding',
+          'UID:' + Date.now() + '@wedding-yulia-ivan',
           'DTSTAMP:' + dtStamp,
           'DTSTART:' + dtStart,
           'DTEND:' + dtEnd,
-          'SUMMARY:Свадьба Натальи и Матвея 💍',
+          'SUMMARY:Свадьба Юлии и Ивана 💍',
           'DESCRIPTION:Ждём вас на нашем торжестве!',
           'LOCATION:г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»',
           'BEGIN:VALARM',
@@ -1316,7 +1283,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'wedding-natalia-matvey.ics';
+        a.download = 'wedding-yulia-ivan.ics';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
