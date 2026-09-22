@@ -140,11 +140,40 @@
       50%      { transform: scale(1.15) rotate(10deg); opacity: 0.9; }
     }
 
+    .hero-title {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero .names {
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      line-height: 1.15;
+      background: linear-gradient(90deg, #b5865c, #c99d7b, #b5865c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .date {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.55rem 1.6rem;
+      border-radius: 40px;
+      background: #ffffff;
+      color: #8b7e74;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 16px rgba(185, 140, 110, 0.14);
+    }
+
     .hero-photos {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.6rem;
+      gap: 2.5rem;
       margin-bottom: 1.8rem;
       flex-wrap: wrap;
     }
@@ -179,36 +208,6 @@
       color: #b5865c;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-    }
-
-    .hero-title {
-      text-align: center;
-      flex: 1;
-      min-width: 220px;
-    }
-
-    .hero .names {
-      font-size: 2.6rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      line-height: 1.15;
-      background: linear-gradient(90deg, #b5865c, #c99d7b, #b5865c);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero .date {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.55rem 1.6rem;
-      border-radius: 40px;
-      background: #ffffff;
-      color: #8b7e74;
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      font-size: 0.95rem;
-      box-shadow: 0 6px 16px rgba(185, 140, 110, 0.14);
     }
 
     .calendar-btn {
@@ -294,7 +293,8 @@
       opacity: 0;
       transform: scale(1.04);
       transition: opacity 0.6s ease, transform 0.6s ease;
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;
       background-position: center;
     }
 
@@ -721,9 +721,8 @@
       .hero .names { font-size: 1.8rem; }
       .hero::before, .hero::after { font-size: 1.2rem; }
       .hero-photo { width: 100px; height: 100px; }
-      .hero-person-name { font-size: 0.95rem; letter-spacing: 0.1em; }
-      .hero-photos { gap: 0.9rem; }
-      .hero-title { min-width: auto; }
+      .hero-photos { gap: 1.5rem; }
+      .hero-title { margin-bottom: 1.2rem; }
       h2 { font-size: 1.35rem; }
       h2 i { width: 34px; height: 34px; font-size: 0.8rem; }
       .timer-item { min-width: 68px; padding: 0.7rem 0.4rem 0.5rem; }
@@ -749,15 +748,15 @@
 
   <!-- ШАПКА -->
   <div class="card hero">
+    <div class="hero-title">
+      <div class="names">Наша свадьба</div>
+      <div class="date">05 ИЮНЯ 2027</div>
+    </div>
+
     <div class="hero-photos">
       <div class="hero-person">
         <div class="hero-photo" style="background-image: url('Julia3.jpg');"></div>
         <div class="hero-person-name">Юлия</div>
-      </div>
-
-      <div class="hero-title">
-        <div class="names">Наша свадьба</div>
-        <div class="date">05 ИЮНЯ 2027</div>
       </div>
 
       <div class="hero-person">
@@ -894,7 +893,7 @@
   <div class="card">
     <h2><i class="fas fa-gift"></i>Подарок</h2>
     <p class="gift-text">
-      Для нас ваше присутствие — это уже праздник 💛<br>
+      Для нас ваше присутствие — это уже праздник 💛<br>
       А любой подарок станет приятным дополнением<br>
       И неважно, в каком конверте 🎁
     </p>
@@ -907,9 +906,9 @@
   <div class="card">
     <h2><i class="fas fa-envelope"></i>Подтверждение</h2>
     <p style="color: #6b625b; margin-bottom: 1rem; font-size: 1rem;">
-      Мечтаем, чтобы праздник получился по-настоящему задорным и полным радости 🥳.   
-      Ваше участие — как раз то, что сделает этот день по-настоящему отличным 🎉. 
-      Поэтому, пожалуйста, подтвердите ваше присутствие до 1 мая 2027 💛</p>
+      Мечтаем, чтобы праздник получился по-настоящему задорным и полным радости 🥳.
+      Ваше участие — как раз то, что сделает этот день по-настоящему отличным 🎉.
+      Поэтому, пожалуйста, подтвердите ваше присутствие до 1 мая 2027 💛</p>
 
     <form 
       class="rsvp-form" 
