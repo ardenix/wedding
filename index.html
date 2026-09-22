@@ -422,7 +422,7 @@
       }
       .seal-shards { width: 150px; height: 150px; }
     }
-    
+
     /* Для телефонов с маленькой высотой — сдвигаем надпись ещё выше */
     @media (max-width: 640px) and (max-height: 700px) {
       .env-bottom-overlay {
@@ -1441,9 +1441,9 @@
       </div>
 
       <div class="env-bottom-overlay">
-        Это приглашение адресовано вам не случайно!<br>
+        Это приглашение адресовано Вам не случайно!<br>
         В этот особенный день нам особенно важно,<br>
-        чтобы вы были рядом с нами!
+        чтобы Вы были рядом с нами!
       </div>
     </div>
   </div>
@@ -1477,9 +1477,9 @@
         <p class="big-text-strong reveal from-bottom">Узнали этих малышей?</p>
 
         <p class="big-text reveal from-bottom">
-          В детстве казалось, что главные решения в жизни — это какую пиццу заказать. 
-          А оказалось, что самое важное — это с кем её есть… и с кем идти дальше 🥂 
-          Приходите на нашу свадьбу — будем есть пиццу (ну, или что-то поторжественнее) 
+          В детстве казалось, что главные решения в жизни — это какую пиццу заказать. 
+          А оказалось, что самое важное — это с кем её есть… и с кем идти дальше 🥂 
+          Приходите на нашу свадьбу — будем есть пиццу (ну, или что-то поторжественнее) 
           и радоваться, что всё сложилось именно так!
         </p>
       </section>
@@ -1632,7 +1632,7 @@
         <h2 class="reveal from-top">Дресс-код</h2>
 
         <p class="dress-text reveal from-bottom">
-          Мы будем рады, если вы поддержите палитру нашего торжества 🌸<br>
+          Мы будем рады, если Вы поддержите палитру нашего торжества 🌸<br>
           Пожалуйста, выберите наряд в одном из этих цветов:
         </p>
 
@@ -1672,7 +1672,7 @@
         <h2 class="reveal from-top">Подарок</h2>
 
         <p class="gift-text reveal from-bottom">
-          Для нас ваше присутствие — это уже праздник 💛<br>
+          Для нас Ваше присутствие — это уже праздник 💛<br>
           А любой подарок станет приятным дополнением,<br>
           и неважно, в каком конверте 🎁
         </p>
@@ -1691,7 +1691,7 @@
         <p class="rsvp-intro reveal from-bottom">
           Мечтаем, чтобы праздник получился по-настоящему задорным и полным радости. 
           Ваше участие — как раз то, что сделает день по-настоящему отличным!
-          Поэтому, пожалуйста, подтвердите ваше присутствие до <br>
+          Поэтому, пожалуйста, подтвердите Ваше присутствие до <br>
           <span style="color: #e63946; font-weight: 700; font-family: 'Amatic SC', cursive; font-size: 2rem;">1 МАЯ 2027</span>
         </p>
 
@@ -1716,7 +1716,7 @@
           </div>
 
           <div class="form-group">
-            <label>Будете ли вы присутствовать в ЗАГС?</label>
+            <label>Будете ли Вы присутствовать в ЗАГС?</label>
             <div class="visit-options">
               <label class="visit-item">
                 <input type="radio" name="entry.1893720403" value="Да" required>
@@ -1948,7 +1948,7 @@
       if (window.submitted) {
         const msg = document.getElementById('rsvpMessage');
         const name = document.getElementById('name').value.trim() || 'гость';
-        msg.textContent = `🎉 Спасибо, ${name}! Мы вас ждём 💛`;
+        msg.textContent = `🎉 Спасибо, ${name}! Мы Вас ждём 💛`;
         launchConfetti();
         document.getElementById('rsvpForm').reset();
         window.submitted = false;
@@ -1969,7 +1969,7 @@
         'UID:' + Date.now() + '@wedding-yulia-ivan',
         'DTSTAMP:' + dtStamp,'DTSTART:' + dtStart,'DTEND:' + dtEnd,
         'SUMMARY:Свадьба Юлии и Ивана 💍',
-        'DESCRIPTION:Ждём вас на нашем торжестве!',
+        'DESCRIPTION:Ждём Вас на нашем торжестве!',
         'LOCATION:г. Иркутск, ул. Декабрьских Событий, 106 — ЗАГС; ул. Байкальская, 279 — Ресторан «Авантаж»',
         'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Напоминание: завтра свадьба!','END:VALARM',
         'END:VEVENT','END:VCALENDAR'
@@ -1995,11 +1995,9 @@
       const lightboxCounter = document.getElementById('lightboxCounter');
       if (!lightbox || !lightboxImg) return;
 
-      // Собираем все фото на странице (шапка + галерея)
       const photos = Array.from(document.querySelectorAll('.polaroid .photo'));
       let currentIndex = 0;
 
-      // Открытие лайтбокса по клику на фото
       photos.forEach((photo, idx) => {
         photo.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -2026,7 +2024,6 @@
       }
 
       function showSlide(index) {
-        // Плавное перелистывание
         lightboxImg.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
         lightboxImg.style.opacity = '0';
         lightboxStage.classList.remove('zoomed');
@@ -2040,7 +2037,6 @@
         }, 220);
       }
 
-      /* ── Стрелки ── */
       window.lightboxPrev = function(e) {
         if (e) e.stopPropagation();
         showSlide(currentIndex - 1);
@@ -2051,20 +2047,17 @@
         showSlide(currentIndex + 1);
       };
 
-      /* ── Zoom по клику на фото ── */
       lightboxStage.addEventListener('click', function(e) {
         e.stopPropagation();
         lightboxStage.classList.toggle('zoomed');
       });
 
-      /* ── Клик по тёмному фону — закрыть ── */
       lightbox.addEventListener('click', function(e) {
         if (e.target === lightbox) {
           window.closeLightbox(e);
         }
       });
 
-      /* ── Свайп на телефоне ── */
       let touchStartX = 0;
       let touchStartY = 0;
       let touchMoved = false;
@@ -2079,7 +2072,6 @@
         if (e.touches.length !== 1) return;
         const dx = e.touches[0].clientX - touchStartX;
         const dy = e.touches[0].clientY - touchStartY;
-        // Если сдвиг больше по горизонтали и заметный — это свайп, отменяем клик
         if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
           touchMoved = true;
           e.preventDefault();
@@ -2093,12 +2085,10 @@
             if (dx < 0) showSlide(currentIndex + 1);
             else showSlide(currentIndex - 1);
           }
-          // Блокируем возможный «click» после свайпа
           e.preventDefault();
         }
       }, { passive: false });
 
-      /* ── Горячие клавиши ← → Esc ── */
       document.addEventListener('keydown', function(e) {
         if (!lightbox.classList.contains('open')) return;
         if (e.key === 'Escape') window.closeLightbox();
