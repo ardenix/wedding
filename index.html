@@ -26,7 +26,7 @@
     }
 
     /* ═══════════════════════════════════════════
-       КОНВЕРТ НА ВЕСЬ ЭКРАН
+       КОНВЕРТ НА ВЕСЬ ЭКРАН (ЗАКРЫТЫЙ)
        ═══════════════════════════════════════════ */
     #envelopeScreen {
       position: fixed;
@@ -72,8 +72,9 @@
       left: 50%;
       width: 92vw;
       height: 88vh;
-      transform: translate(-50%, 60vh) scale(0.9);
+      transform: translate(-50%, -50%) scale(0.9);
       opacity: 0;
+      pointer-events: none;
       background-color: #ede4d3;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -87,12 +88,12 @@
       text-align: center;
       z-index: 20;
       transition:
-        transform 1.4s cubic-bezier(.4,.05,.2,1),
-        opacity 0.6s ease;
+        transform 1s cubic-bezier(.4,.05,.2,1),
+        opacity 1s ease;
     }
 
-    /* Письмо выехало на весь экран */
-    .envelope.open .env-letter {
+    /* Письмо проявляется поверх конверта */
+    .envelope.letter-show .env-letter {
       transform: translate(-50%, -50%) scale(1);
       opacity: 1;
     }
@@ -101,7 +102,6 @@
     .envelope.letter-fade .env-letter {
       opacity: 0;
       transform: translate(-50%, -55%) scale(1.05);
-      transition: opacity 1s ease, transform 1s ease;
     }
 
     .letter-invited {
@@ -136,16 +136,13 @@
       .env-letter { padding: 2rem 1.5rem; }
     }
 
-    /* ── Створки конверта ── */
+    /* ── Створки конверта (ЗАКРЫТЫЕ — просто на месте) ── */
     .env-flap {
       position: absolute;
       background-color: #dcccb0;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.52 0 0 0 0 0.42 0 0 0 0 0.30 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
       z-index: 5;
-      transform-origin: center;
-      transition: transform 1.4s cubic-bezier(.5,.05,.2,1) 0.3s,
-                  opacity 1.4s cubic-bezier(.5,.05,.2,1) 0.3s;
       box-shadow: 0 4px 20px rgba(120, 95, 70, 0.22);
     }
 
@@ -154,26 +151,17 @@
       top: 0; left: 0;
       width: 100%; height: 62%;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
-      transform-origin: top center;
-      transform: rotateX(0deg);
-      background:
-        linear-gradient(180deg, #e8dcc4 0%, #ddcdb2 60%, #d4c2a4 100%);
+      background: linear-gradient(180deg, #e8dcc4 0%, #ddcdb2 60%, #d4c2a4 100%);
       z-index: 8;
     }
 
     .env-flap-top::after {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 100%;
+      inset: 0;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       background: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.10) 100%);
       pointer-events: none;
-    }
-
-    .envelope.open .env-flap-top {
-      transform: rotateX(-180deg);
-      z-index: 0;
     }
 
     /* Нижний клапан */
@@ -184,10 +172,6 @@
       background: linear-gradient(0deg, #d4c2a4 0%, #ddcdb2 40%, #e8dcc4 100%);
       z-index: 6;
     }
-    .envelope.open .env-flap-bottom {
-      transform: translateY(35%) rotate(-1deg);
-      opacity: 0.85;
-    }
 
     /* Левый/правый */
     .env-flap-left {
@@ -196,24 +180,13 @@
       clip-path: polygon(0 0, 100% 50%, 0 100%);
       background: linear-gradient(90deg, #d4c2a4 0%, #ddcdb2 60%, #e8dcc4 100%);
       z-index: 4;
-      transform-origin: left center;
     }
-    .envelope.open .env-flap-left {
-      transform: translateX(-95%) rotateY(-35deg);
-      opacity: 0.6;
-    }
-
     .env-flap-right {
       top: 0; right: 0;
       width: 32%; height: 100%;
       clip-path: polygon(100% 0, 0 50%, 100% 100%);
       background: linear-gradient(-90deg, #d4c2a4 0%, #ddcdb2 60%, #e8dcc4 100%);
       z-index: 4;
-      transform-origin: right center;
-    }
-    .envelope.open .env-flap-right {
-      transform: translateX(95%) rotateY(35deg);
-      opacity: 0.6;
     }
 
     /* ── Тексты на верхнем клапане ── */
@@ -229,7 +202,8 @@
       transition: opacity 0.5s ease;
     }
 
-    .envelope.open .env-flap-text { opacity: 0; }
+    .envelope.letter-show .env-flap-text,
+    .envelope.letter-fade .env-flap-text { opacity: 0; }
 
     .env-invited-line {
       font-family: 'Playfair Display', serif;
@@ -334,7 +308,7 @@
       100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
     }
 
-    /* Осколки печати */
+    /* Осколки */
     .seal-shards {
       position: absolute;
       top: 58%;
@@ -364,10 +338,7 @@
     }
 
     @keyframes shardFly {
-      0% {
-        transform: translate(-50%, -50%) scale(0.6) rotate(0);
-        opacity: 1;
-      }
+      0% { transform: translate(-50%, -50%) scale(0.6) rotate(0); opacity: 1; }
       70% { opacity: 0.9; }
       100% {
         transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(0.3) rotate(var(--rot, 360deg));
@@ -375,7 +346,7 @@
       }
     }
 
-    /* ── Надпись внизу ПОВЕРХ конверта ── */
+    /* ── Надпись внизу ── */
     .env-bottom-overlay {
       position: absolute;
       bottom: 2.5rem;
@@ -395,7 +366,8 @@
       transition: opacity 0.5s ease;
     }
 
-    .envelope.open .env-bottom-overlay { opacity: 0; }
+    .envelope.letter-show .env-bottom-overlay,
+    .envelope.letter-fade .env-bottom-overlay { opacity: 0; }
 
     @media (max-width: 640px) {
       .env-invited-line { font-size: 1.6rem; }
@@ -836,6 +808,7 @@
       margin-top: 0.2rem;
     }
 
+    /* ── ДРЕСС-КОД (2 ряда по 3) ── */
     .dress-text {
       font-family: 'Caveat', cursive;
       font-size: 1.8rem;
@@ -844,15 +817,27 @@
       margin-bottom: 2rem;
       line-height: 1.6;
     }
+
     .palette {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
-      max-width: 560px;
+      gap: 1.6rem;
+      max-width: 460px;      /* ровно 3 кружка в ряд */
       margin: 0 auto;
     }
+
+    /* Принудительный перенос после 3-го кружка */
+    .palette::before {
+      content: "";
+      flex-basis: 100%;
+      height: 0;
+      order: 1;
+    }
+    .palette-item:nth-child(n+4) { order: 2; }
+
     .palette-item { text-align: center; }
+
     .palette-circle {
       width: 90px; height: 90px;
       border-radius: 50%;
@@ -1110,7 +1095,7 @@
 
       .palette-circle { width: 70px; height: 70px; }
       .palette-name { font-size: 1.2rem; }
-      .palette { gap: 1.2rem; }
+      .palette { gap: 1.1rem; max-width: 300px; }
 
       .drinks-grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -1130,7 +1115,7 @@
 <body>
 
   <!-- ═══════════════════════════════════════════
-       КОНВЕРТ НА ВЕСЬ ЭКРАН
+       ЗАКРЫТЫЙ КОНВЕРТ
        ═══════════════════════════════════════════ -->
   <div id="envelopeScreen">
     <div class="envelope" id="envelope">
@@ -1138,7 +1123,7 @@
       <!-- Задняя стенка -->
       <div class="env-back"></div>
 
-      <!-- Письмо (выезжает на весь экран) -->
+      <!-- Письмо (скрыто за створками, пока не сломается печать) -->
       <div class="env-letter">
         <div class="letter-invited">
           Вы приглашены на свадьбу
@@ -1187,7 +1172,7 @@
 
     <div class="paper">
 
-      <!-- 1. ШАПКА + ДЕТСКИЕ ФОТО -->
+      <!-- 1. ШАПКА -->
       <section class="section hero">
         <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
         <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
@@ -1354,7 +1339,7 @@
         </ul>
       </section>
 
-      <!-- 7. ДРЕСС-КОД -->
+      <!-- 7. ДРЕСС-КОД (2 ряда по 3) -->
       <section class="section">
         <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
 
@@ -1366,6 +1351,7 @@
         </p>
 
         <div class="palette">
+          <!-- Ряд 1 -->
           <div class="palette-item reveal from-left" style="transition-delay: 0.0s;">
             <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #6f8a3a, #556B2F 70%);"></div>
             <div class="palette-name">🌿 оливковый</div>
@@ -1374,11 +1360,13 @@
             <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #c8e6b8, #a8d18a 70%);"></div>
             <div class="palette-name">🌱 светло-зелёный</div>
           </div>
-          <div class="palette-item reveal from-bottom" style="transition-delay: 0.2s;">
+          <div class="palette-item reveal from-right" style="transition-delay: 0.2s;">
             <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #f0c4c8, #E8B4B8 70%);"></div>
             <div class="palette-name">🌸 розовый</div>
           </div>
-          <div class="palette-item reveal from-bottom" style="transition-delay: 0.3s;">
+
+          <!-- Ряд 2 -->
+          <div class="palette-item reveal from-left" style="transition-delay: 0.3s;">
             <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #f3e5cf, #E8D9C5 70%);"></div>
             <div class="palette-name">📜 бежевый</div>
           </div>
@@ -1490,8 +1478,7 @@
 
   <script>
     /* ═══════════════════════════════════════════
-       ЛОМАЕМ ПЕЧАТЬ → РАСКРЫВАЕМ КОНВЕРТ → 
-       ПОКАЗЫВАЕМ ПИСЬМО → ДЕРЖИМ 2 СЕК → САЙТ
+       ЛОМАЕМ ПЕЧАТЬ → ПОКАЗЫВАЕМ ПИСЬМО → САЙТ
        ═══════════════════════════════════════════ */
     let sealBroken = false;
 
@@ -1523,16 +1510,16 @@
         setTimeout(() => shard.classList.add('fly'), 30 + i * 20);
       }
 
-      // 3. Через 0.5 сек — раскрываем створки, письмо выезжает
+      // 3. Печать сломалась → письмо мягко проявляется ПОВЕРХ закрытого конверта
+      //    (створки никуда не двигаются, письмо выше их по z-index)
       setTimeout(() => {
-        envelope.classList.add('open');
-      }, 500);
+        envelope.classList.add('letter-show');
+      }, 900);
 
-      // 4. Письмо держится 2 секунды после полного выезда (выезд ~1.4с, ждём до 3.4с от старта)
-      //    Начинаем "растворять" письмо на 3.4 сек
+      // 4. Письмо держится 2 секунды после появления (появилось к ~1.9с, значит 3.9с)
       setTimeout(() => {
         envelope.classList.add('letter-fade');
-      }, 3400);
+      }, 3900);
 
       // 5. Через 1 сек после начала растворения письма — показываем сайт
       setTimeout(() => {
@@ -1543,7 +1530,7 @@
           window.scrollTo({ top: 0, behavior: 'instant' });
           initScrollReveal();
         }, 1000);
-      }, 4400);
+      }, 4900);
     }
 
     // Клик в любом месте экрана тоже ломает печать
