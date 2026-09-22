@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <style>
-    /* ---------- ОБЩИЕ ---------- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -19,14 +18,211 @@
       color: #3a3a3a;
       line-height: 1.7;
       min-height: 100vh;
-      padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════
+       ЭКРАН-КОНВЕРТ
+       ═══════════════════════════════════════════ */
+    #envelopeScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    #envelopeScreen.opened {
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    /* Фон конверта — текстура старой бумаги */
+    .envelope-bg {
+      position: absolute;
+      inset: 0;
+      background-color: #ede4d3;
+      background-image:
+        /* Диагональные линии, имитирующие конверт */
+        linear-gradient(45deg, transparent 49.7%, rgba(120, 95, 70, 0.25) 49.9%, rgba(120, 95, 70, 0.25) 50.1%, transparent 50.3%),
+        linear-gradient(-45deg, transparent 49.7%, rgba(120, 95, 70, 0.25) 49.9%, rgba(120, 95, 70, 0.25) 50.1%, transparent 50.3%),
+        /* Текстура бумаги */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse at center, #f5ecdc 0%, #e0d2bb 100%);
+      background-size: auto, auto, auto, cover;
+      background-position: center;
+    }
+
+    /* Затемнение по краям */
+    .envelope-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(120, 95, 70, 0.18) 100%);
+      pointer-events: none;
+    }
+
+    .envelope-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      max-width: 700px;
+      animation: envelopeIn 1.2s ease-out;
+    }
+
+    @keyframes envelopeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .env-invited {
+      font-family: 'Pangolin', serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.08em;
+      color: #4a4a4a;
+      text-transform: uppercase;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+
+    .env-invited span {
+      display: block;
+      font-size: 1.05rem;
+      letter-spacing: 0.15em;
+      margin-top: 0.4rem;
+      color: #5e554e;
+    }
+
+    .env-script {
+      font-family: 'Marck Script', cursive;
+      font-size: 3.2rem;
+      color: #9b1b30;
+      margin: 1.2rem 0 2.5rem;
+      line-height: 1;
+    }
+
+    /* Сургучная печать */
+    .wax-seal {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto;
+      background:
+        radial-gradient(circle at 35% 30%, #b82440 0%, #8e1528 50%, #6a0e1e 100%);
+      box-shadow:
+        inset -6px -8px 20px rgba(0, 0, 0, 0.45),
+        inset 6px 8px 18px rgba(255, 130, 150, 0.25),
+        0 12px 28px rgba(80, 10, 20, 0.45),
+        0 4px 8px rgba(80, 10, 20, 0.30);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+      animation: sealPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes sealPulse {
+      0%, 100% { transform: scale(1) rotate(-2deg); }
+      50%      { transform: scale(1.05) rotate(2deg); }
+    }
+
+    .wax-seal:hover {
+      transform: scale(1.10) rotate(0);
+      animation: none;
+      box-shadow:
+        inset -6px -8px 20px rgba(0, 0, 0, 0.45),
+        inset 6px 8px 18px rgba(255, 130, 150, 0.30),
+        0 18px 38px rgba(80, 10, 20, 0.55),
+        0 6px 12px rgba(80, 10, 20, 0.35);
+    }
+
+    /* Внутренний ободок печати */
+    .wax-seal::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 210, 220, 0.25);
+    }
+
+    /* Небольшая неровность воска */
+    .wax-seal::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50% 48% 52% 50% / 50% 52% 48% 50%;
+      background: radial-gradient(circle at 30% 30%, transparent 55%, rgba(110, 15, 30, 0.35) 100%);
+      pointer-events: none;
+    }
+
+    .wax-seal-text {
+      font-family: 'Cormorant Garamond', 'Pangolin', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.15em;
+      color: #f0d9b8;
+      text-transform: uppercase;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 2;
+      font-weight: 400;
+    }
+
+    .env-bottom-text {
+      font-family: 'Courier New', 'Pangolin', monospace;
+      font-size: 0.92rem;
+      color: #5a4a3a;
+      max-width: 420px;
+      margin: 2.5rem auto 0;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+    }
+
+    /* Подсказка "нажмите" рядом с печатью */
+    .seal-hint {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: #9b1b30;
+      margin-top: 1rem;
+      opacity: 0.8;
+      animation: hintBlink 2s ease-in-out infinite;
+    }
+    @keyframes hintBlink {
+      0%, 100% { opacity: 0.5; }
+      50%      { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .env-invited { font-size: 1.5rem; }
+      .env-invited span { font-size: 0.9rem; }
+      .env-script { font-size: 2.4rem; }
+      .wax-seal { width: 130px; height: 130px; }
+      .wax-seal-text { font-size: 1.1rem; }
+      .env-bottom-text { font-size: 0.82rem; padding: 0 1rem; }
+    }
+
+    /* ═══════════════════════════════════════════
+       ОСНОВНОЙ САЙТ
+       ═══════════════════════════════════════════ */
+    #mainSite {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
       position: relative;
       overflow-x: hidden;
 
-      /* Текстура бумаги */
       background-color: #f5f1e8;
       background-image:
         radial-gradient(circle at 20% 30%, rgba(200, 180, 155, 0.10) 0%, transparent 45%),
@@ -35,7 +231,17 @@
       background-attachment: fixed;
     }
 
-    /* ---------- ЛЕПЕСТКИ ---------- */
+    #mainSite.visible {
+      display: flex;
+      animation: siteFadeIn 1s ease-out;
+    }
+
+    @keyframes siteFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Лепестки */
     .petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .petal {
       position: absolute; top: -50px; width: 14px; height: 14px;
@@ -53,7 +259,7 @@
       100% { transform: translateY(110vh) translateX(var(--drift, 40px)) rotate(720deg); opacity: 0; }
     }
 
-    /* ---------- КАРТОЧКА ---------- */
+    /* Карточка */
     .card {
       position: relative;
       width: 100%;
@@ -67,8 +273,21 @@
         0 12px 28px rgba(150, 120, 90, 0.12);
       border-radius: 3px;
       transform: rotate(-0.2deg);
+
+      /* Анимация появления при прокрутке */
+      opacity: 0;
+      transform: translateY(40px) rotate(-0.2deg);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .card:nth-child(even) { transform: rotate(0.3deg); }
+
+    .card.appeared {
+      opacity: 1;
+      transform: translateY(0) rotate(-0.2deg);
+    }
+    .card.appeared:nth-child(even) {
+      transform: translateY(0) rotate(0.3deg);
+    }
 
     .card::before {
       content: "";
@@ -97,7 +316,7 @@
 
     .doodle-heart svg { width: 100%; height: 100%; fill: currentColor; }
 
-    /* ---------- ЗАГОЛОВКИ ---------- */
+    /* Заголовки */
     h2 {
       font-family: 'Amatic SC', cursive;
       font-weight: 700;
@@ -121,7 +340,7 @@
       transform: rotate(-2deg);
     }
 
-    /* ---------- ШАПКА ---------- */
+    /* Шапка */
     .hero {
       padding: 2rem 1.5rem 2.5rem;
       text-align: center;
@@ -168,7 +387,6 @@
     }
 
     .polaroid:hover { transform: rotate(0deg) scale(1.03); z-index: 10; }
-
     .polaroid-a { transform: rotate(-4deg); }
     .polaroid-b { transform: rotate(3deg); }
 
@@ -237,7 +455,7 @@
     }
     .calendar-btn:hover { background: #e63946; color: #fff; transform: rotate(-1.5deg); }
 
-    /* ---------- КАЛЕНДАРЬ ---------- */
+    /* Календарь */
     .calendar-block { text-align: center; margin: 1.5rem 0 0.5rem; }
 
     .cal-header {
@@ -305,7 +523,7 @@
       transform: rotate(-20deg);
     }
 
-    /* ---------- ГАЛЕРЕЯ ---------- */
+    /* Галерея */
     .gallery-scatter {
       display: flex;
       justify-content: center;
@@ -359,7 +577,7 @@
     .gallery-prev { left: -8px; }
     .gallery-next { right: -8px; }
 
-    /* ---------- КАРТЫ ---------- */
+    /* Карты */
     .map-block { text-align: center; margin-bottom: 1.8rem; }
 
     .map-title {
@@ -426,33 +644,54 @@
     }
     .map-howto:hover { background: #e63946; color: #fff; transform: rotate(0deg); }
 
-    /* ---------- ПРОГРАММА ДНЯ ---------- */
+    /* Тайминг (список из прошлого варианта) */
     .timing-list { list-style: none; margin-top: 1rem; }
 
     .timing-list li {
       display: flex;
       align-items: center;
+      gap: 1rem;
+      padding: 1rem 0.4rem;
+      border-bottom: 1px solid #f0ede9;
+      font-family: 'Pangolin', cursive;
+      color: #4a4a4a;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .timing-list li:last-child { border-bottom: none; }
+    .timing-list li:hover { background: #fdf8f3; transform: translateX(4px); }
+
+    .timing-emoji {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      gap: 1.2rem;
-      padding: 1rem 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(180, 150, 130, 0.16);
+      border: 2px solid #fff;
+      flex-shrink: 0;
+    }
+
+    .timing-body { flex: 1; display: flex; flex-direction: column; }
+
+    .timing-time {
       font-family: 'Amatic SC', cursive;
-      font-size: 2rem;
-      color: #4a4a4a;
-      letter-spacing: 0.03em;
-      text-align: center;
-    }
-
-    .timing-list .time {
       font-weight: 700;
-      color: #4a4a4a;
-      min-width: 90px;
+      color: #e63946;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      line-height: 1;
     }
 
-    .timing-list .dot { color: #a89a8e; font-size: 1.4rem; }
+    .timing-desc {
+      font-family: 'Caveat', cursive;
+      font-size: 1.35rem;
+      color: #3a3a3a;
+    }
 
-    .timing-icon { width: 48px; height: 48px; flex-shrink: 0; }
-
-    /* ---------- ДРЕСС-КОД ---------- */
+    /* Дресс-код */
     .dress-text {
       font-family: 'Caveat', cursive;
       font-size: 1.5rem;
@@ -494,7 +733,7 @@
       line-height: 1.2;
     }
 
-    /* ---------- ПОДАРОК ---------- */
+    /* Подарок */
     .gift-text {
       font-family: 'Caveat', cursive;
       font-size: 1.5rem;
@@ -516,7 +755,7 @@
       line-height: 1.5;
     }
 
-    /* ---------- ФОРМА ---------- */
+    /* Форма */
     .rsvp-intro {
       font-family: 'Caveat', cursive;
       font-size: 1.4rem;
@@ -527,7 +766,6 @@
     }
 
     .rsvp-form { display: flex; flex-direction: column; gap: 1.4rem; }
-
     .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 
     label {
@@ -551,7 +789,6 @@
     }
     input[type="text"]:focus, select:focus { border-bottom-color: #e63946; }
     input[type="text"]::placeholder { color: #b9a99c; font-style: italic; }
-
     select { cursor: pointer; }
 
     .visit-options {
@@ -587,7 +824,6 @@
       font-weight: 600;
     }
 
-    /* Напитки */
     .drinks-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -695,7 +931,7 @@
       font-weight: 600;
     }
 
-    /* ---------- ПОДВАЛ ---------- */
+    /* Подвал */
     .footer-note {
       font-family: 'Marck Script', cursive;
       font-size: 1.6rem;
@@ -707,7 +943,7 @@
       z-index: 1;
     }
 
-    /* ---------- КОНФЕТТИ ---------- */
+    /* Конфетти */
     .confetti-layer {
       position: fixed;
       inset: 0;
@@ -727,17 +963,16 @@
       100% { transform: translateY(105vh) rotate(720deg) scale(0.9); opacity: 0; }
     }
 
-    /* ---------- АДАПТИВНОСТЬ ---------- */
+    /* Адаптив */
     @media (max-width: 640px) {
-      body { padding: 1rem 0.6rem; }
-      .card { padding: 1.8rem 1.2rem; transform: rotate(0deg) !important; }
+      #mainSite { padding: 1rem 0.6rem; }
+      .card { padding: 1.8rem 1.2rem; }
       .hero-title { font-size: 2.6rem; }
       .hero-subtitle { font-size: 1.3rem; letter-spacing: 0.15em; }
       h2 { font-size: 2.3rem; }
 
       .polaroid .photo { width: 130px; height: 130px; }
       .polaroid .caption { font-size: 1.4rem; }
-
       .hero-polaroids { gap: 1.5rem; }
 
       .timer-number { font-size: 2.3rem; }
@@ -748,9 +983,9 @@
       .cal-day { font-size: 3.4rem; }
       .cal-grid { font-size: 1.2rem; }
 
-      .timing-list li { font-size: 1.6rem; flex-wrap: wrap; gap: 0.6rem; }
-      .timing-list .time { min-width: auto; }
-      .timing-icon { width: 38px; height: 38px; }
+      .timing-emoji { width: 38px; height: 38px; font-size: 1.05rem; }
+      .timing-time { font-size: 1.25rem; }
+      .timing-desc { font-size: 1.15rem; }
 
       .palette-circle { width: 60px; height: 60px; }
       .palette-name { font-size: 1rem; }
@@ -766,530 +1001,594 @@
       .gallery-next { right: 4px; }
 
       .visit-item { min-width: 100%; font-size: 1.15rem; }
-
       .gift-text, .dress-text, .rsvp-intro { font-size: 1.3rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="petals" id="petals"></div>
-  <div class="confetti-layer" id="confettiLayer"></div>
+  <!-- ═══════════════════════════════════════════
+       ЭКРАН-КОНВЕРТ
+       ═══════════════════════════════════════════ -->
+  <div id="envelopeScreen" onclick="openEnvelope()">
+    <div class="envelope-bg"></div>
 
-  <!-- ═══════════════ ШАПКА ═══════════════ -->
-  <div class="card hero">
-    <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-    <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-    <div class="hero-subtitle">Вы приглашены на свадьбу</div>
-    <div class="hero-title">The wedding day</div>
-
-    <div class="hero-polaroids">
-      <div class="polaroid polaroid-a">
-        <div class="photo" style="background-image: url('Julia3.jpg');"></div>
-        <div class="caption">Юлия</div>
-      </div>
-      <div class="polaroid polaroid-b">
-        <div class="photo" style="background-image: url('Ivan3.jpg');"></div>
-        <div class="caption">Иван</div>
-      </div>
-    </div>
-
-    <div class="timer-container" id="timer">
-      <div class="timer-item"><div class="timer-number" id="days">00</div><div class="timer-label">дней</div></div>
-      <div class="timer-item"><div class="timer-number" id="hours">00</div><div class="timer-label">часов</div></div>
-      <div class="timer-item"><div class="timer-number" id="minutes">00</div><div class="timer-label">минут</div></div>
-      <div class="timer-item"><div class="timer-number" id="seconds">00</div><div class="timer-label">секунд</div></div>
-    </div>
-
-    <button class="calendar-btn" type="button" onclick="downloadICS()">
-      <i class="fas fa-calendar-plus"></i> Добавить в календарь
-    </button>
-  </div>
-
-  <!-- ═══════════════ КАЛЕНДАРЬ ═══════════════ -->
-  <div class="card">
-    <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-    <h2>Сохраните дату</h2>
-
-    <div class="calendar-block">
-      <div class="cal-header">
-        <span class="cal-month">ИЮНЬ</span>
-        <span class="cal-day">5</span>
-        <span class="cal-year">2027</span>
+    <div class="envelope-content">
+      <div class="env-invited">
+        Вы приглашены на свадьбу
+        <span>ЮЛИЯ & ИВАН</span>
       </div>
 
-      <div class="cal-weekdays">
-        <span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>вс</span>
+      <div class="env-script">The wedding day</div>
+
+      <div class="wax-seal" id="waxSeal">
+        <span class="wax-seal-text">Нажмите</span>
       </div>
 
-      <div class="cal-grid" id="calGrid"></div>
+      <div class="seal-hint">↓ нажмите на печать ↓</div>
 
-      <div class="save-date">Сохраните дату</div>
-    </div>
-  </div>
-
-  <!-- ═══════════════ ГАЛЕРЕЯ ═══════════════ -->
-  <div class="card">
-    <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-    <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-    <h2>Узнали этих малышей?</h2>
-
-    <div class="gallery-scatter" id="galleryScatter">
-      <div class="polaroid">
-        <div class="photo" style="background-image: url('Photo1.jpg');"></div>
-      </div>
-      <div class="polaroid">
-        <div class="photo" style="background-image: url('Photo2.jpg');"></div>
-      </div>
-      <div class="polaroid">
-        <div class="photo" style="background-image: url('Photo3.jpg');"></div>
-      </div>
-      <div class="polaroid">
-        <div class="photo" style="background-image: url('Photo4.jpg');"></div>
-      </div>
-      <div class="polaroid">
-        <div class="photo" style="background-image: url('Photo5.jpg');"></div>
-      </div>
-      <div class="polaroid">
-        <div class="photo" style="background-image: url('Photo6.jpg');"></div>
-      </div>
-
-      <button class="gallery-nav gallery-prev" type="button" aria-label="Назад" onclick="galleryShift(-1)">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="gallery-nav gallery-next" type="button" aria-label="Вперёд" onclick="galleryShift(1)">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-
-    <p style="text-align: center; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #4a4a4a; margin-top: 1.2rem;">
-      Время пролетело незаметно. И вот наступил момент, когда наши детские мечты стали реальностью. Разделите с нами это главное событие — подарите нам своё внимание и поддержку!
-    </p>
-  </div>
-
-  <!-- ═══════════════ МЕСТО ═══════════════ -->
-  <div class="card">
-    <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-    <h2>Место</h2>
-
-    <!-- ЗАГС -->
-    <div class="map-block">
-      <div class="map-title">Московский областной Дворец бракосочетания № 1</div>
-      <div class="map-polaroid">
-        <iframe 
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3A1198244952bfe23c5366e7a153386d345d53ff19c68f932574687b3b0b2bcc62&amp;source=constructor"
-          frameborder="0"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-        <div class="caption">ЗАГС</div>
-      </div>
-      <div class="map-address">
-        г. Иркутск, ул. Декабрьских Событий, 106<br>
-        Дворец бракосочетания
-      </div>
-      <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Дворец+бракосочетания+Декабрьских+Событий+106" target="_blank">
-        Как добраться →
-      </a>
-    </div>
-
-    <!-- Ресторан -->
-    <div class="map-block">
-      <div class="map-title">Ресторан «Авантаж»</div>
-      <div class="map-polaroid">
-        <iframe 
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3A7ba91779bba17def2330a67bafd52345290a0a6bf2664a163e8ef9bf024bc681&amp;source=constructor"
-          frameborder="0"
-          allowfullscreen
-          loading="lazy">
-        </iframe>
-        <div class="caption">Ресторан</div>
-      </div>
-      <div class="map-address">
-        г. Иркутск, ул. Байкальская, 279
-      </div>
-      <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Байкальская+279+Авантаж" target="_blank">
-        Как добраться →
-      </a>
-    </div>
-  </div>
-
-  <!-- ═══════════════ ПРОГРАММА ДНЯ ═══════════════ -->
-  <div class="card">
-    <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-    <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-    <h2>Тайминг</h2>
-
-    <ul class="timing-list">
-      <li>
-        <span class="time">14:00</span>
-        <span class="dot">•</span>
-        <span>Сбор гостей</span>
-        <svg class="timing-icon" viewBox="0 0 60 40">
-          <ellipse cx="22" cy="22" rx="13" ry="7" fill="none" stroke="#e63946" stroke-width="2" transform="rotate(-15 22 22)"/>
-          <ellipse cx="40" cy="26" rx="13" ry="7" fill="none" stroke="#e63946" stroke-width="2" transform="rotate(10 40 26)"/>
-        </svg>
-      </li>
-      <li>
-        <span class="time">16:00</span>
-        <span class="dot">•</span>
-        <span>Церемония в ЗАГС</span>
-        <svg class="timing-icon" viewBox="0 0 60 60">
-          <circle cx="30" cy="30" r="20" fill="none" stroke="#7a9ac4" stroke-width="2"/>
-          <path d="M30 10 L30 30 L45 30" stroke="#7a9ac4" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </li>
-      <li>
-        <span class="time">17:00</span>
-        <span class="dot">•</span>
-        <span>Банкет</span>
-        <svg class="timing-icon" viewBox="0 0 60 60">
-          <path d="M18 12 L18 30 Q18 40 24 40 L24 52 M12 54 L30 54" stroke="#d4a82c" stroke-width="2" fill="none"/>
-          <path d="M42 12 L42 30 Q42 40 36 40 L36 52 M30 54 L48 54" stroke="#d4a82c" stroke-width="2" fill="none"/>
-        </svg>
-      </li>
-      <li>
-        <span class="time">19:30</span>
-        <span class="dot">•</span>
-        <span>Торт и первый танец</span>
-        <svg class="timing-icon" viewBox="0 0 60 60">
-          <path d="M15 30 L45 30 L45 50 L15 50 Z" fill="none" stroke="#f77f00" stroke-width="2"/>
-          <path d="M20 30 L20 20 Q25 22 30 20 Q35 18 40 22 L40 30" fill="none" stroke="#f77f00" stroke-width="2"/>
-          <path d="M30 14 L30 18 M28 14 L32 14" stroke="#f77f00" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </li>
-      <li>
-        <span class="time">21:00</span>
-        <span class="dot">•</span>
-        <span>Танцы и вечеринка</span>
-        <svg class="timing-icon" viewBox="0 0 60 60">
-          <path d="M30 10 L30 50 M20 50 L40 50" stroke="#7a9ac4" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="30" cy="10" r="4" fill="none" stroke="#7a9ac4" stroke-width="2"/>
-        </svg>
-      </li>
-      <li>
-        <span class="time">23:00</span>
-        <span class="dot">•</span>
-        <span>Завершение вечера</span>
-        <svg class="timing-icon" viewBox="0 0 60 40">
-          <path d="M20 8 L20 14 M14 14 L26 14 L26 22 Q26 30 20 30 Q14 30 14 22 Z" stroke="#e63946" stroke-width="2" fill="none"/>
-          <path d="M40 8 L40 14 M34 14 L46 14 L46 22 Q46 30 40 30 Q34 30 34 22 Z" stroke="#e63946" stroke-width="2" fill="none"/>
-        </svg>
-      </li>
-    </ul>
-  </div>
-
-  <!-- ═══════════════ ДРЕСС-КОД ═══════════════ -->
-  <div class="card">
-    <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-    <h2>Дресс-код</h2>
-
-    <p class="dress-text">
-      Мы будем рады, если вы поддержите палитру нашего торжества 🌸<br>
-      Пожалуйста, выберите наряд в одном из этих цветов:
-    </p>
-
-    <div class="palette">
-      <div class="palette-item">
-        <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #6f8a3a, #556B2F 70%);"></div>
-        <div class="palette-name">🌿 оливковый</div>
-      </div>
-      <div class="palette-item">
-        <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #c8e6b8, #a8d18a 70%);"></div>
-        <div class="palette-name">🌱 светло-зелёный</div>
-      </div>
-      <div class="palette-item">
-        <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #f0c4c8, #E8B4B8 70%);"></div>
-        <div class="palette-name">🌸 розовый</div>
-      </div>
-      <div class="palette-item">
-        <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #f3e5cf, #E8D9C5 70%);"></div>
-        <div class="palette-name">📜 бежевый</div>
-      </div>
-      <div class="palette-item">
-        <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #d4b896, #b89870 70%);"></div>
-        <div class="palette-name">👌🏼 светло-коричневый</div>
-      </div>
-      <div class="palette-item">
-        <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #8a5a30, #6B4423 70%);"></div>
-        <div class="palette-name">🤎 коричневый</div>
+      <div class="env-bottom-text">
+        Это приглашение адресовано вам не случайно!
+        В этот особенный день нам особенно важно,
+        чтобы вы были рядом с нами!
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════ ПОДАРОК ═══════════════ -->
-  <div class="card">
-    <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+  <!-- ═══════════════════════════════════════════
+       ОСНОВНОЙ САЙТ
+       ═══════════════════════════════════════════ -->
+  <div id="mainSite">
 
-    <h2>Подарок</h2>
+    <div class="petals" id="petals"></div>
+    <div class="confetti-layer" id="confettiLayer"></div>
 
-    <p class="gift-text">
-      Для нас ваше присутствие — это уже праздник 💛<br>
-      А любой подарок станет приятным дополнением,<br>
-      и неважно, в каком конверте 🎁
-    </p>
+    <!-- ШАПКА -->
+    <div class="card hero">
+      <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+      <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
 
-    <p class="gift-note">
-      P.S. Пожалуйста, не дарите цветы — мы уезжаем сразу после свадьбы 🌸
-    </p>
-  </div>
+      <div class="hero-subtitle">Вы приглашены на свадьбу</div>
+      <div class="hero-title">Юлия + Иван</div>
 
-  <!-- ═══════════════ ФОРМА RSVP ═══════════════ -->
-  <div class="card">
-    <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-    <h2>Подтверждение</h2>
-
-    <p class="rsvp-intro">
-      Пожалуйста, подтвердите своё присутствие на мероприятии до<br>
-      <span style="color: #e63946; font-weight: 700; font-family: 'Amatic SC', cursive; font-size: 1.6rem;">10 АПРЕЛЯ 2027</span>
-    </p>
-
-    <form 
-      class="rsvp-form" 
-      id="rsvpForm"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSdEffMetZFqe-O7GWki0z_hGBI2xDOrCHmbdZJtNIuVplD-RA/formResponse"
-      method="POST"
-      target="hidden_iframe"
-      onsubmit="window.submitted=true;"
-    >
-      <div class="form-group">
-        <label for="name">Ваше имя и фамилия</label>
-        <input type="text" id="name" name="entry.301623449" placeholder="Иван Петров" required>
-      </div>
-
-      <div class="form-group">
-        <label for="guests">Количество гостей (включая Вас)</label>
-        <select id="guests" name="entry.585057221">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Будете ли вы присутствовать в ЗАГС?</label>
-        <div class="visit-options">
-          <label class="visit-item">
-            <input type="radio" name="entry.1893720403" value="Да" required>
-            <span>✅ Да, буду</span>
-          </label>
-          <label class="visit-item">
-            <input type="radio" name="entry.1893720403" value="Нет">
-            <span>❌ Нет, только на банкет</span>
-          </label>
+      <div class="hero-polaroids">
+        <div class="polaroid polaroid-a">
+          <div class="photo" style="background-image: url('Julia3.jpg');"></div>
+          <div class="caption">Юлия</div>
+        </div>
+        <div class="polaroid polaroid-b">
+          <div class="photo" style="background-image: url('Ivan3.jpg');"></div>
+          <div class="caption">Иван</div>
         </div>
       </div>
 
-      <div class="form-group">
-        <label>Предпочтения по напиткам (можно выбрать несколько 🍷)</label>
-        <div class="drinks-grid">
-          <label class="drink-item drink-red">
-            <input type="checkbox" name="entry.1809060743" value="Вино красное">
-            <span class="drink-emoji">🍷</span>
-            <span class="drink-label">Вино красное</span>
-          </label>
-          <label class="drink-item drink-white">
-            <input type="checkbox" name="entry.1809060743" value="Вино белое">
-            <span class="drink-emoji">🥂</span>
-            <span class="drink-label">Вино белое</span>
-          </label>
-          <label class="drink-item drink-champ">
-            <input type="checkbox" name="entry.1809060743" value="Шампанское">
-            <span class="drink-emoji">🍾</span>
-            <span class="drink-label">Шампанское</span>
-          </label>
-          <label class="drink-item drink-whiskey">
-            <input type="checkbox" name="entry.1809060743" value="Виски">
-            <span class="drink-emoji">🥃</span>
-            <span class="drink-label">Виски</span>
-          </label>
-          <label class="drink-item drink-vodka">
-            <input type="checkbox" name="entry.1809060743" value="Водка">
-            <span class="drink-emoji">🍸</span>
-            <span class="drink-label">Водка</span>
-          </label>
-          <label class="drink-item drink-cognac">
-            <input type="checkbox" name="entry.1809060743" value="Коньяк">
-            <span class="drink-emoji">🥃</span>
-            <span class="drink-label">Коньяк</span>
-          </label>
-          <label class="drink-item drink-beer">
-            <input type="checkbox" name="entry.1809060743" value="Пиво">
-            <span class="drink-emoji">🍺</span>
-            <span class="drink-label">Пиво</span>
-          </label>
-          <label class="drink-item drink-soft">
-            <input type="checkbox" name="entry.1809060743" value="Безалкогольные напитки">
-            <span class="drink-emoji">🥤</span>
-            <span class="drink-label">Безалкогольные</span>
-          </label>
+      <div class="timer-container" id="timer">
+        <div class="timer-item"><div class="timer-number" id="days">00</div><div class="timer-label">дней</div></div>
+        <div class="timer-item"><div class="timer-number" id="hours">00</div><div class="timer-label">часов</div></div>
+        <div class="timer-item"><div class="timer-number" id="minutes">00</div><div class="timer-label">минут</div></div>
+        <div class="timer-item"><div class="timer-number" id="seconds">00</div><div class="timer-label">секунд</div></div>
+      </div>
+
+      <button class="calendar-btn" type="button" onclick="downloadICS()">
+        <i class="fas fa-calendar-plus"></i> Добавить в календарь
+      </button>
+    </div>
+
+    <!-- КАЛЕНДАРЬ -->
+    <div class="card">
+      <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+
+      <h2>Сохраните дату</h2>
+
+      <div class="calendar-block">
+        <div class="cal-header">
+          <span class="cal-month">ИЮНЬ</span>
+          <span class="cal-day">5</span>
+          <span class="cal-year">2027</span>
+        </div>
+
+        <div class="cal-weekdays">
+          <span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>вс</span>
+        </div>
+
+        <div class="cal-grid" id="calGrid"></div>
+
+        <div class="save-date">Сохраните дату</div>
+      </div>
+    </div>
+
+    <!-- ГАЛЕРЕЯ -->
+    <div class="card">
+      <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+      <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+
+      <h2>Наши моменты</h2>
+
+      <div class="gallery-scatter" id="galleryScatter">
+        <div class="polaroid"><div class="photo" style="background-image: url('Photo1.jpg');"></div></div>
+        <div class="polaroid"><div class="photo" style="background-image: url('Photo2.jpg');"></div></div>
+        <div class="polaroid"><div class="photo" style="background-image: url('Photo3.jpg');"></div></div>
+        <div class="polaroid"><div class="photo" style="background-image: url('Photo4.jpg');"></div></div>
+        <div class="polaroid"><div class="photo" style="background-image: url('Photo5.jpg');"></div></div>
+        <div class="polaroid"><div class="photo" style="background-image: url('Photo6.jpg');"></div></div>
+
+        <button class="gallery-nav gallery-prev" type="button" aria-label="Назад" onclick="galleryShift(-1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="gallery-nav gallery-next" type="button" aria-label="Вперёд" onclick="galleryShift(1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <p style="text-align: center; font-family: 'Caveat', cursive; font-size: 1.4rem; color: #4a4a4a; margin-top: 1.2rem;">
+        Время пролетело незаметно. И вот наступил момент, когда наши детские мечты стали реальностью. Разделите с нами это главное событие — подарите нам своё внимание и поддержку!
+      </p>
+    </div>
+
+    <!-- МЕСТО -->
+    <div class="card">
+      <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+
+      <h2>Место</h2>
+
+      <div class="map-block">
+        <div class="map-title">Дворец бракосочетания</div>
+        <div class="map-polaroid">
+          <iframe 
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A1198244952bfe23c5366e7a153386d345d53ff19c68f932574687b3b0b2bcc62&amp;source=constructor"
+            frameborder="0"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+          <div class="caption">ЗАГС</div>
+        </div>
+        <div class="map-address">
+          г. Иркутск, ул. Декабрьских Событий, 106<br>
+          Дворец бракосочетания
+        </div>
+        <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Дворец+бракосочетания+Декабрьских+Событий+106" target="_blank">
+          Как добраться →
+        </a>
+      </div>
+
+      <div class="map-block">
+        <div class="map-title">Ресторан «Авантаж»</div>
+        <div class="map-polaroid">
+          <iframe 
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A7ba91779bba17def2330a67bafd52345290a0a6bf2664a163e8ef9bf024bc681&amp;source=constructor"
+            frameborder="0"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+          <div class="caption">Ресторан</div>
+        </div>
+        <div class="map-address">
+          г. Иркутск, ул. Байкальская, 279
+        </div>
+        <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Байкальская+279+Авантаж" target="_blank">
+          Как добраться →
+        </a>
+      </div>
+    </div>
+
+    <!-- ПРОГРАММА ДНЯ (список из прошлого варианта) -->
+    <div class="card">
+      <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+      <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+
+      <h2>Программа дня</h2>
+
+      <ul class="timing-list">
+        <li>
+          <span class="timing-emoji">💍</span>
+          <span class="timing-body">
+            <span class="timing-time">16:00</span>
+            <span class="timing-desc">Церемония в ЗАГС</span>
+          </span>
+        </li>
+        <li>
+          <span class="timing-emoji">🚗</span>
+          <span class="timing-body">
+            <span class="timing-time">16:30</span>
+            <span class="timing-desc">Трансфер от ЗАГС</span>
+          </span>
+        </li>
+        <li>
+          <span class="timing-emoji">🥂</span>
+          <span class="timing-body">
+            <span class="timing-time">16:50</span>
+            <span class="timing-desc">Сбор гостей, welcome-зона</span>
+          </span>
+        </li>
+        <li>
+          <span class="timing-emoji">🍽️</span>
+          <span class="timing-body">
+            <span class="timing-time">17:00</span>
+            <span class="timing-desc">Банкет и поздравления</span>
+          </span>
+        </li>
+        <li>
+          <span class="timing-emoji">🎂</span>
+          <span class="timing-body">
+            <span class="timing-time">19:30</span>
+            <span class="timing-desc">Торт и первый танец</span>
+          </span>
+        </li>
+        <li>
+          <span class="timing-emoji">🎶</span>
+          <span class="timing-body">
+            <span class="timing-time">21:00</span>
+            <span class="timing-desc">Танцы и вечеринка</span>
+          </span>
+        </li>
+        <li>
+          <span class="timing-emoji">🎆</span>
+          <span class="timing-body">
+            <span class="timing-time">23:00</span>
+            <span class="timing-desc">Фейерверк</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ДРЕСС-КОД -->
+    <div class="card">
+      <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+
+      <h2>Дресс-код</h2>
+
+      <p class="dress-text">
+        Мы будем рады, если вы поддержите палитру нашего торжества 🌸<br>
+        Пожалуйста, выберите наряд в одном из этих цветов:
+      </p>
+
+      <div class="palette">
+        <div class="palette-item">
+          <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #6f8a3a, #556B2F 70%);"></div>
+          <div class="palette-name">🌿 оливковый</div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #c8e6b8, #a8d18a 70%);"></div>
+          <div class="palette-name">🌱 светло-зелёный</div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #f0c4c8, #E8B4B8 70%);"></div>
+          <div class="palette-name">🌸 розовый</div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #f3e5cf, #E8D9C5 70%);"></div>
+          <div class="palette-name">📜 бежевый</div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #d4b896, #b89870 70%);"></div>
+          <div class="palette-name">👌🏼 светло-коричневый</div>
+        </div>
+        <div class="palette-item">
+          <div class="palette-circle" style="background: radial-gradient(circle at 35% 30%, #8a5a30, #6B4423 70%);"></div>
+          <div class="palette-name">🤎 коричневый</div>
         </div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="wishes">Другие пожелания (необязательно)</label>
-        <input type="text" id="wishes" name="entry.51985960" placeholder="Например: аллергия на орехи">
-      </div>
+    <!-- ПОДАРОК -->
+    <div class="card">
+      <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
 
-      <button type="submit" id="submitBtn">Отправить</button>
-      <div id="rsvpMessage"></div>
-    </form>
+      <h2>Подарок</h2>
 
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.showThankYou();}"></iframe>
-  </div>
+      <p class="gift-text">
+        Для нас ваше присутствие — это уже праздник 💛<br>
+        А любой подарок станет приятным дополнением,<br>
+        и неважно, в каком конверте 🎁
+      </p>
 
-  <div class="footer-note">
-    Юлия & Иван • 2027
+      <p class="gift-note">
+        P.S. Пожалуйста, не дарите цветы — мы уезжаем сразу после свадьбы 🌸
+      </p>
+    </div>
+
+    <!-- ФОРМА RSVP -->
+    <div class="card">
+      <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+
+      <h2>Подтверждение</h2>
+
+      <p class="rsvp-intro">
+        Пожалуйста, подтвердите своё присутствие на мероприятии до<br>
+        <span style="color: #e63946; font-weight: 700; font-family: 'Amatic SC', cursive; font-size: 1.6rem;">10 АПРЕЛЯ 2027</span>
+      </p>
+
+      <form 
+        class="rsvp-form" 
+        id="rsvpForm"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSdEffMetZFqe-O7GWki0z_hGBI2xDOrCHmbdZJtNIuVplD-RA/formResponse"
+        method="POST"
+        target="hidden_iframe"
+        onsubmit="window.submitted=true;"
+      >
+        <div class="form-group">
+          <label for="name">Ваше имя и фамилия</label>
+          <input type="text" id="name" name="entry.301623449" placeholder="Иван Петров" required>
+        </div>
+
+        <div class="form-group">
+          <label for="guests">Количество гостей (включая Вас)</label>
+          <select id="guests" name="entry.585057221">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Будете ли вы присутствовать в ЗАГС?</label>
+          <div class="visit-options">
+            <label class="visit-item">
+              <input type="radio" name="entry.1893720403" value="Да" required>
+              <span>✅ Да, буду</span>
+            </label>
+            <label class="visit-item">
+              <input type="radio" name="entry.1893720403" value="Нет">
+              <span>❌ Нет, только на банкет</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Предпочтения по напиткам (можно выбрать несколько 🍷)</label>
+          <div class="drinks-grid">
+            <label class="drink-item drink-red">
+              <input type="checkbox" name="entry.1809060743" value="Вино красное">
+              <span class="drink-emoji">🍷</span>
+              <span class="drink-label">Вино красное</span>
+            </label>
+            <label class="drink-item drink-white">
+              <input type="checkbox" name="entry.1809060743" value="Вино белое">
+              <span class="drink-emoji">🥂</span>
+              <span class="drink-label">Вино белое</span>
+            </label>
+            <label class="drink-item drink-champ">
+              <input type="checkbox" name="entry.1809060743" value="Шампанское">
+              <span class="drink-emoji">🍾</span>
+              <span class="drink-label">Шампанское</span>
+            </label>
+            <label class="drink-item drink-whiskey">
+              <input type="checkbox" name="entry.1809060743" value="Виски">
+              <span class="drink-emoji">🥃</span>
+              <span class="drink-label">Виски</span>
+            </label>
+            <label class="drink-item drink-vodka">
+              <input type="checkbox" name="entry.1809060743" value="Водка">
+              <span class="drink-emoji">🍸</span>
+              <span class="drink-label">Водка</span>
+            </label>
+            <label class="drink-item drink-cognac">
+              <input type="checkbox" name="entry.1809060743" value="Коньяк">
+              <span class="drink-emoji">🥃</span>
+              <span class="drink-label">Коньяк</span>
+            </label>
+            <label class="drink-item drink-beer">
+              <input type="checkbox" name="entry.1809060743" value="Пиво">
+              <span class="drink-emoji">🍺</span>
+              <span class="drink-label">Пиво</span>
+            </label>
+            <label class="drink-item drink-soft">
+              <input type="checkbox" name="entry.1809060743" value="Безалкогольные напитки">
+              <span class="drink-emoji">🥤</span>
+              <span class="drink-label">Безалкогольные</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="wishes">Другие пожелания (необязательно)</label>
+          <input type="text" id="wishes" name="entry.51985960" placeholder="Например: аллергия на орехи">
+        </div>
+
+        <button type="submit" id="submitBtn">Отправить</button>
+        <div id="rsvpMessage"></div>
+      </form>
+
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.showThankYou();}"></iframe>
+    </div>
+
+    <div class="footer-note">
+      Юлия & Иван • 2027
+    </div>
+
   </div>
 
   <script>
+    /* ═══════════════════════════════════════════
+       ОТКРЫТИЕ КОНВЕРТА
+       ═══════════════════════════════════════════ */
+    function openEnvelope() {
+      const env = document.getElementById('envelopeScreen');
+      const site = document.getElementById('mainSite');
+
+      env.classList.add('opened');
+
+      setTimeout(() => {
+        env.style.display = 'none';
+        site.classList.add('visible');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        initScrollReveal();
+      }, 900);
+    }
+
+    /* ═══════════════════════════════════════════
+       ПОЯВЛЕНИЕ БЛОКОВ ПРИ ПРОКРУТКЕ
+       ═══════════════════════════════════════════ */
+    function initScrollReveal() {
+      const cards = document.querySelectorAll('#mainSite .card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appeared');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      cards.forEach((c, i) => {
+        // Первая карточка (шапка) — появляется сразу
+        if (i === 0) {
+          setTimeout(() => c.classList.add('appeared'), 100);
+        }
+        observer.observe(c);
+      });
+    }
+
+    /* ═══════════════════════════════════════════
+       ЛЕПЕСТКИ
+       ═══════════════════════════════════════════ */
     (function() {
-      window.submitted = false;
-
-      /* ---------- ЛЕПЕСТКИ ---------- */
-      (function() {
-        const layer = document.getElementById('petals');
-        for (let i = 0; i < 20; i++) {
-          const p = document.createElement('div');
-          p.className = 'petal';
-          p.style.left = Math.random() * 100 + '%';
-          p.style.animationDuration = (10 + Math.random() * 12) + 's';
-          p.style.animationDelay = (-Math.random() * 20) + 's';
-          p.style.setProperty('--drift', (Math.random() * 220 - 110) + 'px');
-          layer.appendChild(p);
-        }
-      })();
-
-      /* ---------- КАЛЕНДАРЬ ---------- */
-      (function() {
-        const grid = document.getElementById('calGrid');
-        if (!grid) return;
-        const offset = 1;
-        const daysInMonth = 30;
-
-        for (let i = 0; i < offset; i++) {
-          grid.appendChild(document.createElement('span'));
-        }
-        for (let d = 1; d <= daysInMonth; d++) {
-          const s = document.createElement('span');
-          s.textContent = d;
-          if (d === 5) s.classList.add('today');
-          grid.appendChild(s);
-        }
-      })();
-
-      /* ---------- ТАЙМЕР ---------- */
-      const weddingDate = new Date(2027, 5, 5, 14, 0, 0).getTime();
-
-      function updateTimer() {
-        const now = Date.now();
-        const distance = weddingDate - now;
-        if (distance < 0) {
-          ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
-          return;
-        }
-        const days = Math.floor(distance / 86400000);
-        const hours = Math.floor((distance % 86400000) / 3600000);
-        const minutes = Math.floor((distance % 3600000) / 60000);
-        const seconds = Math.floor((distance % 60000) / 1000);
-        document.getElementById('days').textContent = String(days).padStart(2, '0');
-        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      const layer = document.getElementById('petals');
+      if (!layer) return;
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        p.className = 'petal';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (10 + Math.random() * 12) + 's';
+        p.style.animationDelay = (-Math.random() * 20) + 's';
+        p.style.setProperty('--drift', (Math.random() * 220 - 110) + 'px');
+        layer.appendChild(p);
       }
-      updateTimer();
-      setInterval(updateTimer, 1000);
-
-      /* ---------- ГАЛЕРЕЯ (карусель) ---------- */
-      const scatter = document.getElementById('galleryScatter');
-      window.galleryShift = function(dir) {
-        if (!scatter) return;
-        const cards = scatter.querySelectorAll('.polaroid');
-        if (dir > 0) {
-          scatter.appendChild(cards[0]);
-        } else {
-          scatter.insertBefore(cards[cards.length - 1], cards[0]);
-        }
-      };
-
-      /* ---------- КОНФЕТТИ ---------- */
-      function launchConfetti() {
-        const layer = document.getElementById('confettiLayer');
-        const hearts = ['💖','💕','💗','❤️','🌸','✨','💛','🎉'];
-        for (let i = 0; i < 60; i++) {
-          const h = document.createElement('div');
-          h.className = 'confetti-heart';
-          h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-          h.style.left = Math.random() * 100 + '%';
-          h.style.fontSize = (0.9 + Math.random() * 1.7) + 'rem';
-          h.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
-          h.style.animationDelay = (Math.random() * 0.6) + 's';
-          layer.appendChild(h);
-          setTimeout(() => h.remove(), 6000);
-        }
-      }
-
-      /* ---------- СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ ---------- */
-      window.showThankYou = function() {
-        if (window.submitted) {
-          const msg = document.getElementById('rsvpMessage');
-          const name = document.getElementById('name').value.trim() || 'гость';
-          msg.textContent = `🎉 Спасибо, ${name}! Мы вас ждём 💛`;
-          launchConfetti();
-          document.getElementById('rsvpForm').reset();
-          window.submitted = false;
-          setTimeout(() => { msg.textContent = ''; }, 6000);
-        }
-      };
-
-      /* ---------- КАЛЕНДАРЬ .ICS ---------- */
-      window.downloadICS = function() {
-        const dtStart = '20270605T140000';
-        const dtEnd   = '20270605T230000';
-        const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-
-        const ics = [
-          'BEGIN:VCALENDAR',
-          'VERSION:2.0',
-          'PRODID:-//Wedding Yulia and Ivan//RU',
-          'CALSCALE:GREGORIAN',
-          'BEGIN:VEVENT',
-          'UID:' + Date.now() + '@wedding-yulia-ivan',
-          'DTSTAMP:' + dtStamp,
-          'DTSTART:' + dtStart,
-          'DTEND:' + dtEnd,
-          'SUMMARY:Свадьба Юлии и Ивана 💍',
-          'DESCRIPTION:Ждём вас на нашем торжестве!',
-          'LOCATION:г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»',
-          'BEGIN:VALARM',
-          'TRIGGER:-P1D',
-          'ACTION:DISPLAY',
-          'DESCRIPTION:Напоминание: завтра свадьба!',
-          'END:VALARM',
-          'END:VEVENT',
-          'END:VCALENDAR'
-        ].join('\r\n');
-
-        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'wedding-yulia-ivan.ics';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      };
     })();
+
+    /* ═══════════════════════════════════════════
+       КАЛЕНДАРЬ
+       ═══════════════════════════════════════════ */
+    (function() {
+      const grid = document.getElementById('calGrid');
+      if (!grid) return;
+      const offset = 1;
+      const daysInMonth = 30;
+
+      for (let i = 0; i < offset; i++) grid.appendChild(document.createElement('span'));
+      for (let d = 1; d <= daysInMonth; d++) {
+        const s = document.createElement('span');
+        s.textContent = d;
+        if (d === 5) s.classList.add('today');
+        grid.appendChild(s);
+      }
+    })();
+
+    /* ═══════════════════════════════════════════
+       ТАЙМЕР
+       ═══════════════════════════════════════════ */
+    const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
+
+    function updateTimer() {
+      const now = Date.now();
+      const distance = weddingDate - now;
+      if (distance < 0) {
+        ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
+        return;
+      }
+      const days = Math.floor(distance / 86400000);
+      const hours = Math.floor((distance % 86400000) / 3600000);
+      const minutes = Math.floor((distance % 3600000) / 60000);
+      const seconds = Math.floor((distance % 60000) / 1000);
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    /* ═══════════════════════════════════════════
+       ГАЛЕРЕЯ
+       ═══════════════════════════════════════════ */
+    const scatter = document.getElementById('galleryScatter');
+    window.galleryShift = function(dir) {
+      if (!scatter) return;
+      const cards = scatter.querySelectorAll('.polaroid');
+      if (dir > 0) {
+        scatter.appendChild(cards[0]);
+      } else {
+        scatter.insertBefore(cards[cards.length - 1], cards[0]);
+      }
+    };
+
+    /* ═══════════════════════════════════════════
+       КОНФЕТТИ
+       ═══════════════════════════════════════════ */
+    function launchConfetti() {
+      const layer = document.getElementById('confettiLayer');
+      const hearts = ['💖','💕','💗','❤️','🌸','✨','💛','🎉'];
+      for (let i = 0; i < 60; i++) {
+        const h = document.createElement('div');
+        h.className = 'confetti-heart';
+        h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        h.style.left = Math.random() * 100 + '%';
+        h.style.fontSize = (0.9 + Math.random() * 1.7) + 'rem';
+        h.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+        h.style.animationDelay = (Math.random() * 0.6) + 's';
+        layer.appendChild(h);
+        setTimeout(() => h.remove(), 6000);
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ
+       ═══════════════════════════════════════════ */
+    window.submitted = false;
+
+    window.showThankYou = function() {
+      if (window.submitted) {
+        const msg = document.getElementById('rsvpMessage');
+        const name = document.getElementById('name').value.trim() || 'гость';
+        msg.textContent = `🎉 Спасибо, ${name}! Мы вас ждём 💛`;
+        launchConfetti();
+        document.getElementById('rsvpForm').reset();
+        window.submitted = false;
+        setTimeout(() => { msg.textContent = ''; }, 6000);
+      }
+    };
+
+    /* ═══════════════════════════════════════════
+       КАЛЕНДАРЬ .ICS
+       ═══════════════════════════════════════════ */
+    window.downloadICS = function() {
+      const dtStart = '20270605T160000';
+      const dtEnd   = '20270605T230000';
+      const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Wedding Yulia and Ivan//RU',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        'UID:' + Date.now() + '@wedding-yulia-ivan',
+        'DTSTAMP:' + dtStamp,
+        'DTSTART:' + dtStart,
+        'DTEND:' + dtEnd,
+        'SUMMARY:Свадьба Юлии и Ивана 💍',
+        'DESCRIPTION:Ждём вас на нашем торжестве!',
+        'LOCATION:г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»',
+        'BEGIN:VALARM',
+        'TRIGGER:-P1D',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Напоминание: завтра свадьба!',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'wedding-yulia-ivan.ics';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
   </script>
 </body>
 </html>
