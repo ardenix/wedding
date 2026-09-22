@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Свадьба Юлии и Ивана 💍</title>
+  <title>Наша свадьба 💍</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -144,62 +144,70 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1.2rem;
-      margin-bottom: 1.5rem;
+      gap: 1.6rem;
+      margin-bottom: 1.8rem;
       flex-wrap: wrap;
     }
 
+    .hero-person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      flex-shrink: 0;
+    }
+
     .hero-photo {
-      width: 110px;
-      height: 110px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
       box-shadow:
-        0 10px 24px rgba(180, 150, 130, 0.22),
+        0 12px 28px rgba(180, 150, 130, 0.24),
         0 0 0 5px #ffffff,
-        0 0 0 7px #f3e0d4;
+        0 0 0 8px #f3e0d4;
       flex-shrink: 0;
       transition: transform 0.3s;
     }
 
     .hero-photo:hover { transform: scale(1.06) rotate(-2deg); }
 
-    .hero-names {
+    .hero-person-name {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #b5865c;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
       text-align: center;
       flex: 1;
       min-width: 220px;
     }
 
     .hero .names {
-      font-size: 3.4rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      line-height: 1.2;
+      font-size: 2.6rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      line-height: 1.15;
       background: linear-gradient(90deg, #b5865c, #c99d7b, #b5865c);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero .ampersand {
-      font-size: 2.6rem;
-      color: #d99b8a;
-      margin: 0 0.3rem;
-      font-style: italic;
-      -webkit-text-fill-color: #d99b8a;
-    }
-
     .hero .date {
       display: inline-block;
-      margin-top: 1.2rem;
+      margin-top: 1rem;
       padding: 0.55rem 1.6rem;
       border-radius: 40px;
       background: #ffffff;
       color: #8b7e74;
       font-weight: 400;
       letter-spacing: 0.25em;
-      font-size: 1rem;
+      font-size: 0.95rem;
       box-shadow: 0 6px 16px rgba(185, 140, 110, 0.14);
     }
 
@@ -207,7 +215,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 1rem;
+      margin-top: 1.2rem;
       padding: 0.6rem 1.3rem;
       border-radius: 40px;
       background: #fbf1e8;
@@ -413,10 +421,9 @@
       justify-content: center;
       gap: 1.5rem;
       margin: 1.5rem auto 0.5rem;
-      max-width: 480px; /* ровно 3 кружка в ряд */
+      max-width: 480px;
     }
 
-    /* Принудительный перенос после 3-го кружка */
     .color-palette::before {
       content: "";
       flex-basis: 100%;
@@ -691,11 +698,12 @@
       body { padding: 1rem 0.8rem; }
       .card { padding: 1.6rem 1.3rem; border-radius: 26px; }
       .hero { padding: 2rem 1rem 1.8rem; }
-      .hero .names { font-size: 2.2rem; }
+      .hero .names { font-size: 1.8rem; }
       .hero::before, .hero::after { font-size: 1.2rem; }
-      .hero-photo { width: 80px; height: 80px; }
-      .hero-photos { gap: 0.7rem; }
-      .hero-names { min-width: auto; }
+      .hero-photo { width: 100px; height: 100px; }
+      .hero-person-name { font-size: 0.95rem; letter-spacing: 0.1em; }
+      .hero-photos { gap: 0.9rem; }
+      .hero-title { min-width: auto; }
       h2 { font-size: 1.35rem; }
       h2 i { width: 34px; height: 34px; font-size: 0.8rem; }
       .timer-item { min-width: 68px; padding: 0.7rem 0.4rem 0.5rem; }
@@ -721,12 +729,20 @@
   <!-- ШАПКА -->
   <div class="card hero">
     <div class="hero-photos">
-      <div class="hero-photo" style="background-image: url('Julia3.jpg');"></div>
-      <div class="hero-names">
-        <div class="names">Юлия <span class="ampersand">&</span> Иван</div>
+      <div class="hero-person">
+        <div class="hero-photo" style="background-image: url('Julia3.jpg');"></div>
+        <div class="hero-person-name">Юлия</div>
+      </div>
+
+      <div class="hero-title">
+        <div class="names">Наша свадьба</div>
         <div class="date">05 ИЮНЯ 2027</div>
       </div>
-      <div class="hero-photo" style="background-image: url('Ivan3.jpg');"></div>
+
+      <div class="hero-person">
+        <div class="hero-photo" style="background-image: url('Ivan3.jpg');"></div>
+        <div class="hero-person-name">Иван</div>
+      </div>
     </div>
 
     <div class="timer-container" id="timer">
@@ -753,7 +769,7 @@
       <div class="gallery-slide" style="background-image: url('Photo4.jpg');"></div>
       <div class="gallery-slide" style="background-image: url('Photo5.jpg');"></div>
       <div class="gallery-slide" style="background-image: url('Photo6.jpg');"></div>
-      
+
       <button class="gallery-nav gallery-prev" type="button" aria-label="Назад" onclick="galleryPrev()">
         <i class="fas fa-chevron-left"></i>
       </button>
