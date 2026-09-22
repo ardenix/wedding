@@ -769,4 +769,393 @@
     <div class="timer-container" id="timer">
       <div class="timer-item"><div class="timer-number" id="days">00</div><div class="timer-label">дней</div></div>
       <div class="timer-item"><div class="timer-number" id="hours">00</div><div class="timer-label">часов</div></div>
-      <div class="timer-item"><div class="timer-number" id="minutes">00</div><div class="timer
+      <div class="timer-item"><div class="timer-number" id="minutes">00</div><div class="timer-label">минут</div></div>
+      <div class="timer-item"><div class="timer-number" id="seconds">00</div><div class="timer-label">секунд</div></div>
+    </div>
+
+    <button class="calendar-btn" type="button" onclick="downloadICS()">
+      <i class="fas fa-calendar-plus"></i>
+      Добавить в календарь
+    </button>
+  </div>
+
+  <!-- ГАЛЕРЕЯ -->
+  <div class="card">
+    <h2><i class="fas fa-images"></i>Наши моменты</h2>
+    <div class="gallery-viewport" id="galleryViewport">
+      <div class="gallery-slide active" style="background-image: url('Photo1.jpg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo1.jpg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo2.jpg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo3.jpg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo4.jpg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo5.jpg');"></div>
+      <div class="gallery-slide" style="background-image: url('Photo6.jpg');"></div>
+
+      <button class="gallery-nav gallery-prev" type="button" aria-label="Назад" onclick="galleryPrev()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="gallery-nav gallery-next" type="button" aria-label="Вперёд" onclick="galleryNext()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="gallery-dots" id="galleryDots"></div>
+  </div>
+
+  <!-- МЕСТО -->
+  <div class="card">
+    <h2><i class="fas fa-map-pin"></i>Место</h2>
+
+    <h3 style="font-weight: 500; color: #5e554e; margin-bottom: 0.6rem; font-size: 1.05rem;">
+      <i class="fas fa-ring" style="color: #b5865c; margin-right: 6px;"></i>Церемония в ЗАГС
+    </h3>
+    <div class="map-wrapper">
+      <iframe 
+        src="https://yandex.ru/map-widget/v1/?um=constructor%3A1198244952bfe23c5366e7a153386d345d53ff19c68f932574687b3b0b2bcc62&amp;source=constructor" 
+        frameborder="0"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+    <div class="address">
+      <i class="fas fa-location-dot"></i>
+      <span>г. Иркутск, ул. Декабрьских Событий, 106 — Дворец бракосочетания</span>
+    </div>
+    <div class="address" style="margin-top: 0.2rem;">
+      <i class="fas fa-car"></i>
+      <span>Трансфер от ЗАГС в 16:30</span>
+    </div>
+
+    <h3 style="font-weight: 500; color: #5e554e; margin: 1.5rem 0 0.6rem; font-size: 1.05rem;">
+      <i class="fas fa-champagne-glasses" style="color: #b5865c; margin-right: 6px;"></i>Банкет
+    </h3>
+    <div class="map-wrapper">
+      <iframe 
+        src="https://yandex.ru/map-widget/v1/?um=constructor%3A7ba91779bba17def2330a67bafd52345290a0a6bf2664a163e8ef9bf024bc681&amp;source=constructor" 
+        frameborder="0"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+    <div class="address">
+      <i class="fas fa-location-dot"></i>
+      <span>г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»</span>
+    </div>
+  </div>
+
+  <!-- ПРОГРАММА ДНЯ -->
+  <div class="card">
+    <h2><i class="fas fa-clock"></i>Программа дня</h2>
+    <ul class="program-list">
+      <li><span class="program-emoji">💍</span><span class="program-body"><span class="program-time">16:00</span><span class="program-desc">Церемония в ЗАГС</span></span></li>
+      <li><span class="program-emoji">🚗</span><span class="program-body"><span class="program-time">16:30</span><span class="program-desc">Трансфер от ЗАГС</span></span></li>
+      <li><span class="program-emoji">🥂</span><span class="program-body"><span class="program-time">16:50</span><span class="program-desc">Сбор гостей, welcome-зона</span></span></li>
+      <li><span class="program-emoji">🍽️</span><span class="program-body"><span class="program-time">17:00</span><span class="program-desc">Банкет и поздравления</span></span></li>
+      <li><span class="program-emoji">🎂</span><span class="program-body"><span class="program-time">19:30</span><span class="program-desc">Торт и первый танец</span></span></li>
+      <li><span class="program-emoji">🎶</span><span class="program-body"><span class="program-time">21:00</span><span class="program-desc">Танцы и вечеринка</span></span></li>
+      <li><span class="program-emoji">🎆</span><span class="program-body"><span class="program-time">23:00</span><span class="program-desc">Фейерверк</span></span></li>
+    </ul>
+  </div>
+
+  <!-- ДРЕСС-КОД -->
+  <div class="card">
+    <h2><i class="fas fa-vest"></i>Дресс-код</h2>
+    <p class="dress-code-text">
+      Мы будем рады, если вы поддержите палитру нашего торжества 🌸 Пожалуйста, выберите наряд в одном из этих цветов:
+    </p>
+    <div class="color-palette">
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #6f8a3a, #556B2F 70%);"></div>
+        <span class="color-name">🌿 оливковый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #c8e6b8, #a8d18a 70%);"></div>
+        <span class="color-name">🌱 светло-зелёный</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #f0c4c8, #E8B4B8 70%);"></div>
+        <span class="color-name">🌸 розовый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #f3e5cf, #E8D9C5 70%);"></div>
+        <span class="color-name">📜 бежевый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #d4b896, #b89870 70%);"></div>
+        <span class="color-name">👌🏼 светло-коричневый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-circle" style="background: radial-gradient(circle at 35% 30%, #8a5a30, #6B4423 70%);"></div>
+        <span class="color-name">🤎 коричневый</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПОДАРОК -->
+  <div class="card">
+    <h2><i class="fas fa-gift"></i>Подарок</h2>
+    <p class="gift-text">
+      Ваше присутствие — уже лучший подарок для нас 💛<br>
+      Но если вы хотите сделать нам приятно, мы будем рады любому подарку.<br>
+      И не важно, в какой конверт вы его упакуете 🎁
+    </p>
+    <p class="gift-note">
+      P.S. Пожалуйста, не дарите цветы — мы уезжаем сразу после свадьбы 🌸
+    </p>
+  </div>
+
+  <!-- ФОРМА RSVP -->
+  <div class="card">
+    <h2><i class="fas fa-envelope"></i>Подтверждение</h2>
+    <p style="color: #6b625b; margin-bottom: 1rem; font-size: 1rem;">Пожалуйста, подтвердите своё присутствие до 1 мая 2027. 💌</p>
+
+    <form 
+      class="rsvp-form" 
+      id="rsvpForm"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSdEffMetZFqe-O7GWki0z_hGBI2xDOrCHmbdZJtNIuVplD-RA/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="window.submitted=true;"
+    >
+      <div class="form-group">
+        <label for="name">Ваше имя и фамилия</label>
+        <input type="text" id="name" name="entry.301623449" placeholder="Иван Петров" required>
+      </div>
+      <div class="form-group">
+        <label for="guests">Количество гостей (включая Вас)</label>
+        <select id="guests" name="entry.585057221">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Будете ли вы присутствовать в ЗАГС?</label>
+        <div class="visit-options">
+          <label class="visit-item">
+            <input type="radio" name="entry.1893720403" value="Да" required>
+            <span>✅ Да, буду</span>
+          </label>
+          <label class="visit-item">
+            <input type="radio" name="entry.1893720403" value="Нет">
+            <span>❌ Нет, только на банкет</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Предпочтения по напиткам (можно выбрать несколько 🍷)</label>
+        <div class="drinks-grid">
+          <label class="drink-item drink-red">
+            <input type="checkbox" name="entry.1809060743" value="Вино красное">
+            <span class="drink-emoji">🍷</span>
+            <span class="drink-label">Вино красное</span>
+          </label>
+          <label class="drink-item drink-white">
+            <input type="checkbox" name="entry.1809060743" value="Вино белое">
+            <span class="drink-emoji">🥂</span>
+            <span class="drink-label">Вино белое</span>
+          </label>
+          <label class="drink-item drink-champ">
+            <input type="checkbox" name="entry.1809060743" value="Шампанское">
+            <span class="drink-emoji">🍾</span>
+            <span class="drink-label">Шампанское</span>
+          </label>
+          <label class="drink-item drink-whiskey">
+            <input type="checkbox" name="entry.1809060743" value="Виски">
+            <span class="drink-emoji">🥃</span>
+            <span class="drink-label">Виски</span>
+          </label>
+          <label class="drink-item drink-vodka">
+            <input type="checkbox" name="entry.1809060743" value="Водка">
+            <span class="drink-emoji">🍸</span>
+            <span class="drink-label">Водка</span>
+          </label>
+          <label class="drink-item drink-cognac">
+            <input type="checkbox" name="entry.1809060743" value="Коньяк">
+            <span class="drink-emoji">🥃</span>
+            <span class="drink-label">Коньяк</span>
+          </label>
+          <label class="drink-item drink-beer">
+            <input type="checkbox" name="entry.1809060743" value="Пиво">
+            <span class="drink-emoji">🍺</span>
+            <span class="drink-label">Пиво</span>
+          </label>
+          <label class="drink-item drink-soft">
+            <input type="checkbox" name="entry.1809060743" value="Безалкогольные напитки">
+            <span class="drink-emoji">🥤</span>
+            <span class="drink-label">Безалкогольные</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="wishes">Другие пожелания (необязательно)</label>
+        <input type="text" id="wishes" name="entry.51985960" placeholder="Например: аллергия на орехи">
+      </div>
+      <button type="submit" id="submitBtn">Отправить</button>
+      <div id="rsvpMessage"></div>
+    </form>
+
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.showThankYou();}"></iframe>
+  </div>
+
+  <div class="footer-note">
+    <i class="fas fa-heart"></i> Юлия & Иван, 2027
+  </div>
+
+  <script>
+    (function() {
+      window.submitted = false;
+
+      (function createPetals() {
+        const layer = document.getElementById('petals');
+        const COUNT = 22;
+        for (let i = 0; i < COUNT; i++) {
+          const p = document.createElement('div');
+          p.className = 'petal';
+          p.style.left = Math.random() * 100 + '%';
+          p.style.animationDuration = (10 + Math.random() * 10) + 's';
+          p.style.animationDelay = (-Math.random() * 20) + 's';
+          p.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+          p.style.opacity = 0.5 + Math.random() * 0.4;
+          layer.appendChild(p);
+        }
+      })();
+
+      const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
+
+      function updateTimer() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+
+      const slides = document.querySelectorAll('.gallery-slide');
+      const dotsContainer = document.getElementById('galleryDots');
+      let currentSlide = 0;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Фото ' + (i + 1));
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = document.querySelectorAll('.gallery-dot');
+
+      function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+      }
+
+      window.galleryNext = () => goToSlide(currentSlide + 1);
+      window.galleryPrev = () => goToSlide(currentSlide - 1);
+
+      setInterval(() => goToSlide(currentSlide + 1), 6000);
+
+      function launchConfetti() {
+        const layer = document.getElementById('confettiLayer');
+        const hearts = ['💖', '💕', '💗', '💓', '❤️', '🌸', '✨', '💛'];
+        const COUNT = 50;
+
+        for (let i = 0; i < COUNT; i++) {
+          const h = document.createElement('div');
+          h.className = 'confetti-heart';
+          h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+          h.style.left = Math.random() * 100 + '%';
+          h.style.fontSize = (0.9 + Math.random() * 1.6) + 'rem';
+          h.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+          h.style.animationDelay = (Math.random() * 0.6) + 's';
+          layer.appendChild(h);
+
+          setTimeout(() => h.remove(), 6000);
+        }
+      }
+
+      window.showThankYou = function() {
+        if (window.submitted) {
+          const msg = document.getElementById('rsvpMessage');
+          const nameInput = document.getElementById('name');
+          const name = nameInput.value.trim() || 'гость';
+
+          msg.textContent = `🎉 Спасибо, ${name}! Ваш ответ сохранён 💌`;
+          msg.style.color = '#5a9a6f';
+
+          launchConfetti();
+
+          document.getElementById('rsvpForm').reset();
+          window.submitted = false;
+
+          setTimeout(() => { msg.textContent = ''; }, 6000);
+        }
+      };
+
+      window.downloadICS = function() {
+        const dtStart = '20270605T160000';
+        const dtEnd   = '20270606T000000';
+        const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+        const ics = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Wedding Yulia and Ivan//RU',
+          'CALSCALE:GREGORIAN',
+          'BEGIN:VEVENT',
+          'UID:' + Date.now() + '@wedding-yulia-ivan',
+          'DTSTAMP:' + dtStamp,
+          'DTSTART:' + dtStart,
+          'DTEND:' + dtEnd,
+          'SUMMARY:Свадьба Юлии и Ивана 💍',
+          'DESCRIPTION:Ждём вас на нашем торжестве!\\nРесторан «Авантаж»\\nг. Иркутск, ул. Байкальская, 279',
+          'LOCATION:г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»',
+          'BEGIN:VALARM',
+          'TRIGGER:-P1D',
+          'ACTION:DISPLAY',
+          'DESCRIPTION:Напоминание: завтра свадьба!',
+          'END:VALARM',
+          'END:VEVENT',
+          'END:VCALENDAR'
+        ].join('\r\n');
+
+        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'wedding-yulia-ivan.ics';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+    })();
+  </script>
+</body>
+</html>
