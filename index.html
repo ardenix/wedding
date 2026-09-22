@@ -17,7 +17,7 @@
 
     body {
       font-family: 'Pangolin', 'Neucha', cursive;
-      color: #3a3a2e;
+      color: #3a3a3a;
       line-height: 1.75;
       min-height: 100vh;
       position: relative;
@@ -52,20 +52,16 @@
       transform-style: preserve-3d;
     }
 
-    /* Задняя стенка (внутренность) — тёмно-коричневая */
     .env-back {
       position: absolute;
       inset: 0;
-      background-color: #4a3a28;
+      background-color: #c2b198;
       background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.20 0 0 0 0 0.14 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
-      box-shadow: inset 0 0 120px rgba(30, 20, 10, 0.6);
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 0 0.22 0 0 0 0.14 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+      box-shadow: inset 0 0 120px rgba(70, 45, 25, 0.5);
       z-index: 1;
     }
 
-    /* ═══════════════════════════════════════════
-       ПИСЬМО НА ВЕСЬ ЭКРАН
-       ═══════════════════════════════════════════ */
     .env-letter {
       position: absolute;
       top: 50%;
@@ -75,9 +71,9 @@
       transform: translate(-50%, -50%) scale(0.9);
       opacity: 0;
       pointer-events: none;
-      background-color: #f4f1e4;
+      background-color: #ede4d3;
       background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.52 0 0 0 0 0.38 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
       border-radius: 4px;
       box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
       padding: 3rem 2.5rem;
@@ -115,14 +111,14 @@
       font-size: 1.6rem;
       letter-spacing: 0.28em;
       margin-top: 1rem;
-      color: #5a6b2f;
+      color: #6a5a48;
       font-family: 'Playfair Display', serif;
     }
 
     .letter-script {
       font-family: 'Marck Script', cursive;
       font-size: 5.5rem;
-      color: #5a6b2f;
+      color: #9b1b30;
       margin-top: 1.8rem;
       line-height: 1;
     }
@@ -134,21 +130,20 @@
       .env-letter { padding: 2rem 1.5rem; }
     }
 
-    /* ── Створки конверта ── */
     .env-flap {
       position: absolute;
-      background-color: #c9c0a8;
+      background-color: #dcccb0;
       background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.48 0 0 0 0 0.44 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.52 0 0 0 0 0.42 0 0 0 0 0.30 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
       z-index: 5;
-      box-shadow: 0 4px 20px rgba(60, 50, 30, 0.22);
+      box-shadow: 0 4px 20px rgba(120, 95, 70, 0.22);
     }
 
     .env-flap-top {
       top: 0; left: 0;
       width: 100%; height: 62%;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
-      background: linear-gradient(180deg, #dfd5be 0%, #d3c8a8 60%, #c6b898 100%);
+      background: linear-gradient(180deg, #e8dcc4 0%, #ddcdb2 60%, #d4c2a4 100%);
       z-index: 8;
     }
 
@@ -165,7 +160,7 @@
       bottom: 0; left: 0;
       width: 100%; height: 42%;
       clip-path: polygon(0 100%, 100% 100%, 50% 0);
-      background: linear-gradient(0deg, #c6b898 0%, #d3c8a8 40%, #dfd5be 100%);
+      background: linear-gradient(0deg, #d4c2a4 0%, #ddcdb2 40%, #e8dcc4 100%);
       z-index: 6;
     }
 
@@ -173,14 +168,14 @@
       top: 0; left: 0;
       width: 32%; height: 100%;
       clip-path: polygon(0 0, 100% 50%, 0 100%);
-      background: linear-gradient(90deg, #c6b898 0%, #d3c8a8 60%, #dfd5be 100%);
+      background: linear-gradient(90deg, #d4c2a4 0%, #ddcdb2 60%, #e8dcc4 100%);
       z-index: 4;
     }
     .env-flap-right {
       top: 0; right: 0;
       width: 32%; height: 100%;
       clip-path: polygon(100% 0, 0 50%, 100% 100%);
-      background: linear-gradient(-90deg, #c6b898 0%, #d3c8a8 60%, #dfd5be 100%);
+      background: linear-gradient(-90deg, #d4c2a4 0%, #ddcdb2 60%, #e8dcc4 100%);
       z-index: 4;
     }
 
@@ -212,13 +207,12 @@
     .env-script-line {
       font-family: 'Marck Script', cursive;
       font-size: 3.2rem;
-      color: #5a6b2f;
+      color: #9b1b30;
       margin-top: 0.7rem;
       line-height: 1;
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
     }
 
-    /* ── Сургучная печать (оливково-коричневая) ── */
     .wax-seal {
       position: absolute;
       top: 58%;
@@ -228,13 +222,13 @@
       border-radius: 50%;
       transform: translate(-50%, -50%) scale(1);
       background:
-        radial-gradient(circle at 34% 28%, #7a8340 0%, #5a6b2f 45%, #3f4a1c 75%, #2c3410 100%);
+        radial-gradient(circle at 34% 28%, #b82440 0%, #92182a 45%, #6e0f1f 75%, #520b16 100%);
       box-shadow:
         inset -10px -12px 28px rgba(0, 0, 0, 0.55),
-        inset 10px 12px 24px rgba(200, 215, 160, 0.28),
-        inset 0 0 0 3px rgba(60, 70, 25, 0.5),
-        0 18px 40px rgba(40, 50, 15, 0.55),
-        0 6px 14px rgba(40, 50, 15, 0.45);
+        inset 10px 12px 24px rgba(255, 140, 160, 0.28),
+        inset 0 0 0 3px rgba(110, 20, 35, 0.5),
+        0 18px 40px rgba(80, 10, 20, 0.55),
+        0 6px 14px rgba(80, 10, 20, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -261,7 +255,7 @@
       position: absolute;
       inset: 26px;
       border-radius: 50%;
-      border: 2px solid rgba(230, 240, 200, 0.28);
+      border: 2px solid rgba(255, 210, 220, 0.28);
       box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
     }
 
@@ -272,7 +266,7 @@
       left: 22%;
       width: 26%;
       height: 18%;
-      background: radial-gradient(ellipse, rgba(230, 240, 200, 0.5), transparent 70%);
+      background: radial-gradient(ellipse, rgba(255, 200, 210, 0.5), transparent 70%);
       border-radius: 50%;
       filter: blur(4px);
       pointer-events: none;
@@ -282,7 +276,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.7rem;
       letter-spacing: 0.18em;
-      color: #ecdfc0;
+      color: #e8d4b0;
       text-transform: uppercase;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), 0 1px 2px rgba(0, 0, 0, 0.5);
       position: relative;
@@ -316,7 +310,7 @@
       position: absolute;
       width: 40px;
       height: 40px;
-      background: radial-gradient(circle at 35% 30%, #7a8340 0%, #5a6b2f 60%, #2c3410 100%);
+      background: radial-gradient(circle at 35% 30%, #b82440 0%, #8e1528 60%, #6a0e1e 100%);
       border-radius: 40% 60% 55% 45%;
       box-shadow: inset -3px -4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
       top: 50%;
@@ -348,7 +342,7 @@
       text-align: center;
       font-family: 'Special Elite', 'Courier New', monospace;
       font-size: 1.05rem;
-      color: #2e2212;
+      color: #2e1f12;
       line-height: 1.75;
       letter-spacing: 0.03em;
       z-index: 20;
@@ -378,11 +372,11 @@
       min-height: 100vh;
       overflow-x: hidden;
 
-      background-color: #f4f2e8;
+      background-color: #f5f1e8;
       background-image:
-        radial-gradient(circle at 20% 30%, rgba(155, 170, 115, 0.10) 0%, transparent 45%),
-        radial-gradient(circle at 80% 70%, rgba(180, 155, 120, 0.10) 0%, transparent 45%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.42 0 0 0 0 0.28 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+        radial-gradient(circle at 20% 30%, rgba(200, 180, 155, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(190, 165, 140, 0.10) 0%, transparent 45%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       background-attachment: fixed;
     }
 
@@ -403,17 +397,16 @@
       position: relative;
     }
 
-    /* ── Лепестки в палитре ── */
     .petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .petal {
       position: absolute; top: -50px; width: 14px; height: 14px;
-      background: radial-gradient(circle at 30% 30%, #bcc9a0, #7d9160 70%);
+      background: radial-gradient(circle at 30% 30%, #ffd9e0, #f3b8c4 70%);
       border-radius: 50% 0 50% 50%;
       opacity: 0.7;
       animation: petalFall linear infinite;
     }
-    .petal:nth-child(3n) { background: radial-gradient(circle at 30% 30%, #fbf3d8, #e8d8a5 70%); width: 11px; height: 11px; }
-    .petal:nth-child(5n) { background: radial-gradient(circle at 30% 30%, #f4e2d0, #d9b89f 70%); border-radius: 50%; transform: none; }
+    .petal:nth-child(3n) { background: radial-gradient(circle at 30% 30%, #fbe9d0, #f0d0a8 70%); width: 11px; height: 11px; }
+    .petal:nth-child(5n) { background: radial-gradient(circle at 30% 30%, #e6efdc, #c8d9b6 70%); border-radius: 50%; transform: none; }
     @keyframes petalFall {
       0% { transform: translateY(-50px) translateX(0) rotate(0); opacity: 0; }
       10% { opacity: 0.8; }
@@ -424,7 +417,7 @@
     .section {
       position: relative;
       padding: 4rem 0;
-      border-bottom: 1px dashed rgba(140, 155, 100, 0.45);
+      border-bottom: 1px dashed rgba(200, 180, 155, 0.55);
     }
     .section:last-child { border-bottom: none; }
 
@@ -432,8 +425,8 @@
       position: absolute;
       width: 22px;
       height: 22px;
-      color: #5a6b2f;
-      opacity: 0.55;
+      color: #e63946;
+      opacity: 0.6;
       pointer-events: none;
     }
     .section .doodle-heart.tl { top: 1.5rem; left: 1rem; transform: rotate(-18deg); }
@@ -463,7 +456,7 @@
       font-family: 'Amatic SC', cursive;
       font-weight: 700;
       font-size: 3.4rem;
-      color: #5a6b2f;
+      color: #e63946;
       text-align: center;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -475,7 +468,7 @@
       display: block;
       width: 70px;
       height: 3px;
-      background: #5a6b2f;
+      background: #e63946;
       margin: 14px auto 0;
       border-radius: 2px;
       transform: rotate(-2deg);
@@ -489,7 +482,7 @@
     .hero-title {
       font-family: 'Marck Script', cursive;
       font-size: 4.5rem;
-      color: #5a6b2f;
+      color: #e63946;
       line-height: 1.1;
       margin-bottom: 0.8rem;
     }
@@ -505,7 +498,7 @@
     .polaroid {
       background: #ffffff;
       padding: 12px 12px 48px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.08), 0 12px 26px rgba(120, 130, 90, 0.18);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.08), 0 12px 26px rgba(150, 120, 90, 0.16);
       position: relative;
       transition: transform 0.3s ease;
       display: inline-block;
@@ -519,7 +512,7 @@
       height: 210px;
       background-size: cover;
       background-position: center;
-      background-color: #f0ede0;
+      background-color: #f0e8dc;
     }
     .polaroid .caption {
       position: absolute;
@@ -530,13 +523,13 @@
       font-family: 'Caveat', cursive;
       font-size: 1.9rem;
       font-weight: 600;
-      color: #5a6b2f;
+      color: #e63946;
     }
 
     .big-text {
       font-family: 'Caveat', cursive;
       font-size: 1.8rem;
-      color: #4a4a3a;
+      color: #4a4a4a;
       text-align: center;
       line-height: 1.65;
       margin: 1.5rem auto;
@@ -546,7 +539,7 @@
     .big-text-strong {
       font-family: 'Amatic SC', cursive;
       font-size: 2.6rem;
-      color: #5a6b2f;
+      color: #e63946;
       text-align: center;
       line-height: 1.3;
       margin: 1.5rem auto;
@@ -563,8 +556,8 @@
       font-family: 'Amatic SC', cursive;
       margin-bottom: 1.8rem;
     }
-    .cal-month, .cal-year { font-size: 3rem; color: #8a9c6a; font-weight: 400; letter-spacing: 0.08em; }
-    .cal-day { font-size: 5.2rem; color: #a88764; font-weight: 700; line-height: 1; }
+    .cal-month, .cal-year { font-size: 3rem; color: #7a9ac4; font-weight: 400; letter-spacing: 0.08em; }
+    .cal-day { font-size: 5.2rem; color: #f77f00; font-weight: 700; line-height: 1; }
 
     .cal-weekdays, .cal-grid {
       display: grid;
@@ -577,14 +570,14 @@
     }
     .cal-weekdays {
       font-size: 1.3rem;
-      color: #9a9a80;
+      color: #a89a8e;
       margin-bottom: 0.5rem;
       letter-spacing: 0.05em;
     }
-    .cal-grid { font-size: 1.7rem; color: #4a4a3a; }
+    .cal-grid { font-size: 1.7rem; color: #4a4a4a; }
     .cal-grid span { padding: 5px 0; }
     .cal-grid .today {
-      color: #5a6b2f;
+      color: #e63946;
       font-weight: 700;
       position: relative;
     }
@@ -592,7 +585,7 @@
       content: "";
       position: absolute;
       inset: -9px -12px;
-      border: 3px solid #5a6b2f;
+      border: 3px solid #e63946;
       border-radius: 50% 48% 52% 50%;
       transform: rotate(-10deg);
       pointer-events: none;
@@ -601,7 +594,7 @@
     .save-date {
       font-family: 'Caveat', cursive;
       font-size: 1.7rem;
-      color: #4a4a3a;
+      color: #4a4a4a;
       margin-top: 1.5rem;
       transform: rotate(-2deg);
       display: inline-block;
@@ -612,7 +605,7 @@
       position: absolute;
       left: -34px;
       top: -8px;
-      color: #5a6b2f;
+      color: #e63946;
       font-size: 1.7rem;
       transform: rotate(-20deg);
     }
@@ -629,13 +622,13 @@
       font-family: 'Amatic SC', cursive;
       font-size: 3.6rem;
       font-weight: 700;
-      color: #a88764;
+      color: #f77f00;
       line-height: 1;
     }
     .timer-label {
       font-family: 'Caveat', cursive;
       font-size: 1.4rem;
-      color: #8a9c6a;
+      color: #7a9ac4;
       text-transform: lowercase;
     }
 
@@ -646,8 +639,8 @@
       font-weight: 600;
       padding: 0.7rem 2rem;
       background: transparent;
-      color: #5a6b2f;
-      border: 2.5px solid #5a6b2f;
+      color: #e63946;
+      border: 2.5px solid #e63946;
       border-radius: 40px 55px 45px 60px;
       cursor: pointer;
       transition: all 0.2s;
@@ -655,7 +648,7 @@
       align-items: center;
       gap: 0.6rem;
     }
-    .calendar-btn:hover { background: #5a6b2f; color: #fff; transform: rotate(-1.5deg); }
+    .calendar-btn:hover { background: #e63946; color: #fff; transform: rotate(-1.5deg); }
 
     .gallery-scatter {
       display: flex;
@@ -685,8 +678,8 @@
       width: 50px; height: 50px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.9);
-      border: 2px solid #5a6b2f;
-      color: #5a6b2f;
+      border: 2px solid #e63946;
+      color: #e63946;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -695,7 +688,7 @@
       z-index: 20;
       transition: all 0.2s;
     }
-    .gallery-nav:hover { background: #5a6b2f; color: #fff; }
+    .gallery-nav:hover { background: #e63946; color: #fff; }
     .gallery-prev { left: -10px; }
     .gallery-next { right: -10px; }
 
@@ -704,7 +697,7 @@
     .map-title {
       font-family: 'Amatic SC', cursive;
       font-size: 2.6rem;
-      color: #5a6b2f;
+      color: #e63946;
       margin-bottom: 1rem;
       letter-spacing: 0.04em;
     }
@@ -712,7 +705,7 @@
       display: inline-block;
       background: #ffffff;
       padding: 14px 14px 46px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.08), 0 12px 26px rgba(120, 130, 90, 0.18);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.08), 0 12px 26px rgba(150, 120, 90, 0.16);
       max-width: 100%;
       position: relative;
       transform: rotate(-1deg);
@@ -733,13 +726,13 @@
       text-align: center;
       font-family: 'Caveat', cursive;
       font-size: 1.6rem;
-      color: #5a6b2f;
+      color: #e63946;
       font-weight: 600;
     }
     .map-address {
       font-family: 'Pangolin', cursive;
       font-size: 1.2rem;
-      color: #4a4a3a;
+      color: #4a4a4a;
       margin-top: 1.2rem;
       line-height: 1.6;
     }
@@ -747,8 +740,8 @@
       display: inline-block;
       font-family: 'Caveat', cursive;
       font-size: 1.55rem;
-      color: #5a6b2f;
-      border: 2px solid #5a6b2f;
+      color: #e63946;
+      border: 2px solid #e63946;
       border-radius: 30px 40px 35px 45px;
       padding: 0.5rem 1.6rem;
       margin-top: 1rem;
@@ -756,7 +749,7 @@
       transition: all 0.2s;
       transform: rotate(-1deg);
     }
-    .map-howto:hover { background: #5a6b2f; color: #fff; transform: rotate(0deg); }
+    .map-howto:hover { background: #e63946; color: #fff; transform: rotate(0deg); }
 
     .timing-list { list-style: none; margin-top: 1.5rem; }
     .timing-list li {
@@ -764,13 +757,13 @@
       align-items: center;
       gap: 1.2rem;
       padding: 1.2rem 0.5rem;
-      border-bottom: 1px solid #e8e6d8;
+      border-bottom: 1px solid #f0ede9;
       font-family: 'Pangolin', cursive;
-      color: #4a4a3a;
+      color: #4a4a4a;
       transition: background 0.2s, transform 0.2s;
     }
     .timing-list li:last-child { border-bottom: none; }
-    .timing-list li:hover { background: #f8f7ee; transform: translateX(4px); }
+    .timing-list li:hover { background: #fdf8f3; transform: translateX(4px); }
 
     .timing-emoji {
       display: inline-flex;
@@ -780,7 +773,7 @@
       border-radius: 50%;
       font-size: 1.6rem;
       background: #ffffff;
-      box-shadow: 0 4px 10px rgba(120, 130, 90, 0.18);
+      box-shadow: 0 4px 10px rgba(180, 150, 130, 0.16);
       border: 2px solid #fff;
       flex-shrink: 0;
     }
@@ -788,7 +781,7 @@
     .timing-time {
       font-family: 'Amatic SC', cursive;
       font-weight: 700;
-      color: #5a6b2f;
+      color: #e63946;
       font-size: 2rem;
       letter-spacing: 0.05em;
       line-height: 1;
@@ -796,7 +789,7 @@
     .timing-desc {
       font-family: 'Caveat', cursive;
       font-size: 1.7rem;
-      color: #3a3a2e;
+      color: #3a3a3a;
       margin-top: 0.2rem;
     }
 
@@ -805,7 +798,7 @@
       font-family: 'Caveat', cursive;
       font-size: 1.8rem;
       text-align: center;
-      color: #4a4a3a;
+      color: #4a4a4a;
       margin-bottom: 2rem;
       line-height: 1.6;
     }
@@ -841,14 +834,14 @@
     .palette-name {
       font-family: 'Caveat', cursive;
       font-size: 1.45rem;
-      color: #4a4a3a;
+      color: #4a4a4a;
       line-height: 1.2;
     }
 
     .gift-text {
       font-family: 'Caveat', cursive;
       font-size: 1.8rem;
-      color: #4a4a3a;
+      color: #4a4a4a;
       text-align: center;
       line-height: 1.7;
       margin-bottom: 1.5rem;
@@ -856,11 +849,11 @@
     .gift-note {
       font-family: 'Caveat', cursive;
       font-size: 1.65rem;
-      color: #5a6b2f;
+      color: #e63946;
       text-align: center;
       padding: 1.2rem 1.5rem;
-      border-top: 2px dashed #5a6b2f;
-      border-bottom: 2px dashed #5a6b2f;
+      border-top: 2px dashed #e63946;
+      border-bottom: 2px dashed #e63946;
       margin-top: 1.2rem;
       line-height: 1.6;
     }
@@ -868,7 +861,7 @@
     .rsvp-intro {
       font-family: 'Caveat', cursive;
       font-size: 1.7rem;
-      color: #4a4a3a;
+      color: #4a4a4a;
       text-align: center;
       line-height: 1.6;
       margin-bottom: 2rem;
@@ -879,7 +872,7 @@
     label {
       font-family: 'Caveat', cursive;
       font-size: 1.65rem;
-      color: #5a6b2f;
+      color: #e63946;
       font-weight: 600;
     }
     input[type="text"], select {
@@ -887,15 +880,15 @@
       font-size: 1.2rem;
       padding: 0.8rem 1.1rem;
       border: none;
-      border-bottom: 2px dashed #b8b898;
+      border-bottom: 2px dashed #c9b89d;
       background: transparent;
       color: #2e2e2e;
       outline: none;
       transition: border-color 0.2s;
       width: 100%;
     }
-    input[type="text"]:focus, select:focus { border-bottom-color: #5a6b2f; }
-    input[type="text"]::placeholder { color: #a8a898; font-style: italic; }
+    input[type="text"]:focus, select:focus { border-bottom-color: #e63946; }
+    input[type="text"]::placeholder { color: #b9a99c; font-style: italic; }
     select { cursor: pointer; }
 
     .visit-options { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
@@ -906,22 +899,22 @@
       align-items: center;
       gap: 0.7rem;
       padding: 1rem 1.2rem;
-      border: 2px solid #b8b898;
+      border: 2px solid #c9b89d;
       border-radius: 40px 55px 45px 60px;
       background: transparent;
       cursor: pointer;
       font-family: 'Caveat', cursive;
       font-size: 1.55rem;
-      color: #4a4a3a;
+      color: #4a4a4a;
       transition: all 0.2s;
       user-select: none;
     }
-    .visit-item:hover { border-color: #5a6b2f; transform: rotate(-1deg); }
-    .visit-item input[type="radio"] { accent-color: #5a6b2f; transform: scale(1.3); }
+    .visit-item:hover { border-color: #e63946; transform: rotate(-1deg); }
+    .visit-item input[type="radio"] { accent-color: #e63946; transform: scale(1.3); }
     .visit-item:has(input:checked) {
-      border-color: #5a6b2f;
-      background: #f1f3e3;
-      color: #5a6b2f;
+      border-color: #e63946;
+      background: #fdf1ec;
+      color: #e63946;
       font-weight: 600;
     }
 
@@ -938,7 +931,7 @@
       align-items: center;
       gap: 0.4rem;
       padding: 1rem 0.7rem 0.9rem;
-      border: 2px dashed #b8b898;
+      border: 2px dashed #c9b89d;
       border-radius: 30px 40px 32px 42px;
       background: transparent;
       cursor: pointer;
@@ -948,8 +941,8 @@
     }
     .drink-item:hover {
       transform: translateY(-3px) rotate(-1deg);
-      border-color: #5a6b2f;
-      box-shadow: 0 8px 16px rgba(120, 130, 90, 0.12);
+      border-color: #e63946;
+      box-shadow: 0 8px 16px rgba(200, 130, 100, 0.10);
     }
     .drink-emoji { font-size: 2rem; line-height: 1; transition: transform 0.3s; }
     .drink-item:hover .drink-emoji { transform: scale(1.2) rotate(6deg); }
@@ -957,20 +950,19 @@
       font-family: 'Caveat', cursive;
       font-size: 1.4rem;
       font-weight: 600;
-      color: #4a4a3a;
+      color: #4a4a4a;
       line-height: 1.15;
     }
     .drink-item input { position: absolute; opacity: 0; pointer-events: none; }
 
-    /* Напитки в палитре */
-    .drink-red      { --c: #4a2c17; }
-    .drink-white    { --c: #e8cdb8; }
-    .drink-champ    { --c: #f3e7bf; }
-    .drink-whiskey  { --c: #a88764; }
-    .drink-vodka    { --c: #b8c19a; }
-    .drink-cognac   { --c: #6b4329; }
-    .drink-beer     { --c: #9aac7a; }
-    .drink-soft     { --c: #d8ddbf; }
+    .drink-red      { --c: #b23a48; }
+    .drink-white    { --c: #c9a86a; }
+    .drink-champ    { --c: #d99b34; }
+    .drink-whiskey  { --c: #a56b2a; }
+    .drink-vodka    { --c: #7d94b8; }
+    .drink-cognac   { --c: #7c3f24; }
+    .drink-beer     { --c: #c68b23; }
+    .drink-soft     { --c: #6a9d7c; }
 
     .drink-item:has(input:checked) {
       background: var(--c);
@@ -978,14 +970,9 @@
       border-style: solid;
       color: #fff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px color-mix(in srgb, var(--c) 40%, transparent);
+      box-shadow: 0 8px 18px color-mix(in srgb, var(--c) 35%, transparent);
     }
     .drink-item:has(input:checked) .drink-label { color: #fff; }
-    /* Для светлых цветов — тёмный текст */
-    .drink-item:has(input:checked).drink-champ .drink-label,
-    .drink-item:has(input:checked).drink-soft .drink-label,
-    .drink-item:has(input:checked).drink-white .drink-label,
-    .drink-item:has(input:checked).drink-vodka .drink-label { color: #3a3a2e; }
     .drink-item:has(input:checked) .drink-emoji { transform: scale(1.1); }
     .drink-item:has(input:checked)::after {
       content: "✓";
@@ -994,7 +981,7 @@
       font-size: 1.05rem;
       font-weight: 700;
       color: #fff;
-      background: rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.3);
       width: 24px; height: 24px;
       border-radius: 50%;
       display: flex;
@@ -1008,8 +995,8 @@
       font-weight: 700;
       padding: 0.9rem 2.8rem;
       background: transparent;
-      color: #5a6b2f;
-      border: 2.5px solid #5a6b2f;
+      color: #e63946;
+      border: 2.5px solid #e63946;
       border-radius: 45px 60px 50px 55px;
       cursor: pointer;
       transition: all 0.2s;
@@ -1018,7 +1005,7 @@
       min-width: 260px;
     }
     button[type="submit"]:hover {
-      background: #5a6b2f;
+      background: #e63946;
       color: #fff;
       transform: rotate(-1.5deg) scale(1.03);
     }
@@ -1029,7 +1016,7 @@
       margin-top: 1.2rem;
       font-family: 'Caveat', cursive;
       font-size: 1.65rem;
-      color: #5a6b2f;
+      color: #6a9d7c;
       min-height: 2rem;
       font-weight: 600;
     }
@@ -1037,7 +1024,7 @@
     .footer-note {
       font-family: 'Marck Script', cursive;
       font-size: 2rem;
-      color: #5a6b2f;
+      color: #e63946;
       text-align: center;
       margin-top: 1.5rem;
       padding: 2.5rem 1rem 1rem;
@@ -1323,7 +1310,7 @@
         </ul>
       </section>
 
-      <!-- 7. ДРЕСС-КОД (2 ряда по 3) -->
+      <!-- 7. ДРЕСС-КОД (6 оттенков из палитры) -->
       <section class="section">
         <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
 
@@ -1392,7 +1379,7 @@
           Мечтаем, чтобы праздник получился по-настоящему задорным и полным радости. 
           Ваше участие — как раз то, что сделает день по-настоящему отличным!
           Поэтому, пожалуйста, подтвердите ваше присутствие до <br>
-          <span style="color: #5a6b2f; font-weight: 700; font-family: 'Amatic SC', cursive; font-size: 2rem;">1 МАЯ 2027</span>
+          <span style="color: #e63946; font-weight: 700; font-family: 'Amatic SC', cursive; font-size: 2rem;">1 МАЯ 2027</span>
         </p>
 
         <form 
@@ -1603,7 +1590,7 @@
        ═══════════════════════════════════════════ */
     function launchConfetti() {
       const layer = document.getElementById('confettiLayer');
-      const hearts = ['🌿','🌱','🌸','🤎','💛','✨','🍃','🤍'];
+      const hearts = ['💖','💕','💗','❤️','🌸','✨','💛','🎉'];
       for (let i = 0; i < 60; i++) {
         const h = document.createElement('div');
         h.className = 'confetti-heart';
