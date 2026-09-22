@@ -36,7 +36,7 @@
       z-index: 5000;
       overflow: hidden;
       cursor: pointer;
-      transition: opacity 1s ease 2.4s;
+      transition: opacity 1s ease;
       perspective: 2200px;
     }
 
@@ -52,7 +52,7 @@
       transform-style: preserve-3d;
     }
 
-    /* ── Задняя стенка (внутренность) ── */
+    /* Задняя стенка (внутренность) */
     .env-back {
       position: absolute;
       inset: 0;
@@ -63,52 +63,77 @@
       z-index: 1;
     }
 
-    /* ── Письмо-приглашение (выезжает из конверта) ── */
+    /* ═══════════════════════════════════════════
+       ПИСЬМО НА ВЕСЬ ЭКРАН
+       ═══════════════════════════════════════════ */
     .env-letter {
       position: absolute;
-      top: 8%;
+      top: 50%;
       left: 50%;
-      width: 78%;
-      max-width: 720px;
-      transform: translateX(-50%) translateY(0);
+      width: 92vw;
+      height: 88vh;
+      transform: translate(-50%, 60vh) scale(0.9);
+      opacity: 0;
       background-color: #ede4d3;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
-      border-radius: 3px;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.28);
-      padding: 2.5rem 2rem;
+      border-radius: 4px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      z-index: 2;
-      transition: transform 1.4s cubic-bezier(.4,.05,.2,1) 1.3s;
+      z-index: 20;
+      transition:
+        transform 1.4s cubic-bezier(.4,.05,.2,1),
+        opacity 0.6s ease;
     }
 
+    /* Письмо выехало на весь экран */
     .envelope.open .env-letter {
-      transform: translateX(-50%) translateY(-32%);
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    /* Письмо растворяется */
+    .envelope.letter-fade .env-letter {
+      opacity: 0;
+      transform: translate(-50%, -55%) scale(1.05);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
     .letter-invited {
       font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      letter-spacing: 0.1em;
-      color: #3a3a3a;
+      font-size: 3rem;
+      letter-spacing: 0.12em;
+      color: #2a2a2a;
       text-transform: uppercase;
       line-height: 1.35;
     }
     .letter-invited span {
       display: block;
-      font-size: 1.05rem;
-      letter-spacing: 0.25em;
-      margin-top: 0.7rem;
+      font-size: 1.6rem;
+      letter-spacing: 0.28em;
+      margin-top: 1rem;
       color: #6a5a48;
       font-family: 'Playfair Display', serif;
     }
 
     .letter-script {
       font-family: 'Marck Script', cursive;
-      font-size: 3.4rem;
+      font-size: 5.5rem;
       color: #9b1b30;
-      margin-top: 1rem;
+      margin-top: 1.8rem;
       line-height: 1;
+    }
+
+    @media (max-width: 640px) {
+      .letter-invited { font-size: 1.8rem; }
+      .letter-invited span { font-size: 1rem; letter-spacing: 0.2em; }
+      .letter-script { font-size: 3.2rem; margin-top: 1rem; }
+      .env-letter { padding: 2rem 1.5rem; }
     }
 
     /* ── Створки конверта ── */
@@ -119,12 +144,12 @@
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.52 0 0 0 0 0.42 0 0 0 0 0.30 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
       z-index: 5;
       transform-origin: center;
-      transition: transform 1.4s cubic-bezier(.5,.05,.2,1) 0.6s,
-                  opacity 1.4s cubic-bezier(.5,.05,.2,1) 0.6s;
+      transition: transform 1.4s cubic-bezier(.5,.05,.2,1) 0.3s,
+                  opacity 1.4s cubic-bezier(.5,.05,.2,1) 0.3s;
       box-shadow: 0 4px 20px rgba(120, 95, 70, 0.22);
     }
 
-    /* Верхний клапан (треугольник сверху) */
+    /* Верхний клапан */
     .env-flap-top {
       top: 0; left: 0;
       width: 100%; height: 62%;
@@ -136,7 +161,6 @@
       z-index: 8;
     }
 
-    /* Тонкая тень под верхним клапаном для объёма */
     .env-flap-top::after {
       content: "";
       position: absolute;
@@ -165,7 +189,7 @@
       opacity: 0.85;
     }
 
-    /* Левый/правый клапаны */
+    /* Левый/правый */
     .env-flap-left {
       top: 0; left: 0;
       width: 32%; height: 100%;
@@ -264,7 +288,6 @@
       animation: none;
     }
 
-    /* Внутренний ободок */
     .wax-seal::before {
       content: "";
       position: absolute;
@@ -274,7 +297,6 @@
       box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* Блик */
     .wax-seal::after {
       content: "";
       position: absolute;
@@ -299,9 +321,9 @@
       z-index: 2;
     }
 
-    /* ── Состояние "печать ломается" ── */
+    /* Печать ломается */
     .wax-seal.cracking {
-      animation: sealCrack 1s cubic-bezier(.4,.1,.2,1) forwards;
+      animation: sealCrack 0.9s cubic-bezier(.4,.1,.2,1) forwards;
     }
 
     @keyframes sealCrack {
@@ -312,37 +334,7 @@
       100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
     }
 
-    /* Трещины поверх печати */
-    .seal-cracks {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 16;
-    }
-
-    .seal-cracks.visible { opacity: 1; }
-
-    .seal-crack-line {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 4px;
-      height: 60%;
-      background: #2a0508;
-      transform-origin: top center;
-      border-radius: 2px;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
-    }
-
-    .seal-crack-line:nth-child(1) { transform: translate(-50%, 0) rotate(20deg); }
-    .seal-crack-line:nth-child(2) { transform: translate(-50%, 0) rotate(90deg); }
-    .seal-crack-line:nth-child(3) { transform: translate(-50%, 0) rotate(160deg); }
-    .seal-crack-line:nth-child(4) { transform: translate(-50%, 0) rotate(230deg); }
-    .seal-crack-line:nth-child(5) { transform: translate(-50%, 0) rotate(300deg); }
-
-    /* Осколки */
+    /* Осколки печати */
     .seal-shards {
       position: absolute;
       top: 58%;
@@ -412,8 +404,6 @@
       .wax-seal-text { font-size: 1.2rem; }
       .env-bottom-overlay { font-size: 0.85rem; bottom: 1.4rem; }
       .seal-shards { width: 150px; height: 150px; }
-      .letter-invited { font-size: 1.4rem; }
-      .letter-script { font-size: 2.4rem; }
     }
 
     /* ═══════════════════════════════════════════
@@ -450,7 +440,6 @@
       position: relative;
     }
 
-    /* Лепестки */
     .petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .petal {
       position: absolute; top: -50px; width: 14px; height: 14px;
@@ -539,14 +528,6 @@
       color: #e63946;
       line-height: 1.1;
       margin-bottom: 0.8rem;
-    }
-    .hero-subtitle {
-      font-family: 'Amatic SC', cursive;
-      font-size: 1.9rem;
-      color: #7a9ac4;
-      letter-spacing: 0.25em;
-      margin-bottom: 2.4rem;
-      text-transform: uppercase;
     }
     .hero-polaroids {
       display: flex;
@@ -1106,7 +1087,6 @@
       .paper { padding: 0 0.6rem 2rem; }
       .section { padding: 3rem 0; }
       .hero-title { font-size: 3rem; }
-      .hero-subtitle { font-size: 1.4rem; letter-spacing: 0.15em; }
       h2 { font-size: 2.6rem; }
 
       .polaroid .photo { width: 150px; height: 150px; }
@@ -1155,10 +1135,10 @@
   <div id="envelopeScreen">
     <div class="envelope" id="envelope">
 
-      <!-- Задняя стенка (внутренность) -->
+      <!-- Задняя стенка -->
       <div class="env-back"></div>
 
-      <!-- Письмо (выезжает) -->
+      <!-- Письмо (выезжает на весь экран) -->
       <div class="env-letter">
         <div class="letter-invited">
           Вы приглашены на свадьбу
@@ -1172,21 +1152,12 @@
       <div class="env-flap env-flap-right"></div>
       <div class="env-flap env-flap-bottom"></div>
 
-      <!-- Верхний клапан (с надписями) -->
+      <!-- Верхний клапан -->
       <div class="env-flap env-flap-top">
         <div class="env-flap-text">
           <div class="env-invited-line">Вы приглашены на свадьбу</div>
           <div class="env-script-line">The wedding day</div>
         </div>
-      </div>
-
-      <!-- Трещины на печати -->
-      <div class="seal-cracks" id="sealCracks">
-        <div class="seal-crack-line"></div>
-        <div class="seal-crack-line"></div>
-        <div class="seal-crack-line"></div>
-        <div class="seal-crack-line"></div>
-        <div class="seal-crack-line"></div>
       </div>
 
       <!-- Осколки печати -->
@@ -1242,7 +1213,7 @@
         </p>
       </section>
 
-      <!-- 2. БЛОК "ЭТО МЫ" С ГАЛЕРЕЕЙ -->
+      <!-- 2. ЭТО МЫ -->
       <section class="section">
         <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
         <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
@@ -1278,7 +1249,7 @@
         </p>
       </section>
 
-      <!-- 4. КАЛЕНДАРЬ + ДАТА + ОБРАТНЫЙ ОТСЧЁТ -->
+      <!-- 4. КАЛЕНДАРЬ + ДАТА + ТАЙМЕР -->
       <section class="section">
         <div class="doodle-heart tr"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
 
@@ -1322,36 +1293,25 @@
         <div class="map-block reveal from-left">
           <div class="map-title">Дворец бракосочетания</div>
           <div class="map-polaroid">
-            <iframe 
-              src="https://yandex.ru/map-widget/v1/?um=constructor%3A1198244952bfe23c5366e7a153386d345d53ff19c68f932574687b3b0b2bcc62&amp;source=constructor"
-              frameborder="0" allowfullscreen loading="lazy">
-            </iframe>
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1198244952bfe23c5366e7a153386d345d53ff19c68f932574687b3b0b2bcc62&amp;source=constructor" frameborder="0" allowfullscreen loading="lazy"></iframe>
             <div class="caption">ЗАГС</div>
           </div>
           <div class="map-address">
-            г. Иркутск, ул. Декабрьских Событий, 106<br>
-            Дворец бракосочетания
+            г. Иркутск, ул. Декабрьских Событий, 106<br>Дворец бракосочетания
           </div>
-          <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Дворец+бракосочетания+Декабрьских+Событий+106" target="_blank">
-            Как добраться →
-          </a>
+          <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Дворец+бракосочетания+Декабрьских+Событий+106" target="_blank">Как добраться →</a>
         </div>
 
         <div class="map-block reveal from-right">
           <div class="map-title">Ресторан «Авантаж»</div>
           <div class="map-polaroid">
-            <iframe 
-              src="https://yandex.ru/map-widget/v1/?um=constructor%3A7ba91779bba17def2330a67bafd52345290a0a6bf2664a163e8ef9bf024bc681&amp;source=constructor"
-              frameborder="0" allowfullscreen loading="lazy">
-            </iframe>
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A7ba91779bba17def2330a67bafd52345290a0a6bf2664a163e8ef9bf024bc681&amp;source=constructor" frameborder="0" allowfullscreen loading="lazy"></iframe>
             <div class="caption">Ресторан</div>
           </div>
           <div class="map-address">
             г. Иркутск, ул. Байкальская, 279
           </div>
-          <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Байкальская+279+Авантаж" target="_blank">
-            Как добраться →
-          </a>
+          <a class="map-howto" href="https://yandex.ru/maps/?text=Иркутск+Байкальская+279+Авантаж" target="_blank">Как добраться →</a>
         </div>
       </section>
 
@@ -1365,52 +1325,31 @@
         <ul class="timing-list">
           <li class="reveal from-left" style="transition-delay: 0.0s;">
             <span class="timing-emoji">💍</span>
-            <span class="timing-body">
-              <span class="timing-time">16:00</span>
-              <span class="timing-desc">Церемония в ЗАГС</span>
-            </span>
+            <span class="timing-body"><span class="timing-time">16:00</span><span class="timing-desc">Церемония в ЗАГС</span></span>
           </li>
           <li class="reveal from-right" style="transition-delay: 0.15s;">
             <span class="timing-emoji">🚗</span>
-            <span class="timing-body">
-              <span class="timing-time">16:30</span>
-              <span class="timing-desc">Трансфер от ЗАГС</span>
-            </span>
+            <span class="timing-body"><span class="timing-time">16:30</span><span class="timing-desc">Трансфер от ЗАГС</span></span>
           </li>
           <li class="reveal from-left" style="transition-delay: 0.3s;">
             <span class="timing-emoji">🥂</span>
-            <span class="timing-body">
-              <span class="timing-time">16:50</span>
-              <span class="timing-desc">Сбор гостей, welcome-зона</span>
-            </span>
+            <span class="timing-body"><span class="timing-time">16:50</span><span class="timing-desc">Сбор гостей, welcome-зона</span></span>
           </li>
           <li class="reveal from-right" style="transition-delay: 0.45s;">
             <span class="timing-emoji">🍽️</span>
-            <span class="timing-body">
-              <span class="timing-time">17:00</span>
-              <span class="timing-desc">Банкет и поздравления</span>
-            </span>
+            <span class="timing-body"><span class="timing-time">17:00</span><span class="timing-desc">Банкет и поздравления</span></span>
           </li>
           <li class="reveal from-left" style="transition-delay: 0.6s;">
             <span class="timing-emoji">🎂</span>
-            <span class="timing-body">
-              <span class="timing-time">19:30</span>
-              <span class="timing-desc">Торт и первый танец</span>
-            </span>
+            <span class="timing-body"><span class="timing-time">19:30</span><span class="timing-desc">Торт и первый танец</span></span>
           </li>
           <li class="reveal from-right" style="transition-delay: 0.75s;">
             <span class="timing-emoji">🎶</span>
-            <span class="timing-body">
-              <span class="timing-time">21:00</span>
-              <span class="timing-desc">Танцы и вечеринка</span>
-            </span>
+            <span class="timing-body"><span class="timing-time">21:00</span><span class="timing-desc">Танцы и вечеринка</span></span>
           </li>
           <li class="reveal from-left" style="transition-delay: 0.9s;">
             <span class="timing-emoji">🎆</span>
-            <span class="timing-body">
-              <span class="timing-time">23:00</span>
-              <span class="timing-desc">Фейерверк</span>
-            </span>
+            <span class="timing-body"><span class="timing-time">23:00</span><span class="timing-desc">Фейерверк</span></span>
           </li>
         </ul>
       </section>
@@ -1498,11 +1437,7 @@
           <div class="form-group">
             <label for="guests">Количество гостей (включая Вас)</label>
             <select id="guests" name="entry.585057221">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
             </select>
           </div>
 
@@ -1523,46 +1458,14 @@
           <div class="form-group">
             <label>Предпочтения по напиткам (можно выбрать несколько 🍷)</label>
             <div class="drinks-grid">
-              <label class="drink-item drink-red">
-                <input type="checkbox" name="entry.1809060743" value="Вино красное">
-                <span class="drink-emoji">🍷</span>
-                <span class="drink-label">Вино красное</span>
-              </label>
-              <label class="drink-item drink-white">
-                <input type="checkbox" name="entry.1809060743" value="Вино белое">
-                <span class="drink-emoji">🥂</span>
-                <span class="drink-label">Вино белое</span>
-              </label>
-              <label class="drink-item drink-champ">
-                <input type="checkbox" name="entry.1809060743" value="Шампанское">
-                <span class="drink-emoji">🍾</span>
-                <span class="drink-label">Шампанское</span>
-              </label>
-              <label class="drink-item drink-whiskey">
-                <input type="checkbox" name="entry.1809060743" value="Виски">
-                <span class="drink-emoji">🥃</span>
-                <span class="drink-label">Виски</span>
-              </label>
-              <label class="drink-item drink-vodka">
-                <input type="checkbox" name="entry.1809060743" value="Водка">
-                <span class="drink-emoji">🍸</span>
-                <span class="drink-label">Водка</span>
-              </label>
-              <label class="drink-item drink-cognac">
-                <input type="checkbox" name="entry.1809060743" value="Коньяк">
-                <span class="drink-emoji">🥃</span>
-                <span class="drink-label">Коньяк</span>
-              </label>
-              <label class="drink-item drink-beer">
-                <input type="checkbox" name="entry.1809060743" value="Пиво">
-                <span class="drink-emoji">🍺</span>
-                <span class="drink-label">Пиво</span>
-              </label>
-              <label class="drink-item drink-soft">
-                <input type="checkbox" name="entry.1809060743" value="Безалкогольные напитки">
-                <span class="drink-emoji">🥤</span>
-                <span class="drink-label">Безалкогольные</span>
-              </label>
+              <label class="drink-item drink-red"><input type="checkbox" name="entry.1809060743" value="Вино красное"><span class="drink-emoji">🍷</span><span class="drink-label">Вино красное</span></label>
+              <label class="drink-item drink-white"><input type="checkbox" name="entry.1809060743" value="Вино белое"><span class="drink-emoji">🥂</span><span class="drink-label">Вино белое</span></label>
+              <label class="drink-item drink-champ"><input type="checkbox" name="entry.1809060743" value="Шампанское"><span class="drink-emoji">🍾</span><span class="drink-label">Шампанское</span></label>
+              <label class="drink-item drink-whiskey"><input type="checkbox" name="entry.1809060743" value="Виски"><span class="drink-emoji">🥃</span><span class="drink-label">Виски</span></label>
+              <label class="drink-item drink-vodka"><input type="checkbox" name="entry.1809060743" value="Водка"><span class="drink-emoji">🍸</span><span class="drink-label">Водка</span></label>
+              <label class="drink-item drink-cognac"><input type="checkbox" name="entry.1809060743" value="Коньяк"><span class="drink-emoji">🥃</span><span class="drink-label">Коньяк</span></label>
+              <label class="drink-item drink-beer"><input type="checkbox" name="entry.1809060743" value="Пиво"><span class="drink-emoji">🍺</span><span class="drink-label">Пиво</span></label>
+              <label class="drink-item drink-soft"><input type="checkbox" name="entry.1809060743" value="Безалкогольные напитки"><span class="drink-emoji">🥤</span><span class="drink-label">Безалкогольные</span></label>
             </div>
           </div>
 
@@ -1587,7 +1490,8 @@
 
   <script>
     /* ═══════════════════════════════════════════
-       ЛОМАЕМ ПЕЧАТЬ И РАСКРЫВАЕМ КОНВЕРТ
+       ЛОМАЕМ ПЕЧАТЬ → РАСКРЫВАЕМ КОНВЕРТ → 
+       ПОКАЗЫВАЕМ ПИСЬМО → ДЕРЖИМ 2 СЕК → САЙТ
        ═══════════════════════════════════════════ */
     let sealBroken = false;
 
@@ -1597,63 +1501,53 @@
       sealBroken = true;
 
       const seal = document.getElementById('waxSeal');
-      const cracks = document.getElementById('sealCracks');
       const shards = document.getElementById('sealShards');
+      const envelope = document.getElementById('envelope');
+      const screen = document.getElementById('envelopeScreen');
+      const site = document.getElementById('mainSite');
 
-      // 1. Показываем трещины
-      cracks.classList.add('visible');
+      // 1. Печать ломается
+      seal.classList.add('cracking');
 
-      // 2. Небольшая задержка, чтобы трещины были видны, потом печать "ломается"
+      // 2. Осколки разлетаются
+      const count = 10;
+      for (let i = 0; i < count; i++) {
+        const shard = document.createElement('div');
+        shard.className = 'seal-shard';
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.6;
+        const distance = 150 + Math.random() * 180;
+        shard.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+        shard.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
+        shard.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
+        shards.appendChild(shard);
+        setTimeout(() => shard.classList.add('fly'), 30 + i * 20);
+      }
+
+      // 3. Через 0.5 сек — раскрываем створки, письмо выезжает
       setTimeout(() => {
-        seal.classList.add('cracking');
+        envelope.classList.add('open');
+      }, 500);
 
-        // 3. Создаём осколки, разлетающиеся в стороны
-        const count = 10;
-        for (let i = 0; i < count; i++) {
-          const shard = document.createElement('div');
-          shard.className = 'seal-shard';
+      // 4. Письмо держится 2 секунды после полного выезда (выезд ~1.4с, ждём до 3.4с от старта)
+      //    Начинаем "растворять" письмо на 3.4 сек
+      setTimeout(() => {
+        envelope.classList.add('letter-fade');
+      }, 3400);
 
-          const angle = (i / count) * Math.PI * 2 + Math.random() * 0.6;
-          const distance = 150 + Math.random() * 180;
-          const dx = Math.cos(angle) * distance;
-          const dy = Math.sin(angle) * distance;
-          const rot = (Math.random() * 720 - 360) + 'deg';
-
-          shard.style.setProperty('--dx', dx + 'px');
-          shard.style.setProperty('--dy', dy + 'px');
-          shard.style.setProperty('--rot', rot);
-
-          shards.appendChild(shard);
-
-          // запускаем анимацию
-          setTimeout(() => shard.classList.add('fly'), 30 + i * 20);
-        }
-
-        // 4. После того как печать рассыпалась — раскрываем створки
+      // 5. Через 1 сек после начала растворения письма — показываем сайт
+      setTimeout(() => {
+        screen.classList.add('opened');
         setTimeout(() => {
-          document.getElementById('envelope').classList.add('open');
-        }, 700);
-
-        // 5. Через 2.5 сек после начала — показываем сайт
-        setTimeout(() => {
-          const screen = document.getElementById('envelopeScreen');
-          const site = document.getElementById('mainSite');
-          screen.classList.add('opened');
-
-          setTimeout(() => {
-            screen.style.display = 'none';
-            site.classList.add('visible');
-            window.scrollTo({ top: 0, behavior: 'instant' });
-            initScrollReveal();
-          }, 1100);
-        }, 2100);
-
-      }, 250);
+          screen.style.display = 'none';
+          site.classList.add('visible');
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          initScrollReveal();
+        }, 1000);
+      }, 4400);
     }
 
-    /* Клик по всему экрану конверта тоже ломает печать */
+    // Клик в любом месте экрана тоже ломает печать
     document.getElementById('envelopeScreen').addEventListener('click', function(e) {
-      // Если кликнули не на печать, всё равно ломаем
       breakSeal(e);
     });
 
@@ -1699,7 +1593,6 @@
       if (!grid) return;
       const offset = 1;
       const daysInMonth = 30;
-
       for (let i = 0; i < offset; i++) grid.appendChild(document.createElement('span'));
       for (let d = 1; d <= daysInMonth; d++) {
         const s = document.createElement('span');
@@ -1713,7 +1606,6 @@
        ТАЙМЕР
        ═══════════════════════════════════════════ */
     const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
-
     function updateTimer() {
       const now = Date.now();
       const distance = weddingDate - now;
@@ -1721,14 +1613,10 @@
         ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
         return;
       }
-      const days = Math.floor(distance / 86400000);
-      const hours = Math.floor((distance % 86400000) / 3600000);
-      const minutes = Math.floor((distance % 3600000) / 60000);
-      const seconds = Math.floor((distance % 60000) / 1000);
-      document.getElementById('days').textContent = String(days).padStart(2, '0');
-      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      document.getElementById('days').textContent = String(Math.floor(distance / 86400000)).padStart(2, '0');
+      document.getElementById('hours').textContent = String(Math.floor((distance % 86400000) / 3600000)).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(Math.floor((distance % 3600000) / 60000)).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(Math.floor((distance % 60000) / 1000)).padStart(2, '0');
     }
     updateTimer();
     setInterval(updateTimer, 1000);
@@ -1767,7 +1655,6 @@
        СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ
        ═══════════════════════════════════════════ */
     window.submitted = false;
-
     window.showThankYou = function() {
       if (window.submitted) {
         const msg = document.getElementById('rsvpMessage');
@@ -1787,29 +1674,17 @@
       const dtStart = '20270605T160000';
       const dtEnd   = '20270605T230000';
       const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-
       const ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//Wedding Yulia and Ivan//RU',
-        'CALSCALE:GREGORIAN',
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wedding Yulia and Ivan//RU','CALSCALE:GREGORIAN',
         'BEGIN:VEVENT',
         'UID:' + Date.now() + '@wedding-yulia-ivan',
-        'DTSTAMP:' + dtStamp,
-        'DTSTART:' + dtStart,
-        'DTEND:' + dtEnd,
+        'DTSTAMP:' + dtStamp,'DTSTART:' + dtStart,'DTEND:' + dtEnd,
         'SUMMARY:Свадьба Юлии и Ивана 💍',
         'DESCRIPTION:Ждём вас на нашем торжестве!',
         'LOCATION:г. Иркутск, ул. Байкальская, 279 — Ресторан «Авантаж»',
-        'BEGIN:VALARM',
-        'TRIGGER:-P1D',
-        'ACTION:DISPLAY',
-        'DESCRIPTION:Напоминание: завтра свадьба!',
-        'END:VALARM',
-        'END:VEVENT',
-        'END:VCALENDAR'
+        'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Напоминание: завтра свадьба!','END:VALARM',
+        'END:VEVENT','END:VCALENDAR'
       ].join('\r\n');
-
       const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
