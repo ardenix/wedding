@@ -39,14 +39,12 @@
       transition: opacity 1s ease;
       perspective: 2200px;
 
-      /* Фон вокруг конверта — крафтовая бумага */
       background-color: #c8a878;
       background-image:
         radial-gradient(circle at 50% 50%, rgba(230, 200, 150, 0.35) 0%, transparent 60%),
         radial-gradient(circle at 50% 50%, transparent 40%, rgba(80, 50, 20, 0.35) 100%),
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.40 0 0 0 0 0.30 0 0 0 0 0.18 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
 
-      /* Центрируем конверт */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -62,9 +60,9 @@
       position: relative;
       width: 90vw;
       max-width: 900px;
-      height: 70vh;
-      max-height: 600px;
-      /*aspect-ratio: 4 / 3;*/
+      height: 90vh;
+      max-height: 640px;
+      aspect-ratio: 4 / 3;
       transform-style: preserve-3d;
       box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.55),
@@ -151,7 +149,7 @@
       .env-letter { padding: 2rem 1.5rem; }
     }
 
-    /* ── Створки конверта (крафтовая бумага) ── */
+    /* ── Створки конверта ── */
     .env-flap {
       position: absolute;
       background-color: #d4b88a;
@@ -165,8 +163,7 @@
       top: 0; left: 0;
       width: 100%; height: 62%;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
-      background:
-        linear-gradient(180deg, #e0c795 0%, #d4b88a 50%, #c8a878 100%);
+      background: linear-gradient(180deg, #e0c795 0%, #d4b88a 50%, #c8a878 100%);
       z-index: 8;
     }
 
@@ -285,8 +282,7 @@
       height: 210px;
       border-radius: 50% 47% 52% 48% / 48% 52% 47% 53%;
       transform: translate(-50%, -50%) scale(1);
-      background:
-        radial-gradient(circle at 32% 26%, #c82838 0%, #a81828 30%, #8a1020 55%, #6a0814 80%, #4c060e 100%);
+      background: radial-gradient(circle at 32% 26%, #c82838 0%, #a81828 30%, #8a1020 55%, #6a0814 80%, #4c060e 100%);
       box-shadow:
         inset -12px -14px 30px rgba(0, 0, 0, 0.6),
         inset 10px 12px 26px rgba(255, 100, 120, 0.22),
@@ -299,9 +295,7 @@
       justify-content: center;
       cursor: pointer;
       z-index: 15;
-      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1),
-                  box-shadow 0.3s,
-                  opacity 0.4s ease;
+      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s, opacity 0.4s ease;
       animation: sealPulse 2.6s ease-in-out infinite;
     }
 
@@ -328,9 +322,7 @@
       inset: 32px;
       border-radius: 50% 48% 52% 50% / 50% 52% 48% 50%;
       border: 2px solid rgba(230, 190, 200, 0.18);
-      box-shadow:
-        inset 0 0 12px rgba(0, 0, 0, 0.25),
-        inset 0 0 3px rgba(255, 180, 190, 0.15);
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.25), inset 0 0 3px rgba(255, 180, 190, 0.15);
       pointer-events: none;
     }
 
@@ -444,7 +436,6 @@
       .seal-shards { width: 150px; height: 150px; }
     }
 
-    /* Для телефонов с маленькой высотой — сдвигаем надпись ещё выше */
     @media (max-width: 640px) and (max-height: 700px) {
       .env-bottom-overlay {
         bottom: 0.8rem;
@@ -578,10 +569,56 @@
     .hero-polaroids {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      gap: 3rem;
+      align-items: center;
+      gap: 6rem;
       flex-wrap: wrap;
-      margin: 2.5rem 0 1rem;
+      margin: 3rem 0 1rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       ВЕЕР — по 2 фото на человека
+       ═══════════════════════════════════════════ */
+    .hero-person-polaroids {
+      position: relative;
+      width: 230px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-person-polaroids .polaroid {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -130px 0 0 -105px;
+      transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    .hero-person-polaroids .polaroid:first-child {
+      transform: rotate(-14deg) translate(-22px, -8px);
+      z-index: 2;
+    }
+
+    .hero-person-polaroids .polaroid:last-child {
+      transform: rotate(11deg) translate(22px, 8px);
+      z-index: 1;
+    }
+
+    .hero-person-polaroids:hover .polaroid:first-child {
+      transform: rotate(-20deg) translate(-38px, -12px) scale(1.04);
+      z-index: 5;
+    }
+
+    .hero-person-polaroids:hover .polaroid:last-child {
+      transform: rotate(16deg) translate(38px, 12px) scale(1.04);
+      z-index: 4;
+    }
+
+    .hero-person-polaroids .polaroid:hover {
+      transform: rotate(-8deg) translate(0, -6px) scale(1.06) !important;
+      z-index: 10;
     }
 
     /* ═══════════════════════════════════════════
@@ -635,10 +672,6 @@
       filter: drop-shadow(0 1px 1px rgba(80, 60, 40, 0.25));
     }
 
-    .polaroid:hover { transform: rotate(0deg) scale(1.04); z-index: 10; }
-    .polaroid-a { transform: rotate(-4.5deg); }
-    .polaroid-b { transform: rotate(3.5deg); }
-
     .polaroid .photo {
       width: 210px;
       height: 210px;
@@ -651,6 +684,11 @@
       filter: sepia(0.10) contrast(1.02) saturate(0.96);
       transition: filter 0.3s;
       cursor: zoom-in;
+    }
+
+    .hero-polaroids .polaroid .photo {
+      width: 160px;
+      height: 160px;
     }
 
     .polaroid:hover .photo {
@@ -949,7 +987,7 @@
       margin-top: 0.2rem;
     }
 
-    /* ── ДРЕСС-КОД (2 ряда по 3) ── */
+    /* ── ДРЕСС-КОД ── */
     .dress-text {
       font-family: 'Caveat', cursive;
       font-size: 1.8rem;
@@ -1208,7 +1246,7 @@
     }
 
     /* ═══════════════════════════════════════════
-       ЛАЙТБОКС — увеличение фото по клику
+       ЛАЙТБОКС
        ═══════════════════════════════════════════ */
     .lightbox {
       position: fixed;
@@ -1262,9 +1300,7 @@
         0 0 0 10px #e8dfc9;
       transform: scale(0.85);
       opacity: 0;
-      transition:
-        transform 0.4s cubic-bezier(.34,1.56,.64,1),
-        opacity 0.3s ease;
+      transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease;
       will-change: transform;
     }
 
@@ -1366,7 +1402,16 @@
           linear-gradient(45deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom left / 26px 26px no-repeat,
           linear-gradient(315deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom right / 26px 26px no-repeat;
       }
-      .hero-polaroids { gap: 1.5rem; }
+
+      .hero-polaroids .polaroid .photo { width: 120px; height: 120px; }
+      .hero-person-polaroids {
+        width: 170px;
+        height: 210px;
+      }
+      .hero-person-polaroids .polaroid {
+        margin: -100px 0 0 -75px;
+      }
+      .hero-polaroids { gap: 2.5rem; }
 
       .big-text { font-size: 1.5rem; }
       .big-text-strong { font-size: 2.1rem; }
@@ -1400,7 +1445,6 @@
       .gift-text, .dress-text, .rsvp-intro { font-size: 1.5rem; }
       label { font-size: 1.4rem; }
 
-      /* Лайтбокс на мобильном */
       .lightbox { padding: 0.6rem; }
       .lightbox-img {
         width: 92vw;
@@ -1485,13 +1529,28 @@
         <div class="hero-title">У нас свадьба</div>
 
         <div class="hero-polaroids">
-          <div class="polaroid polaroid-a">
-            <div class="photo" style="background-image: url('Julia3.jpg');"></div>
-            <div class="caption">Юлия</div>
+          <!-- Юлия — веер из 2 фото -->
+          <div class="hero-person-polaroids">
+            <div class="polaroid polaroid-a">
+              <div class="photo" style="background-image: url('Julia1.jpg');"></div>
+              <div class="caption">Юлия</div>
+            </div>
+            <div class="polaroid polaroid-c">
+              <div class="photo" style="background-image: url('Julia2.jpg');"></div>
+              <div class="caption">Юлия</div>
+            </div>
           </div>
-          <div class="polaroid polaroid-b">
-            <div class="photo" style="background-image: url('Ivan3.jpg');"></div>
-            <div class="caption">Иван</div>
+
+          <!-- Иван — веер из 2 фото -->
+          <div class="hero-person-polaroids">
+            <div class="polaroid polaroid-b">
+              <div class="photo" style="background-image: url('Ivan1.jpg');"></div>
+              <div class="caption">Иван</div>
+            </div>
+            <div class="polaroid polaroid-d">
+              <div class="photo" style="background-image: url('Ivan2.jpg');"></div>
+              <div class="caption">Иван</div>
+            </div>
           </div>
         </div>
 
@@ -1631,16 +1690,6 @@
             <span class="timing-emoji">🍽️</span>
             <span class="timing-body"><span class="timing-time">17:00</span><span class="timing-desc">Банкет и поздравления</span></span>
           </li>
-          <!--
-          <li class="reveal from-left" style="transition-delay: 0.6s;">
-            <span class="timing-emoji">🎂</span>
-            <span class="timing-body"><span class="timing-time">19:30</span><span class="timing-desc">Торт и первый танец</span></span>
-          </li>
-          <li class="reveal from-right" style="transition-delay: 0.75s;">
-            <span class="timing-emoji">🎶</span>
-            <span class="timing-body"><span class="timing-time">21:00</span><span class="timing-desc">Танцы и вечеринка</span></span>
-          </li>
-          -->
           <li class="reveal from-left" style="transition-delay: 0.75s;">
             <span class="timing-emoji">🎆</span>
             <span class="timing-body"><span class="timing-time">23:00</span><span class="timing-desc">Завершение праздника</span></span>
@@ -1785,9 +1834,7 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       ЛАЙТБОКС — увеличение фото по клику
-       ═══════════════════════════════════════════ -->
+  <!-- ЛАЙТБОКС -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" type="button" aria-label="Закрыть" onclick="closeLightbox(event)">
       <i class="fas fa-times"></i>
@@ -1809,9 +1856,6 @@
   </div>
 
   <script>
-    /* ═══════════════════════════════════════════
-       ЛОМАЕМ ПЕЧАТЬ → ПОКАЗЫВАЕМ ПИСЬМО → САЙТ
-       ═══════════════════════════════════════════ */
     let sealBroken = false;
 
     function breakSeal(e) {
@@ -1840,13 +1884,8 @@
         setTimeout(() => shard.classList.add('fly'), 30 + i * 20);
       }
 
-      setTimeout(() => {
-        envelope.classList.add('letter-show');
-      }, 900);
-
-      setTimeout(() => {
-        envelope.classList.add('letter-fade');
-      }, 3900);
+      setTimeout(() => { envelope.classList.add('letter-show'); }, 900);
+      setTimeout(() => { envelope.classList.add('letter-fade'); }, 3900);
 
       setTimeout(() => {
         screen.classList.add('opened');
@@ -1863,9 +1902,6 @@
       breakSeal(e);
     });
 
-    /* ═══════════════════════════════════════════
-       ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ ПРОКРУТКЕ
-       ═══════════════════════════════════════════ */
     function initScrollReveal() {
       const reveals = document.querySelectorAll('#mainSite .reveal');
       const observer = new IntersectionObserver((entries) => {
@@ -1880,9 +1916,6 @@
       reveals.forEach(el => observer.observe(el));
     }
 
-    /* ═══════════════════════════════════════════
-       ЛЕПЕСТКИ
-       ═══════════════════════════════════════════ */
     (function() {
       const layer = document.getElementById('petals');
       if (!layer) return;
@@ -1897,9 +1930,6 @@
       }
     })();
 
-    /* ═══════════════════════════════════════════
-       КАЛЕНДАРЬ
-       ═══════════════════════════════════════════ */
     (function() {
       const grid = document.getElementById('calGrid');
       if (!grid) return;
@@ -1914,9 +1944,6 @@
       }
     })();
 
-    /* ═══════════════════════════════════════════
-       ТАЙМЕР
-       ═══════════════════════════════════════════ */
     const weddingDate = new Date(2027, 5, 5, 16, 0, 0).getTime();
     function updateTimer() {
       const now = Date.now();
@@ -1933,9 +1960,6 @@
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    /* ═══════════════════════════════════════════
-       ГАЛЕРЕЯ
-       ═══════════════════════════════════════════ */
     const scatter = document.getElementById('galleryScatter');
     window.galleryShift = function(dir) {
       if (!scatter) return;
@@ -1944,9 +1968,6 @@
       else scatter.insertBefore(cards[cards.length - 1], cards[0]);
     };
 
-    /* ═══════════════════════════════════════════
-       КОНФЕТТИ
-       ═══════════════════════════════════════════ */
     function launchConfetti() {
       const layer = document.getElementById('confettiLayer');
       const hearts = ['💖','💕','💗','❤️','🌸','✨','💛','🎉'];
@@ -1963,9 +1984,6 @@
       }
     }
 
-    /* ═══════════════════════════════════════════
-       СООБЩЕНИЕ ПОСЛЕ ОТПРАВКИ
-       ═══════════════════════════════════════════ */
     window.submitted = false;
     window.showThankYou = function() {
       if (window.submitted) {
@@ -1979,9 +1997,6 @@
       }
     };
 
-    /* ═══════════════════════════════════════════
-       КАЛЕНДАРЬ .ICS
-       ═══════════════════════════════════════════ */
     window.downloadICS = function() {
       const dtStart = '20270605T160000';
       const dtEnd   = '20270605T230000';
@@ -2008,9 +2023,6 @@
       URL.revokeObjectURL(url);
     };
 
-    /* ═══════════════════════════════════════════
-       ЛАЙТБОКС — увеличение фото по клику
-       ═══════════════════════════════════════════ */
     (function() {
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightboxImg');
