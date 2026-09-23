@@ -26,7 +26,7 @@
     }
 
     /* ═══════════════════════════════════════════
-       КОНВЕРТ НА ВЕСЬ ЭКРАН (ЗАКРЫТЫЙ)
+       КОНВЕРТ ПО ЦЕНТРУ ЭКРАНА
        ═══════════════════════════════════════════ */
     #envelopeScreen {
       position: fixed;
@@ -38,6 +38,19 @@
       cursor: pointer;
       transition: opacity 1s ease;
       perspective: 2200px;
+
+      /* Фон вокруг конверта — крафтовая бумага */
+      background-color: #c8a878;
+      background-image:
+        radial-gradient(circle at 50% 50%, rgba(230, 200, 150, 0.35) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, transparent 40%, rgba(80, 50, 20, 0.35) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.40 0 0 0 0 0.30 0 0 0 0 0.18 0 0 0 0.10 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+
+      /* Центрируем конверт */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
 
     #envelopeScreen.opened {
@@ -47,9 +60,17 @@
 
     .envelope {
       position: relative;
-      width: 100vw;
-      height: 100vh;
+      width: 90vw;
+      max-width: 900px;
+      height: 90vh;
+      max-height: 640px;
+      aspect-ratio: 4 / 3;
       transform-style: preserve-3d;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 8px 24px rgba(0, 0, 0, 0.35);
+      border-radius: 4px;
+      overflow: hidden;
     }
 
     .env-back {
