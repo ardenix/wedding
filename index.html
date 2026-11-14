@@ -566,85 +566,31 @@
       line-height: 1.1;
       margin-bottom: 0.8rem;
     }
-    .hero-polaroids {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5rem;
-      flex-wrap: wrap;
-      margin: 3rem 0 1rem;
-    }
 
     /* ═══════════════════════════════════════════
-       ВЕЕР — широкий, по 2 фото на человека
+       ОДНО ФОТО В ШАПКЕ
        ═══════════════════════════════════════════ */
-    .hero-person-block {
+    .hero-photo-wrap {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.2rem;
-    }
-
-    .hero-person-name {
-      font-family: 'Marck Script', cursive;
-      font-size: 2.6rem;
-      color: #e63946;
-      text-align: center;
-      line-height: 1;
-      letter-spacing: 0.04em;
-    }
-
-    .hero-person-polaroids {
-      position: relative;
-      width: 340px;
-      height: 320px;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      align-items: center;
+      margin: 2.5rem 0 1.5rem;
     }
 
-    .hero-person-polaroids .polaroid {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -105px 0 0 -85px;
-      padding: 12px 12px 12px;
-      transition: transform 0.5s cubic-bezier(.34,1.56,.64,1), z-index 0s;
+    .hero-polaroid-single {
+      transform: rotate(-2deg);
+      padding: 16px 16px 16px;
     }
 
-    /* Скрываем любые подписи внутри полароидов шапки */
-    .hero-person-polaroids .polaroid .caption {
-      display: none;
+    .hero-polaroid-single .photo {
+      width: 420px;
+      height: 420px;
+      background-size: cover;
+      background-position: center;
     }
 
-    /* Верхнее фото — сильнее влево и вверх */
-    .hero-person-polaroids .polaroid:first-child {
-      transform: rotate(-22deg) translate(-75px, -25px);
-      z-index: 2;
-    }
-
-    /* Нижнее фото — сильнее вправо и вниз */
-    .hero-person-polaroids .polaroid:last-child {
-      transform: rotate(18deg) translate(75px, 25px);
-      z-index: 1;
-    }
-
-    /* При наведении на группу — раскрываются ещё шире */
-    .hero-person-polaroids:hover .polaroid:first-child {
-      transform: rotate(-28deg) translate(-105px, -35px) scale(1.05);
-      z-index: 5;
-    }
-
-    .hero-person-polaroids:hover .polaroid:last-child {
-      transform: rotate(24deg) translate(105px, 35px) scale(1.05);
-      z-index: 4;
-    }
-
-    /* При наведении на конкретное фото — оно выходит вперёд */
-    .hero-person-polaroids .polaroid:hover {
-      transform: rotate(-6deg) translate(0, -10px) scale(1.1) !important;
-      z-index: 10;
+    .hero-polaroid-single:hover {
+      transform: rotate(0deg) scale(1.02);
     }
 
     /* ═══════════════════════════════════════════
@@ -710,11 +656,6 @@
       filter: sepia(0.10) contrast(1.02) saturate(0.96);
       transition: filter 0.3s;
       cursor: zoom-in;
-    }
-
-    .hero-polaroids .polaroid .photo {
-      width: 155px;
-      height: 155px;
     }
 
     .polaroid:hover .photo {
@@ -1417,6 +1358,13 @@
       .hero-title { font-size: 3rem; }
       h2 { font-size: 2.6rem; }
 
+      .hero-polaroid-single { padding: 10px 10px 10px; }
+      .hero-polaroid-single .photo {
+        width: 280px;
+        height: 280px;
+      }
+      .hero-photo-wrap { margin: 1.5rem 0 1rem; }
+
       .polaroid { padding: 10px 10px 44px; }
       .polaroid .photo { width: 150px; height: 150px; }
       .polaroid .caption { font-size: 1.6rem; bottom: 8px; }
@@ -1428,31 +1376,6 @@
           linear-gradient(45deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom left / 26px 26px no-repeat,
           linear-gradient(315deg, #c9b48a 0%, #b8a074 40%, transparent 42%) bottom right / 26px 26px no-repeat;
       }
-
-      .hero-person-name { font-size: 2rem; }
-      .hero-person-block { gap: 0.8rem; }
-
-      .hero-polaroids .polaroid .photo { width: 110px; height: 110px; }
-      .hero-person-polaroids {
-        width: 240px;
-        height: 240px;
-      }
-      .hero-person-polaroids .polaroid {
-        margin: -80px 0 0 -65px;
-      }
-      .hero-person-polaroids .polaroid:first-child {
-        transform: rotate(-20deg) translate(-55px, -18px);
-      }
-      .hero-person-polaroids .polaroid:last-child {
-        transform: rotate(16deg) translate(55px, 18px);
-      }
-      .hero-person-polaroids:hover .polaroid:first-child {
-        transform: rotate(-26deg) translate(-75px, -26px) scale(1.05);
-      }
-      .hero-person-polaroids:hover .polaroid:last-child {
-        transform: rotate(22deg) translate(75px, 26px) scale(1.05);
-      }
-      .hero-polaroids { gap: 2rem; }
 
       .big-text { font-size: 1.5rem; }
       .big-text-strong { font-size: 2.1rem; }
@@ -1569,31 +1492,9 @@
 
         <div class="hero-title">У нас свадьба</div>
 
-        <div class="hero-polaroids">
-          <!-- Юлия — веер из 2 фото -->
-          <div class="hero-person-block">
-            <div class="hero-person-polaroids">
-              <div class="polaroid polaroid-a">
-                <div class="photo" style="background-image: url('Julia5.jpg');"></div>
-              </div>
-              <div class="polaroid polaroid-c">
-                <div class="photo" style="background-image: url('Julia3.jpg');"></div>
-              </div>
-            </div>
-            <div class="hero-person-name">Юлия</div>
-          </div>
-
-          <!-- Иван — веер из 2 фото -->
-          <div class="hero-person-block">
-            <div class="hero-person-polaroids">
-              <div class="polaroid polaroid-b">
-                <div class="photo" style="background-image: url('Ivan3.jpg');"></div>
-              </div>
-              <div class="polaroid polaroid-d">
-                <div class="photo" style="background-image: url('Ivan4.jpg');"></div>
-              </div>
-            </div>
-            <div class="hero-person-name">Иван</div>
+        <div class="hero-photo-wrap">
+          <div class="polaroid hero-polaroid-single">
+            <div class="photo" style="background-image: url('HeroPhoto.jpg');"></div>
           </div>
         </div>
 
@@ -1602,7 +1503,7 @@
         <p class="big-text reveal from-bottom">
           В детстве казалось, что главные решения в жизни — это какую пиццу заказать. 
           А оказалось, что самое важное — это с кем её есть… и с кем идти дальше 🥂 
-          Приходите на нашу свадьбу — будем есть пиццу (ну, или что-то поторжественнее) 
+          Приходите на нашу свадьбу — будем есть пиццу (ну, или что-то потржественнее) 
           и радоваться, что всё сложилось именно так!
         </p>
       </section>
