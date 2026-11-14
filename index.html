@@ -568,7 +568,7 @@
     }
 
     /* ═══════════════════════════════════════════
-       ОДНО ФОТО В ШАПКЕ
+       ОДНО ФОТО В ШАПКЕ — УВЕЛИЧЕНО
        ═══════════════════════════════════════════ */
     .hero-photo-wrap {
       display: flex;
@@ -579,12 +579,12 @@
 
     .hero-polaroid-single {
       transform: rotate(-2deg);
-      padding: 16px 16px 16px;
+      padding: 18px 18px 18px;
     }
 
     .hero-polaroid-single .photo {
-      width: 420px;
-      height: 420px;
+      width: 560px;
+      height: 560px;
       background-size: cover;
       background-position: center;
     }
@@ -830,6 +830,11 @@
     .gallery-scatter .polaroid:nth-child(4) { transform: rotate(8.5deg) translateY(-10px); }
     .gallery-scatter .polaroid:nth-child(5) { transform: rotate(-5.5deg) translateY(6px); }
     .gallery-scatter .polaroid:nth-child(6) { transform: rotate(6.5deg) translateY(-6px); }
+    .gallery-scatter .polaroid:nth-child(7) { transform: rotate(-4deg) translateY(8px); }
+    .gallery-scatter .polaroid:nth-child(8) { transform: rotate(5deg) translateY(-6px); }
+    .gallery-scatter .polaroid:nth-child(9) { transform: rotate(-6deg) translateY(10px); }
+    .gallery-scatter .polaroid:nth-child(10) { transform: rotate(7deg) translateY(-8px); }
+    .gallery-scatter .polaroid:nth-child(11) { transform: rotate(-3deg) translateY(6px); }
     .gallery-scatter .polaroid:hover { transform: rotate(0) scale(1.06); z-index: 10; }
 
     .gallery-nav {
@@ -1360,8 +1365,8 @@
 
       .hero-polaroid-single { padding: 10px 10px 10px; }
       .hero-polaroid-single .photo {
-        width: 280px;
-        height: 280px;
+        width: 340px;
+        height: 340px;
       }
       .hero-photo-wrap { margin: 1.5rem 0 1rem; }
 
@@ -1497,10 +1502,23 @@
             <div class="photo" style="background-image: url('HeroPhoto.jpg');"></div>
           </div>
         </div>
-     
       </section>
 
-      <!-- 2. ЭТО МЫ -->
+      <!-- 2. ПРИГЛАШЕНИЕ (был блок 3) -->
+      <section class="section">
+        <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
+
+        <p class="big-text-strong reveal from-top">Дорогие наши друзья и родные!</p>
+
+        <p class="big-text reveal from-bottom">
+          Скоро у нашей истории появится новая глава - мы станем семьёй 💍 <br>
+          И первые страницы этой главы нам хочется <br>
+          наполнить вашими улыбками, объятиями и тёплыми словами 🤗 <br>
+          Ждём вас на нашей свадьбе 💛
+        </p>
+      </section>
+
+      <!-- 3. ЭТО МЫ (был блок 2) -->
       <section class="section">
         <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
         <div class="doodle-heart br"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
@@ -1527,20 +1545,6 @@
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
-      </section>
-
-      <!-- 3. ПРИГЛАШЕНИЕ -->
-      <section class="section">
-        <div class="doodle-heart tl"><svg viewBox="0 0 32 32"><path d="M16 28s-12-8-12-16a6 6 0 0 1 12-2 6 6 0 0 1 12 2c0 8-12 16-12 16z"/></svg></div>
-
-        <p class="big-text-strong reveal from-top">Дорогие наши друзья и родные!</p>
-
-        <p class="big-text reveal from-bottom">
-          Скоро у нашей истории появиться новая глава - мы станем семьёй 💍 <br>
-          И первые страницы этой главы нам хочется <br>
-          наполнить вашими улыбками, объятиями и тёплыми словами 🤗 <br>
-          Ждём вас на нашей свадьбе 💛
-        </p>
       </section>
 
       <!-- 4. КАЛЕНДАРЬ + ДАТА + ТАЙМЕР -->
@@ -1689,7 +1693,7 @@
         <p class="gift-text reveal from-bottom">
           Для нас самое ценное — ваше присутствие 💛<br>
           Но если вы решите сделать подарок, <br>
-          финаносвая поддержка станет отличным началом <br>
+          финансовая поддержка станет отличным началом <br>
           нашей семейной истории 
         </p>
 
